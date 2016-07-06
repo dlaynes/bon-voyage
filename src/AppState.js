@@ -1,16 +1,26 @@
 import { observable } from 'mobx';
 
 class AppState {
-  @observable timer = 0;
+  @observable gameState = 1;
+
+  gameStates = {
+      home : 1,
+      ships : 2,
+      space: 3,
+      event : 4,
+      battleResult : 5,
+      planet: 6,
+      endBad: 7,
+      endGood: 8
+  };
 
   constructor() {
-    setInterval(() => {
-      this.timer += 1;
-    }, 1000);
+
   }
 
-  resetTimer() {
-    this.timer = 0;
+  changeState(state){
+      this.gameState = state;
+      console.log(this.gameState);
   }
 }
 
