@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 
+@observer
 class ResourceListComponent extends Component {
     render() {
         return (
@@ -14,33 +16,33 @@ class ResourceListComponent extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span className="metal">0</span></td>
-                            <td><span className="crystal">0</span></td>
-                            <td><span className="deuterium">0</span></td>
+                            <td>{this.props.store.baseMetal}</td>
+                            <td>{this.props.store.baseCrystal}</td>
+                            <td>{this.props.store.baseDeuterium}</td>
                         </tr>
                     </tbody>
                 </table>
                 <table className="tbl-resources">
                     <tbody>
                         <tr>
-                            <td>Capacity</td>
-                            <td><span className="text-error capacity">0</span>/<span className="capacity_max">0</span></td>
+                            <td className="half">Capacity</td>
+                            <td><span className="text-error">{this.props.store.calcUsedCapacity}</span>/{this.props.store.capacity}</td>
                         </tr>
                         <tr>
                             <td>Consumption</td>
-                            <td><span className="consumption">0</span></td>
+                            <td>{this.props.store.consumption}</td>
                         </tr>
                         <tr>
                             <td>Speed</td>
-                            <td><span className="speed">0</span></td>
+                            <td>{this.props.store.speed}</td>
                         </tr>
                         <tr>
                             <td>Ships</td>
-                            <td><span className="ships">0</span></td>
+                            <td>{this.props.store.shipCount}</td>
                         </tr>
                         <tr>
                             <td>Space Credits</td>
-                            <td><span className="space-credits text-success">0</span></td>
+                            <td><span className="text-success">{this.props.store.spaceCredits}</span></td>
                         </tr>
                     </tbody>
                 </table>

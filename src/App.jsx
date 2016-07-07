@@ -11,8 +11,9 @@ import GoodEndingComponent from './Components/GoodEndingComponent';
 
 @observer
 class App extends Component {
+
     render() {
-        let store = this.props.appState;
+        let store = this.props.appStore;
 
         let visibility = {
             home: (store.gameState==store.gameStates.home),
@@ -28,10 +29,13 @@ class App extends Component {
                 <HomeComponent visibility={visibility.home} setGameState={this.setGameState} store={store} />
                 <SelectShipsComponent priceList={window.bvConfig.shipData}
                                       visibility={visibility.ships} setGameState={this.setGameState} store={store} />
-                <SpaceComponent visibility={visibility.space} setGameState={this.setGameState} store={store} />
-                <PlanetComponent visibility={visibility.planet} setGameState={this.setGameState} store={store} />
+                <SpaceComponent visibility={visibility.space}
+                                setGameState={this.setGameState} store={store} />
+                <PlanetComponent priceList={window.bvConfig.shipData} visibility={visibility.planet}
+                                 setGameState={this.setGameState} />
                 <BadEndingComponent visibility={visibility.badEnding} setGameState={this.setGameState} store={store} />
-                <GoodEndingComponent visibility={visibility.goodEnding} setGameState={this.setGameState} store={store} />
+                <GoodEndingComponent visibility={visibility.goodEnding}
+                                     setGameState={this.setGameState} store={store} />
             </div>
             <DevTools />
         </div>
@@ -40,7 +44,7 @@ class App extends Component {
 
     /* fat arrow function ('this' will always be available) */
     setGameState = (idx) => {
-        this.props.appState.changeState(idx);
+        this.props.appStore.changeState(idx);
     };
 }
 
