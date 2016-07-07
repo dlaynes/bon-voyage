@@ -1,14 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import AppState from './AppState';
+import AppStore from './Stores/AppStore';
 import App from './App';
 
-const appState = new AppState();
+const appStore = new AppStore();
+appStore.resetFleet();
+appStore.resetShipSelection();
 
 render(
   <AppContainer>
-    <App appState={appState} />
+    <App appStore={appStore} />
   </AppContainer>,
   document.getElementById('root')
 );
@@ -19,7 +21,7 @@ if (module.hot) {
 
     render(
       <AppContainer>
-        <NextApp appState={appState} />
+        <NextApp appStore={appStore} />
       </AppContainer>,
       document.getElementById('root')
     );

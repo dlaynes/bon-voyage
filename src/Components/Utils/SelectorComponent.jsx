@@ -6,15 +6,18 @@ class SelectorComponent extends Component {
 
     render() {
 
-        var validShipIds = [202,203,204,205,206,207,208,209,210,211,213,214,215];
+        var validShipIds = this.props.store.validConstructibleShips;
 
         return (
             <div>
-                <table className="tbl-ships" cellPadding="0" cellSpacing="0">
+                <table className="tbl-ships">
                     <tbody>
                         <tr>
                             {validShipIds.map((x, i) =>
-                                x != 214 ? <SelectorItemComponent key={'shipInput-'+x} shipData={this.props.priceList[x]} shipId={x} /> : null
+                                <SelectorItemComponent store={this.props.store}
+                                                       unitLimit={this.props.store.unitLimit}
+                                                       key={'shipInput-'+x}
+                                                       shipData={this.props.priceList[x]} shipId={x} />
                             )}
                         </tr>
                     </tbody>
