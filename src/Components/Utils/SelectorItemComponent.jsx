@@ -23,12 +23,20 @@ class SelectorItemComponent extends Component {
         return (
             <td>
                 <span className="name">{this.props.shipData.name}</span>
-                <br /><img src={imgUrl} height="48" width="48" />
-                <br />
-                <span className="text-info">{this.props.store.ships[this.props.shipId]}</span><br />
-                <button className="text-success" onClick={this.addOne}>+1</button><br />
-                <button className="text-success" onClick={this.addTen}>+10</button><br />
-                <button className="text-error" onClick={this.minusOne}>-1</button>
+                <img src={imgUrl} height="48" width="48" />
+                <span className="text-info">{this.props.store.ships[this.props.shipId]}</span>
+                <table className="mini-buttons" cellPadding="0" cellSpacing="0">
+                    <tbody>
+                        <tr>
+                            <td><button className="text-success" onClick={this.addOne}>+1</button></td>
+                            <td><button className="text-error" onClick={this.minusOne}>-1</button></td>
+                        </tr>
+                        <tr>
+                            <td><button className="text-success" onClick={this.addTen}>+10</button></td>
+                            <td><button className="text-error" onClick={this.minusTen}>-10</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </td>
         )
     }
@@ -43,6 +51,10 @@ class SelectorItemComponent extends Component {
 
     minusOne = (event) => {
         this.changeAmount(this.props.store.ships[this.props.shipId]-1);
+    };
+
+    minusTen = (event) => {
+        this.changeAmount(this.props.store.ships[this.props.shipId]-10);
     };
 
     changeAmount(amount){
