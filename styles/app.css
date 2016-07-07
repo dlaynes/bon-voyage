@@ -16,22 +16,32 @@
 .tbl-ships {
     font-size: 7px; color: #99f; margin-top: 20px;
 }
-.tbl-ships td {
+.tbl-ships > tbody > tr > td {
     width: 8.3%; text-align: center; min-width: 76px;
 }
-.tbl-ships td span {
-    display: inline-block; height: 55px; vertical-align: middle;
+.tbl-ships td .name {
+    margin: 0 auto;
+    display: block; height: 30px; vertical-align: middle;
+    clear: both;
 }
 .tbl-ships td img {
-    display: inline-block; margin-bottom: 8px;
+    display: block; margin: 0 auto 8px;
+    clear: both;
 }
-.input-micro {
-    width: 80%;
+.tbl-ships td span {
+    text-align: center; padding-bottom: 2px;
 }
-#holder input {
-    font-family: 'Press Start 2P', cursive; font-size: 10px;
-    box-shadow: none; border-radius: 0;
-    border: 0 none;
+.mini-buttons {
+    width: 54px;
+    margin: 0 auto;
+}
+#holder .mini-buttons button {
+    width: 26px;
+    height: 16px;
+    font-size: 8px;
+    padding: 0px 0px;
+    margin-top: 1px;
+    text-align: center;
 }
 
 .tbl-resources {
@@ -78,6 +88,7 @@
 .techs-nav table {
     font-size:8px
 }
+
 .current_capacity {
     color: #73cafd;
 }

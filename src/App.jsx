@@ -29,7 +29,7 @@ class App extends Component {
                 <HomeComponent visibility={visibility.home} setGameState={this.setGameState} store={store} />
                 <SelectShipsComponent priceList={window.bvConfig.shipData}
                                       visibility={visibility.ships} setGameState={this.setGameState} store={store} />
-                <SpaceComponent visibility={visibility.space}
+                <SpaceComponent visibility={visibility.space} priceList={window.bvConfig.shipData}
                                 setGameState={this.setGameState} store={store} />
                 <PlanetComponent priceList={window.bvConfig.shipData} visibility={visibility.planet}
                                  setGameState={this.setGameState} />

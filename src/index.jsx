@@ -5,8 +5,6 @@ import AppStore from './Stores/AppStore';
 import App from './App';
 
 const appStore = new AppStore();
-appStore.resetFleet();
-appStore.resetShipSelection();
 
 render(
   <AppContainer>
