@@ -6,8 +6,8 @@ class BadEndingComponent extends Component {
     render () {
         return (
             <div className={ this.props.visibility ? '' : 'hidden' }>
-                <h3>Bad ending title</h3>
-                <p>Bad ending message</p>
+                <h3>{this.props.store.currentGameOverStatus.title}</h3>
+                <p>{this.props.store.currentGameOverStatus.description}</p>
                 <div className="clear"></div>
                 <div className="text-center">
                     <button onClick={(e) => this.returnToHome(e)} className="action-red">» PLAY AGAIN?</button>

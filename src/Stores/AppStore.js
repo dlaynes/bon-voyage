@@ -17,10 +17,6 @@ class AppStore {
         endGood: 8
     };
 
-    mapWidth = 520;
-
-    @observable endingReason = 6;
-
     gameEndings = {
         success: 0,
         missingProbes: 1,
@@ -41,7 +37,7 @@ class AppStore {
     minDistance = 50;
     defaultDistance = 120000;
     defaultMetal = 3000000;
-    defaultCrystal = 1700000;
+    defaultCrystal = 1600000;
     defaultDeuterium = 350000;
     defaultMilitaryTech = 10;
     defaultArmorTech = 10;
@@ -49,6 +45,7 @@ class AppStore {
     defaultCombustionDrive = 10;
     defaultImpulseDrive = 8;
     defaultHyperspaceDrive = 6;
+    defaultAstroPhysicsTech = 4;
 
     validShips = [202,203,204,205,206,207,208,209,210,211,213,214,215];
     validConstructibleShips = [202,203,204,205,206,207,208,209,210,211,213,215];
@@ -61,7 +58,8 @@ class AppStore {
         '111' : this.defaultArmorTech,
         '115' : this.defaultCombustionDrive,
         '117' : this.defaultImpulseDrive,
-        '118' : this.defaultHyperspaceDrive
+        '118' : this.defaultHyperspaceDrive,
+        '124' : this.defaultAstroPhysicsTech
     };
 
     @observable ships = {
@@ -85,7 +83,8 @@ class AppStore {
         '111' : this.defaultArmorTech,
         '115' : this.defaultCombustionDrive,
         '117' : this.defaultImpulseDrive,
-        '118' : this.defaultHyperspaceDrive
+        '118' : this.defaultHyperspaceDrive,
+        '124' : this.defaultAstroPhysicsTech
     };
     uniSpeed = 1;
 
@@ -98,6 +97,7 @@ class AppStore {
     @observable speed = 0;
     @observable spaceCredits = 0;
     @observable duration = 0;
+    @observable fleetSpeed = 10;
 
     /* Ship builder variables */
 
@@ -112,48 +112,88 @@ class AppStore {
     @observable timeUnit = 0;
 
     planets = {
-        "v-3455": {name:"V-3455"},
-        "tau-wg": {name:"Tau-WG"}
+        "v-3455": {name:"V-3455",description: "A friendly planet available 24/7 for tourism"},
+        "tau-wg": {name:"Tau-WG",description: "Welcome to the best planet around"}
     };
+
+    @observable currentPlanet = {
+        name: 'No Name',
+        description: 'Unknown planet'
+    }
     
     @observable pastEvents = FixedQueue(20, []);
     
-    landMarks = {
-        '81000':{
-            visited: false,
-            action: () => {
-                let onlyprobes = true;
-                for(let i=0; i < this.validShips.length; i++){
-                    let idx = this.validShips[i];
+    landMarks =
+        [
+            {
+                distance: 81500,
+                visited: false,
+                action: () => {
+                    let onlyProbes = true;
+                    for(let i=0; i < this.validShips.length; i++){
+                        let idx = this.validShips[i];
 
-                    if(idx!='210' && shipList[idx]>0) {
-                        onlyprobes = false;
-                        break;
+                        if( idx != 210 && this.ships[idx]) {
+                            onlyProbes = false;
+                            break;
+                        }
+                    }
+                    if(onlyProbes){
+                        this.showEnding(this.gameEndings.missingProbes);
                     }
                 }
-                if(onlyprobes){
-                    this.showEnding(this.gameEndings.missingProbes);
+            },
+            {
+                distance: 81000,
+                visited: false,
+                action: () => {
+                    this.changeState(this.gameStates.planet, this.planets["v-3455"]);
+                }
+            },
+            {
+                distance: 38500,
+                visited: false,
+                action: () => {
+                    this.changeState(this.gameStates.planet, this.planets["tau-wg"]);
                 }
             }
-        },
-        '80900':{
-            visited: false,
-            action: () => {
-                this.changeState(this.gameStates.planet, this.planets["v-3455"]);
-            }
-        },
-        '38500':{
-            visited: false,
-            action: () => {
-                this.changeState(this.gameStates.planet, this.planets["tau-wg"]);
-            }
-        }
-    };
+        ];
 
     constructor() {
 
     }
+
+    @observable currentEvent = {
+        title: 'Event',
+        description: 'Nothing interesting',
+        actions: ['ok']
+    };
+
+    @observable currentGameOverStatus = {
+        title: 'Game Over',
+        description: 'You lost the game!'
+    };
+
+    resetEventDescriptions(){
+        this.currentEvent.title = 'Event';
+        this.currentEvent.description = 'Nothing interesting happening';
+        this.currentEvent.actions = ['ok'];
+        this.currentGameOverStatus.title = 'Game Over';
+        this.currentGameOverStatus.description = 'You lost the game!';
+        this.currentPlanet.title = 'No Name';
+        this.currentPlanet.description = 'Unknown planet';
+    }
+
+    @action setCurrentPlanet(planet){
+        this.currentPlanet.name = planet.name;
+        this.currentPlanet.description = planet.description;
+    }
     
+    @action setGameOverStatus(title,description){
+        this.currentGameOverStatus.title = title;
+        this.currentGameOverStatus.description = description;
+    }
+
     @action resetPastEvents(){
         this.pastEvents = [];
     }
@@ -170,18 +210,16 @@ class AppStore {
     }
 
     showEnding(reason){
-        if(reason in this.endingReason){
-            switch(reason){
-                case this.endingReason.success:
-                    this.changeState(this.gameStates.endGood);
-                    break;
-                case this.endingReason.quitGame:
-                    this.changeState(this.gameStates.home);
-                    break;
-                default:
-                    this.changeState(this.gameStates.endBad);
-                    break;
-            }
+        switch(reason){
+            case this.gameEndings.success:
+                this.changeState(this.gameStates.endGood);
+                break;
+            case this.gameEndings.quitGame:
+                this.changeState(this.gameStates.home);
+                break;
+            default:
+                this.changeState(this.gameStates.endBad, reason);
+                break;
         }
     }
     
@@ -189,7 +227,12 @@ class AppStore {
         
     }
 
+    calcEventProbability(){
+        return this.EVENT_PROBABILITY;
+    }
+
     handleGameLoop = () => {
+        //console.log("In loop. Distance", this.distance);
 
         let step = AppStore.calcProgress(this.duration, this.defaultDistance);
 
@@ -207,21 +250,34 @@ class AppStore {
         }
         this.deuterium -= this.consumption; //This triggers a capacity update, hopefully
         this.timeUnit += 1;
-        
-        for(id in this.landMarks){
-            if(!this.landMarks.hasOwnProperty(id)){ continue; }
-            
-            if(this.distance < id && !this.landMarks[id].visited){
-                this.landMarks[id].visited = true;
-                this.landMarks.action();
-                return;
-            }        
-        }
 
-        if(Math.random() < this.EVENT_PROBABILITY){
-            this.randomEvent();
-        }
+        do {
+            for(let i=0; i < this.landMarks.length; i++){
+
+                if(!this.landMarks[i].visited && this.distance < this.landMarks[i].distance){
+                    this.landMarks[i].visited = true;
+                    this.landMarks[i].action();
+                    break;
+                }
+            }
+
+            if(Math.random() < this.calcEventProbability()){
+                this.randomEvent();
+            }
+        } while(false);
+
+
     };
+
+    goToSpace(){
+        this.addResources({
+            metal: this.baseMetal,
+            crystal: this.baseCrystal,
+            deuterium: this.baseDeuterium
+        });
+        this.pastEvents.push({time:0, message:"Mission just started!"});
+        this.changeState(this.gameStates.space);
+    }
 
     changeState(state, data){
         switch(state){
@@ -235,6 +291,7 @@ class AppStore {
                 this.gameLoop.setHandler(this.handleGameLoop);
                 this.resetLandMarks();
                 this.resetPastEvents();
+                this.resetEventDescriptions();
                 break;
             case this.gameStates.space:
                 this.gameLoop.play();
@@ -249,16 +306,35 @@ class AppStore {
                 //Do something with data
                 break;
             case this.gameStates.planet:
-                //Do something with data
+                this.gameLoop.pause();
+                this.pastEvents.push({time: this.timeUnit,message:"We just reached planet "+data.name})
+                this.setCurrentPlanet(data);
                 break;
             case this.gameStates.endBad:
+                console.log("data",data);
+                this.gameLoop.pause();
+                switch(data){
+                    case this.gameEndings.noDeuterium:
+                        this.setGameOverStatus('Ran out of deuterium!','The ships ran out of deuterium and went into power-saving mode. We will start hibernating soon and hopefully an expedition will rescue us in the next weeks, or else this could be a very long sleep.');
+                        break;
+                    case this.gameEndings.noShips:
+                        this.setGameOverStatus('We lost our fleet','No ships are active right now. I\'m the only survivor, and just sent a message to the command center. I was put on hold, while a repetitive music plays as I wait.');
+                        break;
+                    case this.gameEndings.missingProbes:
+                        this.setGameOverStatus('Fleet lost', 'Some enemy aliens loved our Probes so much, they activated their Tractor Field weapon and stole them from us. Next time send a crewed fleet, with better gravity-deflection systems.');
+                        break;
+                    case this.gameEndings.blackHole:
+                        this.setGameOverStatus('','The fleet entered a black hole, and turned into a bunch of metal made spaghetti, disappearing from this universe for an infinite time.');
+                        break;
+                    case this.gameEndings.supernova:
+                        this.setGameOverStatus('Supernova','The expedition passed close to the star Ominous Spark, which coincidentally imploded and destroyed the fleet, along with a quarter of the galaxy');
+                        break;
+                }
                 break;
             case this.gameStates.endGood:
+                this.gameLoop.pause();
                 break;
             default:
-                console.log("debug type of ships", typeof this.gameStates.ships);
-                console.log("debug ships", this.gameStates.ships);
-                console.log("debug type of new state", typeof state);
                 console.warn("Unknown state...", state);
                 return;
                 break;
@@ -338,33 +414,6 @@ class AppStore {
         this.metal = actualResources.metal;
         this.crystal = actualResources.crystal;
         this.deuterium = actualResources.deuterium;
-    }
-
-    /* In game use addResources() instead */
-    @action setResources(resources){
-        this.metal = resources.metal;
-        this.crystal = resources.crystal;
-        this.deuterium = resources.deuterium;
-    }
-
-    @action setCapacity(capacity){
-        this.capacity = capacity;
-    }
-
-    @action setDistance(distance){
-        this.distance = distance;
-    }
-
-    @action setSpeed(speed){
-        this.speed = speed;
-    }
-
-    @action setDuration(duration){
-        this.duration = duration;
-    }
-
-    @action setConsumption(consumption){
-        this.consumption = consumption;
     }
 
     @action changeTech(idx, num){
@@ -483,9 +532,8 @@ class AppStore {
         }
 
         this.capacity = capacity;
-        console.log(this.capacity);
 
-        let duration = 10 + 35000/this.uniSpeed * Math.sqrt((10*distance) / slowest ),
+        let duration = 10 + 35000/this.fleetSpeed * Math.sqrt((10*distance) / slowest ),
 
             sum = 0;
 
@@ -521,10 +569,6 @@ class AppStore {
 
 
     /* Ship selection functions */
-
-    @computed get calcUsedCapacity(){
-        return Math.min(this.baseMetal+this.baseCrystal+this.baseDeuterium,this.capacity);
-    }
     
     @action resetBaseResources(){
         this.baseMetal = this.defaultMetal;
@@ -532,27 +576,33 @@ class AppStore {
         this.baseDeuterium = this.defaultDeuterium;
     }
 
-    @action setBaseResources(resources){
-        this.baseMetal = resources.metal;
-        this.baseCrystal = resources.crystal;
-        this.baseDeuterium = resources.deuterium;
-    }
+    @action tryUsingShipAmount(idx, amount, priceList, space){
 
-    @action tryUsingShipAmount(idx, amount, priceList){
         if(amount > this.unitLimit){
             amount = this.unitLimit;
         }
         if(!(idx in this.ships)){
             return;
         }
+        let metal, crystal, deuterium;
+
+        if(!space){
+            metal = this.baseMetal;
+            crystal = this.baseCrystal;
+            deuterium = this.baseDeuterium;
+        } else {
+            metal = this.metal;
+            crystal = this.crystal;
+            deuterium = this.deuterium;
+        }
 
         if(this.ships[idx]==amount){
-            // :)
+            return;
         } else if(this.ships[idx] > amount){
             let dif = this.ships[idx] - amount;
-            this.baseMetal = this.baseMetal + (dif * priceList.metal);
-            this.baseCrystal = this.baseCrystal + (dif * priceList.crystal);
-            this.baseDeuterium = this.baseDeuterium + (dif * priceList.deuterium);
+            metal += (dif * priceList.metal);
+            crystal += (dif * priceList.crystal);
+            deuterium += (dif * priceList.deuterium);
 
             this.changeShipAmount(idx, amount);
         } else {
@@ -571,9 +621,9 @@ class AppStore {
                 extraDeuterium = amount * priceList.deuterium;
 
                 if(
-                    this.baseMetal + originalMetalUsed >= extraMetal &&
-                    this.baseCrystal + originalCrystalUsed >= extraCrystal &&
-                    this.baseDeuterium + originalDeuteriumUsed >= extraDeuterium
+                    metal + originalMetalUsed >= extraMetal &&
+                    crystal + originalCrystalUsed >= extraCrystal &&
+                    deuterium + originalDeuteriumUsed >= extraDeuterium
                 ) {
                     break;
                 }
@@ -582,27 +632,25 @@ class AppStore {
                 amount = this.ships[idx] + dif;
             }
 
-            this.baseMetal = this.baseMetal - (dif * priceList.metal);
-            this.baseCrystal = this.baseCrystal - (dif * priceList.crystal);
-            this.baseDeuterium = this.baseDeuterium - (dif * priceList.deuterium);
+            metal -= (dif * priceList.metal);
+            crystal -= (dif * priceList.crystal);
+            deuterium -= (dif * priceList.deuterium);
 
             this.changeShipAmount(idx, amount);
         }
+
+        if(!space){
+            this.baseMetal = metal;
+            this.baseCrystal = crystal;
+            this.baseDeuterium = deuterium;
+        } else {
+            this.metal = metal;
+            this.crystal = crystal;
+            this.deuterium = deuterium;
+        }
+
     }
 
-    /* Space */
-
-    @computed get calcMapDistance(){
-        return this.mapWidth - ((this.distance * this.mapWidth) / this.defaultDistance);
-    }
-    
-    formatTime(num){
-        new Date(num * 1000).toISOString().substr(14, 5);
-    }
-    
-    @computed get timeUnitFormatted(){
-        return this.formatTime(this.timeUnit);
-    }
 }
 
 export default AppStore;

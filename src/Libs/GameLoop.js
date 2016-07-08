@@ -22,22 +22,25 @@ class GameLoop {
         this.running = false;
     }
     
-    loop(timestamp){
+    loop = (timestamp) => {
         if(!timestamp) timestamp = 0;
 
         if(!this.previousTimestamp){
             this.previousTimestamp = timestamp;
         }
 
+        //console.log("looping");
+
         var progress = timestamp - this.previousTimestamp;
-        if(progress >= this.gameSpeed) {
+        //console.log("progress", progress);
+        if(progress >= this.speed) {
             this.previousTimestamp = timestamp;
             this.func();
         }
         if(this.running){
-            window.requestAnimationFrame(() => this.loop );
+            window.requestAnimationFrame(this.loop );
         }
-    }
+    };
     
     reset(){
         this.previousTimestamp = null;

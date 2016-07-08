@@ -21,15 +21,16 @@
 }
 .tbl-ships td .name {
     margin: 0 auto;
-    display: block; height: 30px; vertical-align: middle;
-    clear: both;
+    display: block; height: 26px; vertical-align: middle;
+    clear: both; font-size: 8px;
 }
 .tbl-ships td img {
-    display: block; margin: 0 auto 8px;
+    display: block; margin: 0 auto 6px;
     clear: both;
 }
 .tbl-ships td span {
-    text-align: center; padding-bottom: 2px;
+    text-align: center; padding-bottom: 4px;
+    display: inline-block;
 }
 .mini-buttons {
     width: 54px;
@@ -40,7 +41,7 @@
     height: 16px;
     font-size: 8px;
     padding: 0px 0px;
-    margin-top: 1px;
+    margin-top: 1px; margin-right: 0px;
     text-align: center;
 }
 
@@ -49,9 +50,11 @@
 }
 .tbl-resources th {
     text-align: left; width: 50%;
+    line-height: 20px;
 }
 .tbl-resources td {
     color: #dbb500; text-align: left;
+    line-height: 20px;
 }
 .half {
     width: 50%;
@@ -72,7 +75,8 @@
 }
 #holder button {
     border: 0 none; font-family: 'Press Start 2P', cursive; font-size: 10px;
-    padding: 6px 8px;
+    padding: 6px 8px;     margin-top: 8px;
+    margin-right: 6px;
 }
 .action-red {
     margin-top: 8px;
@@ -85,6 +89,9 @@
 .techs-nav {
     position: absolute; top: 0;
     right: 0;}
+.techs-nav td {
+    line-height: 20px;
+}
 .techs-nav table {
     font-size:8px
 }
@@ -103,6 +110,10 @@
     width: 370px;
     margin: 0;
 }
+.space-map-container {
+    position: relative;
+    overflow: auto;
+}
 .space-map {
     background-color: #2c448d;
     border: 0 none;
@@ -115,7 +126,6 @@
     margin: 0;
     padding: 1px 2px;
     width: 550px;
-    position: relative;
 }
 #fleet {
     position: absolute;
