@@ -2,17 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f031fb84-3d7e-4fcf-b66a-525f9747440c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Components/Planet/SpacePortComponent.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Components/Planet/TraderComponent.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Components/Planet/ShopComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/ShipyardItemComponent.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Components/Planet/TalkComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/MarketComponent.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Components/Planet/WelcomeComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/CityCentreComponent.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ideas.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Components/Planet/ResearchLab/ResearchLabItemComponent.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Components/Planet/ResearchLabComponent.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Components/Ships/ShipInfoComponent.jsx" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Components/Planet/ShipyardItemComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/Shipyard/ShipyardItemComponent.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/BadEndingComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/BadEndingComponent.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Debug/DebugBar.jsx" afterPath="$PROJECT_DIR$/src/Components/Debug/DebugBar.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Planet/MarketComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/MarketComponent.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Planet/ShipyardComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/ShipyardComponent.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Planet/TraderComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/TraderComponent.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/PlanetComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/PlanetComponent.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/SelectShipsComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/SelectShipsComponent.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Ships/ResourceListComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Ships/ResourceListComponent.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Ships/SelectorComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Ships/SelectorComponent.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Ships/SelectorItemComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Ships/SelectorItemComponent.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Space/ResourceListComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Space/ResourceListComponent.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Stores/AppStore.js" afterPath="$PROJECT_DIR$/src/Stores/AppStore.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/styles/app.css" afterPath="$PROJECT_DIR$/styles/app.css" />
     </list>
@@ -36,21 +44,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AppStore.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Stores/AppStore.js">
+      <file leaf-file-name="MarketComponent.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Planet/MarketComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="116" column="6" selection-start-line="116" selection-start-column="6" selection-end-line="116" selection-end-column="6" />
+            <state relative-caret-position="450">
+              <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlanetComponent.jsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Components/PlanetComponent.jsx">
+      <file leaf-file-name="app.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/styles/app.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-90">
-              <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+            <state relative-caret-position="658">
+              <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResearchLabComponent.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Planet/ResearchLabComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -58,11 +76,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DebugBar.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Debug/DebugBar.jsx">
+      <file leaf-file-name="ideas.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ideas.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+            <state relative-caret-position="465">
+              <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SelectShipsComponent.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/SelectShipsComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShipInfoComponent.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Ships/ShipInfoComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -71,8 +109,8 @@
       <file leaf-file-name="ShipyardComponent.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Planet/ShipyardComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state relative-caret-position="270">
+              <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -80,11 +118,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/styles/app.css">
+      <file leaf-file-name="ShipyardItemComponent.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Planet/Shipyard/ShipyardItemComponent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+            <state relative-caret-position="442">
+              <caret line="32" column="59" selection-start-line="32" selection-start-column="59" selection-end-line="32" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlanetComponent.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/PlanetComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="502">
+              <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SelectorItemComponent.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Ships/SelectorItemComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -98,13 +158,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Components/HomeComponent.js" />
         <option value="$PROJECT_DIR$/src/styles/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/src/scripts/bootstrap.min.js" />
         <option value="$PROJECT_DIR$/src/scripts/jquery.min.js" />
         <option value="$PROJECT_DIR$/src/styles/app.css" />
         <option value="$PROJECT_DIR$/src/Components/EventComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx" />
         <option value="$PROJECT_DIR$/src/States/ShipState.js" />
         <option value="$PROJECT_DIR$/src/AppState.js" />
         <option value="$PROJECT_DIR$/src/States/Models/ShipState.js" />
@@ -124,27 +182,33 @@
         <option value="$PROJECT_DIR$/src/Components/Utils/ResourceListComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Space/TechsNavComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Libs/GameLoop.js" />
-        <option value="$PROJECT_DIR$/src/Components/SelectShipsComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Space/EventListComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Space/MapComponent.jsx" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/src/Components/Ships/ResourceListComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Space/ResourceListComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/BadEndingComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/SpaceComponent.jsx" />
         <option value="$PROJECT_DIR$/src/App.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Ships/SelectorItemComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Ships/SelectorComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Planet/ShipyardItemComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Planet/CityCentreComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Planet/MarketComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Planet/SpacePortComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Planet/TraderComponent.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Planet/ResearchLabItem.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Ships/ResourceListComponent.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Planet/ResearchLab/ResearchLabItemComponent.jsx" />
+        <option value="$PROJECT_DIR$/src/Stores/AppStore.js" />
+        <option value="$PROJECT_DIR$/src/Components/BadEndingComponent.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Space/ResourceListComponent.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Debug/DebugBar.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Planet/ResearchLabComponent.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Ships/SelectorComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Planet/ShipyardComponent.jsx" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/src/Components/Ships/SelectorItemComponent.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Planet/Shipyard/ShipyardItemComponent.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Planet/MarketComponent.jsx" />
         <option value="$PROJECT_DIR$/styles/app.css" />
         <option value="$PROJECT_DIR$/src/Components/PlanetComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Stores/AppStore.js" />
-        <option value="$PROJECT_DIR$/src/Components/Debug/DebugBar.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/SelectShipsComponent.jsx" />
+        <option value="$PROJECT_DIR$/ideas.txt" />
       </list>
     </option>
   </component>
@@ -162,8 +226,8 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-1" />
-    <option name="width" value="1368" />
-    <option name="height" value="745" />
+    <option name="width" value="1922" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -191,7 +255,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -398,12 +461,65 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Planet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shipyard" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Planet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ResearchLab" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Debug" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -414,15 +530,15 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Components/Planet/Shipyard" />
+      <recent name="$PROJECT_DIR$/src/Components/Planet/ResearchLab" />
       <recent name="$PROJECT_DIR$/src/Components/Ships" />
       <recent name="$PROJECT_DIR$/src/Stores/Panels" />
       <recent name="$PROJECT_DIR$/src/Stores" />
-      <recent name="$PROJECT_DIR$/src/States/Models" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager">
@@ -480,18 +596,19 @@
       <workItem from="1467859656435" duration="2996000" />
       <workItem from="1467895988377" duration="16801000" />
       <workItem from="1467930207397" duration="5367000" />
-      <workItem from="1467935640805" duration="16018000" />
+      <workItem from="1467935640805" duration="18350000" />
+      <workItem from="1467981549815" duration="13718000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92541000" />
+    <option name="totallyTimeSpent" value="108591000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1368" height="745" extended-state="6" />
+    <frame x="-1" y="0" width="1922" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20278184" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15208334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297546" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -524,49 +641,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Stores/AppStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Stores/Panels/SpaceStore.js" />
-    <entry file="file://$PROJECT_DIR$/src/Stores/Panels/PlanetStore.js" />
-    <entry file="file://$PROJECT_DIR$/src/Stores/Panels/GoodEndingStore.js" />
     <entry file="file://$PROJECT_DIR$/src/Stores/Panels/EventStore.js" />
     <entry file="file://$PROJECT_DIR$/src/Stores/Panels/Planet/ShipyardStore.js" />
     <entry file="file://$PROJECT_DIR$/src/Stores/Panels/Planet/ShopStore.js" />
@@ -641,14 +720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/EventComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -675,29 +746,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Ships/ResourceListComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Space/MapComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="155" selection-start-line="21" selection-start-column="155" selection-end-line="21" selection-end-column="155" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -705,7 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="8" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -719,24 +770,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/BadEndingComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Ships/SelectorItemComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -745,53 +778,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/SelectShipsComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Ships/SelectorComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Planet/ShipyardItemComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Space/ResourceListComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10">
-          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Planet/CityCentreComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Planet/MarketComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -799,30 +789,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Planet/TraderComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="375">
+          <caret line="25" column="70" selection-start-line="25" selection-start-column="70" selection-end-line="25" selection-end-column="70" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/styles/app.css">
+    <entry file="file://$PROJECT_DIR$/src/Components/Ships/ResourceListComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+        <state relative-caret-position="490">
+          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Planet/ShipyardComponent.jsx">
+    <entry file="file://$PROJECT_DIR$/src/Components/Planet/ResearchLab/ResearchLabItemComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="570">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -831,27 +820,163 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Stores/AppStore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="116" column="6" selection-start-line="116" selection-start-column="6" selection-end-line="116" selection-end-column="6" />
+        <state relative-caret-position="848">
+          <caret line="668" column="22" selection-start-line="668" selection-start-column="22" selection-end-line="668" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/BadEndingComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Space/ResourceListComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Debug/DebugBar.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+        <state relative-caret-position="292">
+          <caret line="42" column="29" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Ships/SelectorComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ogame/skins/EpicBlue/img/b.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ogame/skins/EpicBlue/images/metall.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ogame/skins/EpicBlue/images/kristall.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ogame/skins/EpicBlue/images/deuterium.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Ships/SelectorItemComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Planet/ShipyardComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Planet/Shipyard/ShipyardItemComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="32" column="59" selection-start-line="32" selection-start-column="59" selection-end-line="32" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Planet/ResearchLabComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Planet/MarketComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="658">
+          <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/PlanetComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-90">
-          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+        <state relative-caret-position="502">
+          <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/SelectShipsComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Ships/ShipInfoComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ideas.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>

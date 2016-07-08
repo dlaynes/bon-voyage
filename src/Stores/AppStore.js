@@ -42,7 +42,7 @@ class AppStore {
     defaultMilitaryTech = 10;
     defaultArmorTech = 10;
     defaultShieldingTech = 10;
-    defaultCombustionDrive = 10;
+    defaultCombustionDrive = 12;
     defaultImpulseDrive = 8;
     defaultHyperspaceDrive = 6;
     defaultAstroPhysicsTech = 4;
@@ -51,6 +51,7 @@ class AppStore {
     validConstructibleShips = [202,203,204,205,206,207,208,209,210,211,213,215];
     validMotors = [109,110,111];
     validBattleTechs = [115,117,118];
+    validResearchLabTechs = [109,110,111,115,117,118];
 
     defaultTechs = {
         '109' : this.defaultMilitaryTech,
@@ -86,7 +87,6 @@ class AppStore {
         '118' : this.defaultHyperspaceDrive,
         '124' : this.defaultAstroPhysicsTech
     };
-    uniSpeed = 1;
 
     @observable distance = 0;
     @observable metal = 0;
@@ -145,7 +145,7 @@ class AppStore {
                 }
             },
             {
-                distance: 81000,
+                distance: 80500,
                 visited: false,
                 action: () => {
                     this.changeState(this.gameStates.planet, this.planets["v-3455"]);
@@ -202,7 +202,6 @@ class AppStore {
         this.currentPlanet.name = planet.name;
         this.currentPlanet.description = planet.description;
         this.currentPlanet.actionStatus = planet.actionStatus;
-        console.log("current planet",this.currentPlanet);
     }
     
     @action setGameOverStatus(title,description){
@@ -667,6 +666,7 @@ class AppStore {
             this.deuterium = deuterium;
         }
 
+        return amount;
     }
 
 }

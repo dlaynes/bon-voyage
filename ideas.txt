@@ -1,0 +1,37 @@
+Events:
+- You found some fleet debris. Take? (Yes/No/You don't have recyclers)!
+- You found inactive fleets. Take? (Yes/No)
+- You found a merchant. He will trade (resources/ships) for (resources/space credits/ships)
+- (Neutral/Enemy) fleet approaches (easy/normal/hard) (pirates/scourge/enemy aliens) (Flee/Attack/Negotiate)
+- You found some resources
+- Found friendly (aliens/confederates):
+a) You receive advice
+b) You have [shipType!] you receive (ships/space credits) for them => (trade ships? Yes/No).
+- Vortex: speed increased (amount) for (time) [Speed status changes color: sky blue]
+- Malfunction: speed decreased (amount) for (time) [Speed status changes color: purple]
+- Severe malfunction: you lose X ships
+- Something interesting happens
+- Thiefs steal resources/space credits
+- Blackhole/Supernova
+
+Difficulty increases with distance
+
+Planet:
+- <Shipyard> You can build more ships - OK
+- <Trader>
+a) You can trade space credits for resources
+b) You can trade ships for resources (ratio based, not 100%)
+- <Research Lab> You can trade space credits for techs or motors - OK
+- <Misc buildings..> You receive info about the game
+- You can continue your mission - OK
+
+Medals:
+- Not available for now.
+
+Pirates: levels 4-7
+The scourge: levels 7-10
+Aliens: levels 10-13
+
+TODO:
+- Informacion sobre una nave en el selector, al hacer click sobre imagen o nombre. (Resaltar)
+- Score + hash verification, enviable cada 20 min

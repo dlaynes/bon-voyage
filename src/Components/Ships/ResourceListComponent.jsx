@@ -54,7 +54,7 @@ class ResourceListComponent extends Component {
                         </tr>
                         <tr>
                             <th>Space Credits</th>
-                            <td><span className="text-success">{this.props.store.spaceCredits}</span></td>
+                            <td><span className="text-success">§ {this.props.store.spaceCredits}</span></td>
                         </tr>
                     </tbody>
                 </table>

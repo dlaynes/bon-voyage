@@ -15,6 +15,7 @@ class SelectorComponent extends Component {
                         <tr>
                             {validShipIds.map((x, i) =>
                                 <SelectorItemComponent store={this.props.store}
+                                                       tryToAlterShipCount={this.props.tryToAlterShipCount}
                                                        key={'shipInput-'+x}
                                                        shipData={this.props.priceList[x]} shipId={x} />
                             )}

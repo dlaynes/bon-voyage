@@ -25,7 +25,7 @@ class ResourceListComponent extends Component {
                     <tr>
                         <td>{this.props.store.metal}</td>
                         <td>{this.props.store.crystal}</td>
-                        <td>{this.props.store.deuterium}</td>
+                        <td><span className="text-error">{this.props.store.deuterium}</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -61,7 +61,7 @@ class ResourceListComponent extends Component {
                     </tr>
                     <tr>
                         <th>Space Credits</th>
-                        <td><span className="text-success">{this.props.store.spaceCredits}</span></td>
+                        <td><span className="text-success">§ {this.props.store.spaceCredits}</span></td>
                     </tr>
                     </tbody>
                 </table>
