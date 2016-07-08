@@ -15,7 +15,6 @@ class SelectorComponent extends Component {
                         <tr>
                             {validShipIds.map((x, i) =>
                                 <SelectorItemComponent store={this.props.store}
-                                                       unitLimit={this.props.store.unitLimit}
                                                        key={'shipInput-'+x}
                                                        shipData={this.props.priceList[x]} shipId={x} />
                             )}
@@ -25,7 +24,6 @@ class SelectorComponent extends Component {
             </div>
         )
     }
-
 }
 
 export default SelectorComponent;

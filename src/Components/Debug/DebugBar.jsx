@@ -40,6 +40,8 @@ class DebugBar extends Component {
                     <button onClick={this.selectSecretShips}>Ships (secret)</button>
                     <button onClick={this.selectLightShips}>Ships (light)</button>
                     <button onClick={this.selectHeavyShips}>Ships (heavy)</button>
+                    <strong>Game speed:</strong>
+                    <input onChange={this.setGameSpeed} defaultValue={this.props.store.intervalSpeed} />
                 </ul>
             </div>
         )    
@@ -68,6 +70,11 @@ class DebugBar extends Component {
         }
         this.props.store.goToSpace();
     }
+
+    setGameSpeed = (event) => {
+        let v = event.target.value;
+        this.props.store.intervalSpeed = parseInt(v, 10);
+    };
     
 }
 

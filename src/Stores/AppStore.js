@@ -112,14 +112,15 @@ class AppStore {
     @observable timeUnit = 0;
 
     planets = {
-        "v-3455": {name:"V-3455",description: "A friendly planet available 24/7 for tourism"},
-        "tau-wg": {name:"Tau-WG",description: "Welcome to the best planet around"}
+        "v-3455": {name:"V-3455",description: "A friendly planet available 24/7 for tourism",actionStatus:0},
+        "tau-wg": {name:"Tau-WG",description: "Welcome to the best planet around",actionStatus:0}
     };
 
     @observable currentPlanet = {
         name: 'No Name',
-        description: 'Unknown planet'
-    }
+        description: 'Unknown planet',
+        actionStatus: 0
+    };
     
     @observable pastEvents = FixedQueue(20, []);
     
@@ -175,18 +176,33 @@ class AppStore {
     };
 
     resetEventDescriptions(){
-        this.currentEvent.title = 'Event';
-        this.currentEvent.description = 'Nothing interesting happening';
-        this.currentEvent.actions = ['ok'];
-        this.currentGameOverStatus.title = 'Game Over';
-        this.currentGameOverStatus.description = 'You lost the game!';
-        this.currentPlanet.title = 'No Name';
-        this.currentPlanet.description = 'Unknown planet';
+
+        this.setCurrentEvent({
+            title: 'Event',
+            description: 'Nothing interesting happening',
+            actions: ['ok']
+        });
+
+        this.setGameOverStatus('Game Over','You lost the game!');
+
+        this.setCurrentPlanet({
+            title: 'No Name',
+            description: 'Unknown Planet',
+            actionStatus: 0
+        });
+    }
+
+    @action setCurrentEvent(event){
+        this.currentEvent.title = event.title;
+        this.currentEvent.description = event.description;
+        this.currentEvent.actions = event.actions;
     }
 
     @action setCurrentPlanet(planet){
         this.currentPlanet.name = planet.name;
         this.currentPlanet.description = planet.description;
+        this.currentPlanet.actionStatus = planet.actionStatus;
+        console.log("current planet",this.currentPlanet);
     }
     
     @action setGameOverStatus(title,description){
@@ -270,7 +286,7 @@ class AppStore {
     };
 
     goToSpace(){
-        this.addResources({
+        var res = this.addResources({
             metal: this.baseMetal,
             crystal: this.baseCrystal,
             deuterium: this.baseDeuterium
@@ -414,6 +430,8 @@ class AppStore {
         this.metal = actualResources.metal;
         this.crystal = actualResources.crystal;
         this.deuterium = actualResources.deuterium;
+
+        return actualResources;
     }
 
     @action changeTech(idx, num){
