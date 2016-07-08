@@ -16,10 +16,21 @@ class ShipyardItemComponent extends Component {
                 <table className="mini-buttons" cellPadding="0" cellSpacing="0">
                     <tbody>
                     <tr>
-                        <td><button className="text-success" onClick={this.addOne}>+1</button></td>
+                        <td><button className="text-info" onClick={this.addOne}>+1</button></td>
                     </tr>
                     <tr>
-                        <td><button className="text-success" onClick={this.addTen}>+10</button></td>
+                        <td><button className="text-info" onClick={this.addTen}>+10</button></td>
+                    </tr>
+                    </tbody>
+                </table><br />
+                <span className="text-warning">§ {this.props.shipData.sellingPrice}</span>
+                <table className="mini-buttons" cellPadding="0" cellSpacing="0">
+                    <tbody>
+                    <tr>
+                        <td><button className="text-success" onClick={this.purchaseOne}>+1</button></td>
+                    </tr>
+                    <tr>
+                        <td><button className="text-success" onClick={this.purchaseTen}>+10</button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -36,9 +47,19 @@ class ShipyardItemComponent extends Component {
     };
 
     changeAmount(amount){
-        if(amount < 0){ amount = 0; }
-        let spaceBuy = true;
-        this.props.store.tryUsingShipAmount(this.props.shipId, amount, this.props.shipData, spaceBuy);
+        this.props.tryToIncreaseItem(this.props.shipId, amount);
+    }
+    
+    purchaseOne = (event) => {
+        this.purchaseAmount(1);
+    };
+    
+    purchaseTen = (event) => {
+        this.purchaseAmount(10);
+    };
+    
+    purchaseAmount(amount){
+        this.props.tryToPurchaseShip(this.props.shipId, amount);
     }
 }
 

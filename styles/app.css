@@ -138,7 +138,21 @@
 .bottom-menu {
     position: absolute;
     bottom: 20px;
+    width: 100%;
+}
+.bottom-menu span {
+
 }
 #holder .one-fourth {
     width: 25%;
+}
+#holder .one-fifth {
+    width: 20%;
+}
+.market-resources {
+    width: 600px; text-align: center;
+    margin: 0 auto;
+}
+.market-resources td {
+    width: 33%;
 }

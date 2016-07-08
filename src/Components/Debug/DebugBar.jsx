@@ -33,16 +33,22 @@ class DebugBar extends Component {
     
     render(){
         return (
-            <div>
-                <ul className="text-center">
+            <div className="alert">
+                <div className="text-center">
                     <button onClick={this.goToHome}>Home</button>
                     <button onClick={this.goToShipPage}>Ships</button>
-                    <button onClick={this.selectSecretShips}>Ships (secret)</button>
+                    <button onClick={this.selectSecretShips}>Ships (expedition)</button>
                     <button onClick={this.selectLightShips}>Ships (light)</button>
                     <button onClick={this.selectHeavyShips}>Ships (heavy)</button>
-                    <strong>Game speed:</strong>
-                    <input onChange={this.setGameSpeed} defaultValue={this.props.store.intervalSpeed} />
-                </ul>
+                    <strong> Game speed: </strong>
+                    <input onChange={this.setGameSpeed} className="input-mini"
+                           defaultValue={this.props.store.intervalSpeed} />
+                    <br />
+                    <strong>Events enabled? </strong>
+                    <input type="checkbox" onChange={this.toggleEvents} />
+                    <strong> Space Credits </strong>
+                    <input onChange={this.setSpaceCredits} defaultValue={this.props.store.spaceCredits} />
+                </div>
             </div>
         )    
     }
@@ -70,6 +76,15 @@ class DebugBar extends Component {
         }
         this.props.store.goToSpace();
     }
+
+    toggleEvents = (event) => {
+        let v = event.target.checked;
+    };
+
+    setSpaceCredits = (event) => {
+        let v = event.target.value;
+        this.props.store.spaceCredits = parseInt(v, 10);
+    };
 
     setGameSpeed = (event) => {
         let v = event.target.value;

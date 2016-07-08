@@ -9,6 +9,7 @@ import SelectorComponent from "./Ships/SelectorComponent";
 class SelectShipsComponent extends Component {
 
     @observable validating = false;
+    @observable validatingResources = false;
 
     @computed get watchOneShipErrorClass () {
         return (this.validating && !this.props.store.shipCount) ? 'text-error pull-left' : 'hidden';
@@ -18,6 +19,7 @@ class SelectShipsComponent extends Component {
     };
 
     timeout = null;
+    timeoutResources = null;
 
     render () {
 
@@ -28,13 +30,16 @@ class SelectShipsComponent extends Component {
                     We will give you the remaining resources (if you have enough room available). Watch out on the deuterium usage!</p>
                 <div className="pull-right half">
                     <ResourceListComponent module="ships" store={this.props.store} />
+                    <br />
                 </div>
-                <SelectorComponent priceList={this.props.priceList} store={this.props.store} />
+                <SelectorComponent tryToAlterShipCount={this.tryToAlterShipCount}
+                                   priceList={this.props.priceList} store={this.props.store} />
                 <div className="clear"></div>
                 <div className="text-center">
                     <button onClick={this.resetShipStore} className="text-warning">» RESET</button>
                     <button onClick={this.goToSpace.bind(this)} className="action-red">» READY?</button>
                 </div>
+                <span className={this.validatingResources?'text-error':'hidden'}>Not enough Resources!</span>
                 <span className={this.watchOneShipErrorClass}>We need at least one ship!</span>
                 <span className={this.watchNoDeuteriumClass}>We can't go anywhere without deuterium!</span>
                 <div className="clear"></div>
@@ -49,6 +54,24 @@ class SelectShipsComponent extends Component {
         }
         return !! this.props.store.baseDeuterium;
     }
+
+    tryToAlterShipCount = (idx,amount, increasing) => {
+        if(amount < 0){ amount = 0; }
+        let spaceBuy = false, originalAmount = this.props.store.ships[idx];
+        let realAmount = this.props.store.tryUsingShipAmount(idx, amount, this.props.priceList[idx], spaceBuy);
+
+        if(realAmount > originalAmount || !increasing){
+
+        } else {
+            this.validatingResources = true;
+            if(!this.timeoutResources){
+                this.timeoutResources = setTimeout(() => {
+                    this.validatingResources = false;
+                    this.timeoutResources = null;
+                }, 3000);
+            }
+        }
+    };
 
     resetShipStore = () => {
         this.props.store.resetFleet();

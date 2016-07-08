@@ -17,7 +17,7 @@ class BadEndingComponent extends Component {
     }
 
     returnToHome(){
-        this.props.store.changeState(this.props.store.gameState.home)
+        this.props.store.changeState(this.props.store.gameStates.home)
     }
 }
 export default BadEndingComponent;

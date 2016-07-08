@@ -16,11 +16,11 @@ class SelectorItemComponent extends Component {
                 <table className="mini-buttons" cellPadding="0" cellSpacing="0">
                     <tbody>
                         <tr>
-                            <td><button className="text-success" onClick={this.addOne}>+1</button></td>
+                            <td><button className="text-info" onClick={this.addOne}>+1</button></td>
                             <td><button className="text-error" onClick={this.minusOne}>-1</button></td>
                         </tr>
                         <tr>
-                            <td><button className="text-success" onClick={this.addTen}>+10</button></td>
+                            <td><button className="text-info" onClick={this.addTen}>+10</button></td>
                             <td><button className="text-error" onClick={this.minusTen}>-10</button></td>
                         </tr>
                     </tbody>
@@ -30,24 +30,23 @@ class SelectorItemComponent extends Component {
     }
 
     addOne = (event) => {
-        this.changeAmount(this.props.store.ships[this.props.shipId]+1);
+        this.changeAmount(this.props.store.ships[this.props.shipId]+1, true);
     };
 
     addTen = (event) => {
-        this.changeAmount(this.props.store.ships[this.props.shipId]+10);
+        this.changeAmount(this.props.store.ships[this.props.shipId]+10, true);
     };
 
     minusOne = (event) => {
-        this.changeAmount(this.props.store.ships[this.props.shipId]-1);
+        this.changeAmount(this.props.store.ships[this.props.shipId]-1, false);
     };
 
     minusTen = (event) => {
-        this.changeAmount(this.props.store.ships[this.props.shipId]-10);
+        this.changeAmount(this.props.store.ships[this.props.shipId]-10, false);
     };
 
-    changeAmount(amount){
-        if(amount < 0){ amount = 0; }
-        this.props.store.tryUsingShipAmount(this.props.shipId, amount, this.props.shipData);
+    changeAmount(amount, increasing){
+        this.props.tryToAlterShipCount(this.props.shipId, amount, increasing);
     }
 }
 
