@@ -20,7 +20,7 @@ class HomeComponent extends Component {
     }
 
     goToShipSelection(){
-        this.props.setGameState(this.props.store.gameStates.ships);
+        this.props.store.changeState(this.props.store.gameStates.ships);
     }
 }
 export default HomeComponent;

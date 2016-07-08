@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
 
-import ResourceListComponent from "./Utils/ResourceListComponent";
-import SelectorComponent from "./Utils/SelectorComponent";
+import ResourceListComponent from "./Ships/ResourceListComponent";
+import SelectorComponent from "./Ships/SelectorComponent";
 
 @observer
 class SelectShipsComponent extends Component {
@@ -27,13 +27,13 @@ class SelectShipsComponent extends Component {
                 <p>Prepare yourself for the trip. Perhaps you want certain ships for your needs?<br />
                     We will give you the remaining resources (if you have enough room available). Watch out on the deuterium usage!</p>
                 <div className="pull-right half">
-                    <ResourceListComponent store={this.props.store} />
+                    <ResourceListComponent module="ships" store={this.props.store} />
                 </div>
                 <SelectorComponent priceList={this.props.priceList} store={this.props.store} />
                 <div className="clear"></div>
                 <div className="text-center">
                     <button onClick={this.resetShipStore} className="text-warning">» RESET</button>
-                    <button onClick={this.startBattle.bind(this)} className="action-red">» READY?</button>
+                    <button onClick={this.goToSpace.bind(this)} className="action-red">» READY?</button>
                 </div>
                 <span className={this.watchOneShipErrorClass}>We need at least one ship!</span>
                 <span className={this.watchNoDeuteriumClass}>We can't go anywhere without deuterium!</span>
@@ -55,9 +55,10 @@ class SelectShipsComponent extends Component {
         this.props.store.resetBaseResources();
     };
 
-    @action startBattle(){
+    @action goToSpace(){
         if(this.validate()){
-            this.props.store.changeState(this.props.store.gameStates.space);
+            this.props.store.goToSpace();
+            
             this.validating = false;
         } else {
             this.validating = true;

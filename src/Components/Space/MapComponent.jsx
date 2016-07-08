@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
+import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 
 @observer
 class MapComponent extends Component {
+    
+    mapWidth = 520;
+
+    @computed get calcMapDistance(){
+        return this.mapWidth - ((this.props.store.distance * this.mapWidth) / this.props.store.defaultDistance);
+    }
 
     render(){
-        var fleetStyle = {left: this.props.store.calcMapDistance};
+        var fleetStyle = {left: this.calcMapDistance + 2};
 
         return(
-            <div className="pull-left">
-                <pre className="space-map">
-+                            +
-    +             +               +
-        +          +
-<span className="text-warning" style={fleetStyle}>Э</span>             <span className="text-info">o</span>            <span className="text-info">o</span>           <span className="text-success">Ω</span>
-+
-    +
-        +              +
-                </pre>
-            </div>
+            <div className="space-map-container">
+            <pre className="space-map">+                            +<br />
+<span />    +             +               +<br />
+<span />        +          +<br />
+<span />             <span className="text-info">o</span>            <span className="text-info">o</span>           <span className="text-success">Ω</span><br />
++<br />
+<span />    +<br />
+<span />        +              +            </pre>
+                <span id="fleet" className="text-warning" style={fleetStyle}>Э</span>
+                </div>
         )
 
     }

@@ -6,25 +6,16 @@ class SelectorItemComponent extends Component {
 
     timeout = null;
 
-    /*
-    constructor(props){
-        super(props);
-        this.state = {
-            value : props.store.ships[props.shipId]
-        };
-    }
-    */
-
     render() {
-        let imgUrl = '/ogame/skins/EpicBlue/gebaeude/'+this.props.shipId+'.gif';
-        //let amount = this.props.store.ships[this.props.shipId];
         const shipId = this.props.shipId;
+        const imgUrl = window.bvConfig.iconPath+shipId+'.gif';
+        //let amount = this.props.store.ships[this.props.shipId];
 
         return (
             <td>
                 <span className="name">{this.props.shipData.name}</span>
                 <img src={imgUrl} height="48" width="48" />
-                <span className="text-info">{this.props.store.ships[this.props.shipId]}</span>
+                <span className="text-info">{this.props.store.ships[shipId]}</span>
                 <table className="mini-buttons" cellPadding="0" cellSpacing="0">
                     <tbody>
                         <tr>
