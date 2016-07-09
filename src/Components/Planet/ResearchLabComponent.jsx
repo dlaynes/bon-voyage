@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { computed, observable } from 'mobx';
 
+import ExchangeRate from '../../Libs/BonVoyage/ExchangeRate';
 import ResearchLabItemComponent from './ResearchLab/ResearchLabItemComponent';
 
 @observer
@@ -40,16 +41,20 @@ class ResearchLabComponent extends Component {
     }
 
     tryToPurchaseItem = (idx) => {
-        var techData = this.props.priceList[idx];
+
+        const basePrice = ExchangeRate.resourcesToSpaceCredits(this.props.priceList[idx], ExchangeRate.NORMAL);
+        
         const price = ResearchLabItemComponent.calcPrice(
-            techData.basePrice,
-            techData.factor,
+            basePrice,
+            this.props.priceList[idx].factor,
             this.props.store.techs[idx]+1);
         if(price > this.props.store.spaceCredits){
             this.validating = true;
+            this.success = false;
         } else {
             this.props.store.techs[idx] += 1;
             this.props.store.spaceCredits -= price;
+            this.validating = false;
             this.success = true;
         }
 

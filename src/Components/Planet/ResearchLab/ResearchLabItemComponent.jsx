@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { computed } from 'mobx';
+import ExchangeRate from '../../../Libs/BonVoyage/ExchangeRate';
 
 @observer
 class ResearchLabItemComponent extends Component {
 
     @computed get currentPrice(){
+        const basePrice = ExchangeRate.resourcesToSpaceCredits(this.props.techData, ExchangeRate.NORMAL);
+
         return ResearchLabItemComponent.calcPrice(
-            this.props.techData.basePrice,
+            basePrice,
             this.props.techData.factor,
             this.props.store.techs[this.props.techId]+1);
     }
@@ -34,6 +37,7 @@ class ResearchLabItemComponent extends Component {
     }
     
     static calcPrice(basePrice, factor, desiredLevel){
+        //console.log("base price",(basePrice * Math.pow( factor, ( desiredLevel - 1 ) ) ) );
         return (basePrice * Math.pow( factor, ( desiredLevel - 1 ) ) );
     }
 

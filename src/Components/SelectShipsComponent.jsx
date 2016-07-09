@@ -18,9 +18,6 @@ class SelectShipsComponent extends Component {
         return (this.validating && !this.props.store.baseDeuterium) ? 'text-error-pull-left':'hidden';
     };
 
-    timeout = null;
-    timeoutResources = null;
-
     render () {
 
         return (
@@ -64,12 +61,9 @@ class SelectShipsComponent extends Component {
 
         } else {
             this.validatingResources = true;
-            if(!this.timeoutResources){
-                this.timeoutResources = setTimeout(() => {
-                    this.validatingResources = false;
-                    this.timeoutResources = null;
-                }, 3000);
-            }
+             setTimeout(() => {
+                this.validatingResources = false;
+            }, 3000);
         }
     };
 
@@ -86,12 +80,9 @@ class SelectShipsComponent extends Component {
         } else {
             this.validating = true;
 
-            if(!this.timeout){
-                this.timeout = setTimeout(() => {
-                    this.validating = false;
-                    this.timeout = null;
-                }, 3000);
-            }
+            setTimeout(() => {
+                this.validating = false;
+            }, 3000);
         }
     };
 }

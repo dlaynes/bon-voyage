@@ -29,7 +29,7 @@ class AppStore {
 
     EVENT_PROBABILITY = 0.15;
 
-    intervalSpeed = 1000;
+    @observable intervalSpeed = 1000;
     gameLoop = new GameLoop();
 
     /* Ship variables */
@@ -42,7 +42,7 @@ class AppStore {
     defaultMilitaryTech = 10;
     defaultArmorTech = 10;
     defaultShieldingTech = 10;
-    defaultCombustionDrive = 12;
+    defaultCombustionDrive = 10;
     defaultImpulseDrive = 8;
     defaultHyperspaceDrive = 6;
     defaultAstroPhysicsTech = 4;
@@ -63,7 +63,7 @@ class AppStore {
         '124' : this.defaultAstroPhysicsTech
     };
 
-    @observable ships = {
+    @observable enemyShips = {
         '202':0,
         '203':0,
         '204':0,
@@ -78,7 +78,33 @@ class AppStore {
         '214':0, //Death star
         '215':0  //Battle cruiser
     };
+
+    @observable ships = {
+        '202':0,
+        '203':0,
+        '204':0,
+        '205':0,
+        '206':0,
+        '207':0,
+        '208':0,
+        '209':0,
+        '210':0,
+        '211':0,
+        '213':0,
+        '214':0,
+        '215':0
+    };
     @observable techs = {
+        '109' : this.defaultMilitaryTech,
+        '110' : this.defaultShieldingTech,
+        '111' : this.defaultArmorTech,
+        '115' : this.defaultCombustionDrive,
+        '117' : this.defaultImpulseDrive,
+        '118' : this.defaultHyperspaceDrive,
+        '124' : this.defaultAstroPhysicsTech
+    };
+
+    @observable enemyTechs = {
         '109' : this.defaultMilitaryTech,
         '110' : this.defaultShieldingTech,
         '111' : this.defaultArmorTech,
@@ -305,6 +331,7 @@ class AppStore {
                 this.gameLoop.setSpeed(this.intervalSpeed);
                 this.gameLoop.setHandler(this.handleGameLoop);
                 this.resetLandMarks();
+                this.resetEnemyFleet();
                 this.resetPastEvents();
                 this.resetEventDescriptions();
                 break;
@@ -372,6 +399,21 @@ class AppStore {
         return this.metal + this.crystal + this.deuterium;
     }
 
+    @action resetEnemyFleet(){
+        for(let i=0; i < this.validShips.length;i++) {
+            let idx = this.validShips[i];
+            this.enemyShips[idx] = 0;
+        }
+        for(let i=0; i < this.validMotors.length;i++) {
+            let idx = this.validMotors[i];
+            this.enemyTechs[idx] = this.defaultTechs[idx];
+        }
+        for(let i=0; i < this.validBattleTechs.length;i++) {
+            let idx = this.validBattleTechs[i];
+            this.enemyTechs[idx] = this.defaultTechs[idx];
+        }
+    }
+
     @action resetFleet() {
         for(let i=0; i < this.validShips.length;i++) {
             let idx = this.validShips[i];
@@ -431,12 +473,6 @@ class AppStore {
         this.deuterium = actualResources.deuterium;
 
         return actualResources;
-    }
-
-    @action changeTech(idx, num){
-        if(idx in this.techs){
-            this.techs[idx] = num;
-        }
     }
 
     @action changeShipAmount(idx, num){

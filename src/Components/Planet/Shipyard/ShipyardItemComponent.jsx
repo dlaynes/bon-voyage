@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
+import ExchangeRate from '../../../Libs/BonVoyage/ExchangeRate';
+
 @observer
 class ShipyardItemComponent extends Component {
 
+    getPrice(){
+        return ExchangeRate.resourcesToSpaceCredits(this.props.shipData, ExchangeRate.NORMAL);
+    }
+
     render() {
+
         const shipId = this.props.shipId;
         const imgUrl = window.bvConfig.iconPath+shipId+'.gif';
         
@@ -23,7 +30,7 @@ class ShipyardItemComponent extends Component {
                     </tr>
                     </tbody>
                 </table><br />
-                <span className="text-warning">§ {this.props.shipData.sellingPrice}</span>
+                <span className="text-warning">§ {this.getPrice()}</span>
                 <table className="mini-buttons" cellPadding="0" cellSpacing="0">
                     <tbody>
                     <tr>
