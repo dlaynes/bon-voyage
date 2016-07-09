@@ -40,6 +40,8 @@ class DebugBar extends Component {
                     <button onClick={this.selectSecretShips}>Ships (expedition)</button>
                     <button onClick={this.selectLightShips}>Ships (light)</button>
                     <button onClick={this.selectHeavyShips}>Ships (heavy)</button>
+                    <button onClick={this.planetOne}>Planet 1 Exp</button>
+                    <button onClick={this.planetTwo}>Planet 2 Exp</button>
                     <strong> Game speed: </strong>
                     <input onChange={this.setGameSpeed} className="input-mini"
                            defaultValue={this.props.store.intervalSpeed} />
@@ -76,7 +78,14 @@ class DebugBar extends Component {
         }
         this.props.store.goToSpace();
     }
-
+    planetOne = () => {
+        this.chooseShips(this.shipsExpedition);
+        this.props.store.distance = 81000;
+    };
+    planetTwo = () => {
+        this.chooseShips(this.shipsExpedition);
+        this.props.store.distance = 38000;
+    };
     toggleEvents = (event) => {
         let v = event.target.checked;
     };

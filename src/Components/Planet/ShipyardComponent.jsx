@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
 
+import ExchangeRate from '../../Libs/BonVoyage/ExchangeRate';
+
 import ShipyardItemComponent from './Shipyard/ShipyardItemComponent';
 
 @observer
 class ShipyardComponent extends Component {
-
-    timeout = null;
-    timeoutResources = null;
     
     @observable success = false;
     @observable successResources = false;
@@ -56,20 +55,19 @@ class ShipyardComponent extends Component {
         } else {
             this.validatingResources = true;
         }
-        if(!this.timeoutResources){
-            this.timeoutResources = setTimeout(() => {
-                this.validatingResources = false;
-                this.successResources = false;
-                this.timeoutResources = null;
-            }, 3000);
-        }
+        setTimeout(() => {
+            this.validatingResources = false;
+            this.successResources = false;
+        }, 3000);
+   
     };
 
     tryToPurchaseShip = (idx, amount) => {
         if(amount < 0){ amount = 0; }
 
-        var techData = this.props.priceList[idx],
-            price = techData.sellingPrice * amount;
+        const basePrice = ExchangeRate.resourcesToSpaceCredits(this.props.priceList[idx], ExchangeRate.NORMAL);
+
+        var price = basePrice * amount;
 
         if(price > this.props.store.spaceCredits){
             this.validating = true;
@@ -78,13 +76,11 @@ class ShipyardComponent extends Component {
             this.props.store.spaceCredits -= price;
             this.success = true;
         }
-        if(!this.timeout){
-            this.timeout = setTimeout(() => {
-                this.validating = false;
-                this.success = false;
-                this.timeout = null;
-            }, 3000);
-        }
+        setTimeout(() => {
+            this.validating = false;
+            this.success = false;
+        }, 3000);
+        
     };
 
 }

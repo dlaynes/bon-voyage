@@ -30,7 +30,7 @@
 }
 .tbl-ships td span {
     text-align: center; padding-bottom: 4px;
-    display: inline-block; font-size: 10px;
+    display: inline-block; font-size: 8px;
 }
 .mini-buttons {
     width: 54px;
@@ -141,7 +141,10 @@
     width: 100%;
 }
 .bottom-menu span {
-
+    display: inline-block;
+    top: 5px;
+    position: relative;
+    padding-right: 5px;
 }
 #holder .one-fourth {
     width: 25%;
@@ -153,6 +156,16 @@
     width: 600px; text-align: center;
     margin: 0 auto;
 }
-.market-resources td {
-    width: 33%;
+.market-resources > tbody > tr > td {
+    width: 33%; text-align: center;
+}
+.mid-buttons {
+    margin: 0 auto; font-size: 8px;
+    width: 80px; text-align: center
+}
+#holder .mid-buttons button {
+    font-size: 8px;
+    height: 20px;
+    line-height: 17px;
+    padding: 2px 6px;
 }

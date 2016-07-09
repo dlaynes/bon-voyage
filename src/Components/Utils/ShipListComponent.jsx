@@ -10,7 +10,7 @@ class ShipListComponent extends Component {
             <table className="tbl-active-ships">
                 <tbody>
                     {this.props.store.validShips.map((x, i) =>
-                        <tr key={"ship-list-"+this.props.module+'-'+x} className={ this.props.store.ships[x] ? '' : 'hidden' }>
+                        <tr key={"ship-list-"+this.props.module+'-'+x} className={ this.props.shipList[x] ? '' : 'hidden' }>
                             <td className="ship-desc">
                                 { this.props.priceList[x].name }
                             </td><td>

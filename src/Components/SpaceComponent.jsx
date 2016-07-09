@@ -22,7 +22,7 @@ class SpaceComponent extends Component {
                 </div>
                 <div className="clear"></div>
                 <div className="pull-left half">
-                    <ShipListComponent module="space" store={this.props.store} priceList={this.props.priceList} />
+                    <ShipListComponent module="space" shipList={this.props.store.ships} store={this.props.store} priceList={this.props.priceList} />
                 </div>
                 <div className="pull-right half">
                     <ResourceListComponent module="space" store={this.props.store} />
