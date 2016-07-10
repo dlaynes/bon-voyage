@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
+import GameState from '../Libs/BonVoyage/Model/GameState';
+
 @observer
 class GoodEndingComponent extends Component {
     render () {
@@ -19,7 +21,7 @@ class GoodEndingComponent extends Component {
     }
 
     returnToHome = () => {
-        this.props.store.changeState(this.props.store.gameStates.home)
+        this.props.store.changeState(GameState.states.home)
     };
 
     shareScore = () => {

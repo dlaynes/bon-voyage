@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 
+import Space from '../../Libs/BonVoyage/Model/Space';
+
 @observer
 class MapComponent extends Component {
     
     mapWidth = 520;
 
     @computed get calcMapDistance(){
-        return this.mapWidth - ((this.props.store.distance * this.mapWidth) / this.props.store.defaultDistance);
+        return this.mapWidth - ((this.props.store.distance * this.mapWidth) / Space.defaultDistance);
     }
 
     render(){

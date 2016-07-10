@@ -8,7 +8,7 @@ class ResourceListComponent extends Component {
 
     @computed get calcUsedCapacity(){
         return Math.min(
-            this.props.store.baseMetal+this.props.store.baseCrystal+this.props.store.baseDeuterium,
+            this.props.headQuarters.baseMetal+this.props.headQuarters.baseCrystal+this.props.headQuarters.baseDeuterium,
             this.props.store.capacity
         );
     }
@@ -27,9 +27,9 @@ class ResourceListComponent extends Component {
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{this.props.store.baseMetal}</td>
-                        <td>{this.props.store.baseCrystal}</td>
-                        <td>{this.props.store.baseDeuterium}</td>
+                        <td>{this.props.headQuarters.baseMetal}</td>
+                        <td>{this.props.headQuarters.baseCrystal}</td>
+                        <td>{this.props.headQuarters.baseDeuterium}</td>
                     </tr>
                     </tbody>
                 </table>

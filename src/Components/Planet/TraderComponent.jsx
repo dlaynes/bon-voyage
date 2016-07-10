@@ -6,6 +6,8 @@ import ExchangeRate from '../../Libs/BonVoyage/ExchangeRate';
 
 import TraderItemComponent from './Trader/TraderItemComponent';
 
+import Fleet from '../../Libs/BonVoyage/Model/Fleet';
+
 @observer
 class TraderComponent extends Component {
 
@@ -13,14 +15,15 @@ class TraderComponent extends Component {
     @observable validating = false;
     @observable cannotSellAllShips = false;
 
-    validShipIds = this.props.store.validConstructibleShips;
+    validShipIds = Fleet.validConstructibleShips;
 
     render() {
 
         return (
             <div className={this.props.visibility?'':'hidden'}>
                 <h4>Trader</h4>
-                <p>You can exchange your ships for Space Credits here.</p>
+                <p>You can exchange your ships for Space Credits here.<br />
+                    <span className="text-warning">Pay attention to your Fleet Capacity or else you might lose resources</span></p>
                 <table className="tbl-ships tbl-ships-space">
                     <tbody>
                         <tr>
@@ -54,15 +57,33 @@ class TraderComponent extends Component {
 
         if(amount < totalShips){
             if(amount > currentAmount){
+                
+                this.cannotSellAllShips = false;
+                this.success = false;
                 this.validating = true;
+            
             } else {
                 this.props.store.spaceCredits += sellingPrice;
                 this.props.store.changeShipAmount(idx, currentAmount - amount);
+                this.props.store.setResources({
+                    metal:this.props.store.metal,
+                    crystal:this.props.store.crystal,
+                    deuterium: this.props.store.deuterium}); /* Small hack */
+                
+                this.cannotSellAllShips = false;
+                this.validating = false;
                 this.success = true;
             }
         } else if(amount == totalShips) {
+
+            this.success = false;
+            this.validating = false;
             this.cannotSellAllShips = true;
+        
         } else {
+
+            this.cannotSellAllShips = false;
+            this.success = false;
             this.validating = true;
         }
         setTimeout(() => {

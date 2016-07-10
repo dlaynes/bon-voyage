@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 import { observable } from 'mobx';
 
 import ExchangeRate from '../../Libs/BonVoyage/ExchangeRate';
+import Fleet from '../../Libs/BonVoyage/Model/Fleet';
 
 import ShipyardItemComponent from './Shipyard/ShipyardItemComponent';
 
@@ -14,9 +15,9 @@ class ShipyardComponent extends Component {
     @observable validating = false;
     @observable validatingResources = false;
 
-    render() {
+    validShipIds = Fleet.validConstructibleShips;
 
-        var validShipIds = this.props.store.validConstructibleShips;
+    render() {
 
         return (
             <div className={this.props.visibility?'':'hidden'}>
@@ -25,7 +26,7 @@ class ShipyardComponent extends Component {
                 <table className="tbl-ships tbl-ships-space">
                     <tbody>
                     <tr>
-                        {validShipIds.map((x, i) =>
+                        {this.validShipIds.map((x, i) =>
                             <ShipyardItemComponent store={this.props.store}
                                                    key={'shipYardInput-'+x}
                                                    shipData={this.props.priceList[x]} shipId={x}
@@ -47,12 +48,21 @@ class ShipyardComponent extends Component {
     }
 
     tryToIncreaseItem = (idx, amount) => {
+
+        this.success = false;
+        this.validating = false;
+        this.validatingResources = false;
+        this.successResources = false;
+        
         if(amount < 0){ amount = 0; }
         let spaceBuy = true, originalAmount = this.props.store.ships[idx];
         var realAmount = this.props.store.tryUsingShipAmount(idx, amount, this.props.priceList[idx], spaceBuy);
         if(realAmount > originalAmount){
+            
             this.successResources = true;
+
         } else {
+            
             this.validatingResources = true;
         }
         setTimeout(() => {
@@ -65,16 +75,25 @@ class ShipyardComponent extends Component {
     tryToPurchaseShip = (idx, amount) => {
         if(amount < 0){ amount = 0; }
 
+        this.success = false;
+        this.validating = false;
+        this.validatingResources = false;
+        this.successResources = false;
+        
         const basePrice = ExchangeRate.resourcesToSpaceCredits(this.props.priceList[idx], ExchangeRate.NORMAL);
 
         var price = basePrice * amount;
 
         if(price > this.props.store.spaceCredits){
+            
             this.validating = true;
+            
         } else {
             this.props.store.changeShipAmount(idx, this.props.store.ships[idx]+amount);
             this.props.store.spaceCredits -= price;
+            
             this.success = true;
+        
         }
         setTimeout(() => {
             this.validating = false;
