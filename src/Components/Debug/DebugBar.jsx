@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import GameState from '../../Libs/BonVoyage/Model/GameState';
+import Space from '../../Libs/BonVoyage/Model/Space';
+
 class DebugBar extends Component {
 
     shipsLight = {
@@ -44,7 +47,7 @@ class DebugBar extends Component {
                     <button onClick={this.planetTwo}>Planet 2 Exp</button>
                     <strong> Game speed: </strong>
                     <input onChange={this.setGameSpeed} className="input-mini"
-                           defaultValue={this.props.store.intervalSpeed} />
+                           defaultValue={Space.defaultIntervalSpeed} />
                     <br />
                     <strong>Events enabled? </strong>
                     <input type="checkbox" onChange={this.toggleEvents} />
@@ -56,22 +59,22 @@ class DebugBar extends Component {
     }
     
     goToHome = () => {
-        this.props.store.changeState(this.props.store.gameStates.home);
+        this.props.store.changeState(GameState.states.home);
     };
     goToShipPage = () => {
-        this.props.store.changeState(this.props.store.gameStates.ships);
+        this.props.store.changeState(GameState.states.ships);
     };
     selectSecretShips = () => {
-        this.chooseShips(this.shipsExpedition);    
+        this.chooseShips(this.shipsExpedition);
     };    
     selectLightShips = ( ) => {
         this.chooseShips(this.shipsLight);
     };    
     selectHeavyShips = () => {
         this.chooseShips(this.shipsHeavy);
-    };    
+    };
     chooseShips(ships){
-        this.props.store.changeState(this.props.store.gameStates.ships);
+        this.props.store.changeState(GameState.states.ships);
         for(var idx in ships){
             if(!ships.hasOwnProperty(idx)) continue;
             this.props.store.tryUsingShipAmount(idx, ships[idx], window.bvConfig.shipData[idx]);
@@ -96,8 +99,8 @@ class DebugBar extends Component {
     };
 
     setGameSpeed = (event) => {
-        let v = event.target.value;
-        this.props.store.intervalSpeed = parseInt(v, 10);
+        let v = parseInt(event.target.value, 10);
+        this.props.store.gameLoop.setSpeed(v);
     };
     
 }

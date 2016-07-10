@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
+import GameState from '../Libs/BonVoyage/Model/GameState';
+
 @observer
 class EventComponent extends Component {
     render () {
@@ -17,7 +19,7 @@ class EventComponent extends Component {
     }
 
     returnToHome(){
-        this.props.store.changeState(this.props.store.gameState.home)
+        this.props.store.changeState(GameState.states.home);
     }
 }
 export default EventComponent;

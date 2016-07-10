@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 
 import SelectorItemComponent from './SelectorItemComponent';
+import Fleet from '../../Libs/BonVoyage/Model/Fleet';
 
 class SelectorComponent extends Component {
 
+    validShipIds = Fleet.validConstructibleShips;
+    
     render() {
-
-        var validShipIds = this.props.store.validConstructibleShips;
 
         return (
             <div>
                 <table className="tbl-ships">
                     <tbody>
                         <tr>
-                            {validShipIds.map((x, i) =>
+                            {this.validShipIds.map((x, i) =>
                                 <SelectorItemComponent store={this.props.store}
                                                        tryToAlterShipCount={this.props.tryToAlterShipCount}
                                                        key={'shipInput-'+x}

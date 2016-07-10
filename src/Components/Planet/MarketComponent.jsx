@@ -31,7 +31,7 @@ class MarketComponent extends Component {
                             <table className="mid-buttons" cellPadding="0" cellSpacing="0">
                                 <tbody>
                                 <tr>
-                                    <td><br /><span className="text-warning">§ {this.tenthsMetal}</span>
+                                    <td><br /><span className="text-warning">§ {this.tenthsMetal}</span><br />
                                         <button className="text-info" onClick={this.addTM}>+10000</button></td>
                                 </tr>
                                 <tr>
@@ -46,7 +46,7 @@ class MarketComponent extends Component {
                             <table className="mid-buttons" cellPadding="0" cellSpacing="0">
                                 <tbody>
                                 <tr>
-                                    <td><br /><span className="text-warning">§ {this.tenthsCrystal}</span>
+                                    <td><br /><span className="text-warning">§ {this.tenthsCrystal}</span><br />
                                         <button className="text-info" onClick={this.addTC}>+10000</button></td>
                                 </tr>
                                 <tr>
@@ -61,7 +61,7 @@ class MarketComponent extends Component {
                             <table className="mid-buttons" cellPadding="0" cellSpacing="0">
                                 <tbody>
                                 <tr>
-                                    <td><br /><span className="text-warning">§ {this.tenthsDeuterium}</span>
+                                    <td><br /><span className="text-warning">§ {this.tenthsDeuterium}</span><br />
                                         <button className="text-info" onClick={this.addTD}>+10000</button></td>
                                 </tr>
                                 <tr>
@@ -85,15 +85,25 @@ class MarketComponent extends Component {
     }
 
     addResources(resources,price){
+
+        this.success = false;
+        this.validating = false;
+        this.validatingCapacity = false;
+        
         if(resources.metal + resources.crystal + resources.deuterium > this.props.store.capacity - this.props.store.usedCapacity){
+            
             this.validatingCapacity = true;
+            
         } else if(price > this.props.store.spaceCredits){
+
             this.validating = true;
+            
         } else {
             this.props.store.spaceCredits -= price;
             this.props.store.metal += resources.metal;
             this.props.store.crystal += resources.crystal;
             this.props.store.deuterium += resources.deuterium;
+
             this.success = true;
         }
         setTimeout(() => {

@@ -6,6 +6,9 @@ import ShipListComponent from './Utils/ShipListComponent';
 import ResourceListComponent from './Space/ResourceListComponent';
 import TechsNavComponent from './Space/TechsNavComponent';
 
+
+import GameState from '../Libs/BonVoyage/Model/GameState';
+
 class SpaceComponent extends Component {
 
     render () {
@@ -33,7 +36,7 @@ class SpaceComponent extends Component {
 
     /* TO DO: el usuario deberia ser redirigido a una ventana estilo evento */
     returnToHome(){
-        this.props.store.showEnding(this.props.store.gameEndings.quitGame);
+        this.props.store.showEnding(GameState.endings.quitGame);
     }
 }
 export default SpaceComponent;

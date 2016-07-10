@@ -5,17 +5,17 @@ import { computed, observable } from 'mobx';
 import ExchangeRate from '../../Libs/BonVoyage/ExchangeRate';
 import ResearchLabItemComponent from './ResearchLab/ResearchLabItemComponent';
 
+import Fleet from '../../Libs/BonVoyage/Model/Fleet';
+
 @observer
 class ResearchLabComponent extends Component {
 
-    timeout = null;
-
     @observable validating = false;
     @observable success = false;
+
+    validResearchLabTechs = Fleet.validResearchLabTechs;
     
     render() {
-        
-        let validResearchLabTechs = this.props.store.validResearchLabTechs;
         
         return (
             <div className={this.props.visibility?'':'hidden'}>
@@ -24,7 +24,7 @@ class ResearchLabComponent extends Component {
                 <table className="tbl-ships tbl-ships-space">
                     <tbody>
                     <tr>
-                        {validResearchLabTechs.map((x, i) =>
+                        {this.validResearchLabTechs.map((x, i) =>
                             <ResearchLabItemComponent store={this.props.store} tryToPurchaseItem={this.tryToPurchaseItem}
                                                    key={'researchLabInput-'+x}
                                                    techData={this.props.priceList[x]} techId={x} />
@@ -43,6 +43,9 @@ class ResearchLabComponent extends Component {
     tryToPurchaseItem = (idx) => {
 
         const basePrice = ExchangeRate.resourcesToSpaceCredits(this.props.priceList[idx], ExchangeRate.NORMAL);
+
+        this.validating = false;
+        this.success = false;
         
         const price = ResearchLabItemComponent.calcPrice(
             basePrice,
@@ -50,21 +53,18 @@ class ResearchLabComponent extends Component {
             this.props.store.techs[idx]+1);
         if(price > this.props.store.spaceCredits){
             this.validating = true;
-            this.success = false;
         } else {
             this.props.store.techs[idx] += 1;
             this.props.store.spaceCredits -= price;
-            this.validating = false;
+
             this.success = true;
         }
 
-        if(!this.timeout){
-            this.timeout = setTimeout(() => {
-                this.validating = false;
-                this.success = false;
-                this.timeout = null;
-            }, 3000);
-        }
+        setTimeout(() => {
+            this.validating = false;
+            this.success = false;
+        }, 3000);
+  
 
     };
     

@@ -15,7 +15,7 @@ class SelectShipsComponent extends Component {
         return (this.validating && !this.props.store.shipCount) ? 'text-error pull-left' : 'hidden';
     };
     @computed get watchNoDeuteriumClass () {
-        return (this.validating && !this.props.store.baseDeuterium) ? 'text-error-pull-left':'hidden';
+        return (this.validating && !this.props.headQuarters.baseDeuterium) ? 'text-error-pull-left':'hidden';
     };
 
     render () {
@@ -26,7 +26,8 @@ class SelectShipsComponent extends Component {
                 <p>Prepare yourself for the trip. Perhaps you want certain ships for your needs?<br />
                     We will give you the remaining resources (if you have enough room available). Watch out on the deuterium usage!</p>
                 <div className="pull-right half">
-                    <ResourceListComponent module="ships" store={this.props.store} />
+                    <ResourceListComponent headQuarters={this.props.headQuarters}
+                                           module="ships" store={this.props.store} />
                     <br />
                 </div>
                 <SelectorComponent tryToAlterShipCount={this.tryToAlterShipCount}
@@ -49,7 +50,7 @@ class SelectShipsComponent extends Component {
         if(!c){
             return false;
         }
-        return !! this.props.store.baseDeuterium;
+        return !! this.props.headQuarters.baseDeuterium;
     }
 
     tryToAlterShipCount = (idx,amount, increasing) => {
@@ -57,9 +58,12 @@ class SelectShipsComponent extends Component {
         let spaceBuy = false, originalAmount = this.props.store.ships[idx];
         let realAmount = this.props.store.tryUsingShipAmount(idx, amount, this.props.priceList[idx], spaceBuy);
 
+        this.validating = false;
+        
         if(realAmount > originalAmount || !increasing){
 
         } else {
+            
             this.validatingResources = true;
              setTimeout(() => {
                 this.validatingResources = false;
@@ -69,14 +73,17 @@ class SelectShipsComponent extends Component {
 
     resetShipStore = () => {
         this.props.store.resetFleet();
-        this.props.store.resetBaseResources();
+        this.props.headQuarters.resetBaseResources();
     };
 
     @action goToSpace(){
+
+        this.validatingResources = false;
+        this.validating = false;
+        
         if(this.validate()){
             this.props.store.goToSpace();
             
-            this.validating = false;
         } else {
             this.validating = true;
 

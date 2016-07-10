@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
 import { observer } from 'mobx-react';
+
+import GameState from '../Libs/BonVoyage/Model/GameState';
 
 @observer
 class HomeComponent extends Component {
@@ -20,7 +21,7 @@ class HomeComponent extends Component {
     }
 
     goToShipSelection(){
-        this.props.store.changeState(this.props.store.gameStates.ships);
+        this.props.store.changeState(GameState.states.ships);
     }
 }
 export default HomeComponent;

@@ -9,6 +9,8 @@ import TraderComponent from './Planet/TraderComponent';
 import MarketComponent from './Planet/MarketComponent';
 import ResearchLabComponent from './Planet/ResearchLabComponent';
 
+import GameState from '../Libs/BonVoyage/Model/GameState';
+
 @observer
 class PlanetComponent extends Component {
 
@@ -94,7 +96,7 @@ class PlanetComponent extends Component {
         this.props.store.currentPlanet.actionStatus = 5;
     };
     leavePlanet = () => {
-        this.props.store.changeState(this.props.store.gameStates.space);
+        this.props.store.changeState(GameState.states.space);
     }
 
 }

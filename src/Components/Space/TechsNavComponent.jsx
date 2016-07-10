@@ -5,6 +5,9 @@ import { observer } from 'mobx-react';
 class TechsNavComponent extends Component {
     
     render(){
+
+        console.log("Inside techs nav component",this.props.store.techs);
+
         return(
             <div className="techs-nav">
                 <table>
