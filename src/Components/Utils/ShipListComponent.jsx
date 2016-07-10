@@ -6,7 +6,7 @@ import Fleet from '../../Libs/BonVoyage/Model/Fleet';
 @observer
 class ShipListComponent extends Component {
 
-    validShips = Fleet.validShips;
+    validShips = Fleet.validShips; /* Try not to break the screen size */
     
     render() {
 
@@ -20,7 +20,7 @@ class ShipListComponent extends Component {
                             </td><td>
                             <img src={ window.bvConfig.iconPath+x+'.gif' }
                                  height="20" width="20" />
-                        </td><td><span className="amount">{this.props.store.ships[x]}</span></td>
+                        </td><td><span className="amount">{this.props.shipList[x]}</span></td>
                         </tr>
                     )}
                 </tbody>

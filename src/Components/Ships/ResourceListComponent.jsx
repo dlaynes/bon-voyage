@@ -8,8 +8,8 @@ class ResourceListComponent extends Component {
 
     @computed get calcUsedCapacity(){
         return Math.min(
-            this.props.headQuarters.baseMetal+this.props.headQuarters.baseCrystal+this.props.headQuarters.baseDeuterium,
-            this.props.store.capacity
+            this.props.headQuarters.metal+this.props.headQuarters.crystal+this.props.headQuarters.deuterium,
+            this.props.playerFleet.capacity
         );
     }
 
@@ -27,9 +27,9 @@ class ResourceListComponent extends Component {
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{this.props.headQuarters.baseMetal}</td>
-                        <td>{this.props.headQuarters.baseCrystal}</td>
-                        <td>{this.props.headQuarters.baseDeuterium}</td>
+                        <td>{this.props.headQuarters.metal}</td>
+                        <td>{this.props.headQuarters.crystal}</td>
+                        <td>{this.props.headQuarters.deuterium}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -37,24 +37,24 @@ class ResourceListComponent extends Component {
                     <tbody>
                         <tr>
                             <th className="half">Capacity</th>
-                            <td><span className={(this.calcUsedCapacity < this.props.store.capacity)?'text-info':'text-error'}>
-                                    {this.calcUsedCapacity}</span>/{this.props.store.capacity}</td>
+                            <td><span className={(this.calcUsedCapacity < this.props.playerFleet.capacity)?'text-info':'text-error'}>
+                                    {this.calcUsedCapacity}</span>/{this.props.playerFleet.capacity}</td>
                         </tr>
                         <tr>
                             <th>Consumption</th>
-                            <td>{this.props.store.consumption}</td>
+                            <td>{this.props.playerFleet.consumption}</td>
                         </tr>
                         <tr>
                             <th>Speed</th>
-                            <td>{this.props.store.speed}</td>
+                            <td>{this.props.playerFleet.speed}</td>
                         </tr>
                         <tr>
                             <th>Ships</th>
-                            <td>{this.props.store.shipCount}</td>
+                            <td>{this.props.playerFleet.shipCount}</td>
                         </tr>
                         <tr>
                             <th>Space Credits</th>
-                            <td><span className="text-success">§ {this.props.store.spaceCredits}</span></td>
+                            <td><span className="text-success">§ {this.props.playerFleet.spaceCredits}</span></td>
                         </tr>
                     </tbody>
                 </table>

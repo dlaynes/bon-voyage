@@ -10,7 +10,7 @@ class MapComponent extends Component {
     mapWidth = 520;
 
     @computed get calcMapDistance(){
-        return this.mapWidth - ((this.props.store.distance * this.mapWidth) / Space.defaultDistance);
+        return this.mapWidth - ((this.props.store.playerFleet.distance * this.mapWidth) / Space.defaultDistance);
     }
 
     render(){

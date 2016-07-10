@@ -15,7 +15,7 @@ class SpaceComponent extends Component {
         return (
             <div className={ this.props.visibility ? '' : 'hidden' }>
                 <h3>Space</h3>
-                <TechsNavComponent store={this.props.store} />
+                <TechsNavComponent techList={this.props.store.playerFleet.techs} />
                 <p>[Random message]</p>
                 <div className="pull-left">
                     <MapComponent store={this.props.store} />
@@ -25,10 +25,11 @@ class SpaceComponent extends Component {
                 </div>
                 <div className="clear"></div>
                 <div className="pull-left half">
-                    <ShipListComponent module="space" shipList={this.props.store.ships} store={this.props.store} priceList={this.props.priceList} />
+                    <ShipListComponent module="space" shipList={this.props.store.playerFleet.ships}
+                                       store={this.props.store} priceList={this.props.priceList} />
                 </div>
                 <div className="pull-right half">
-                    <ResourceListComponent module="space" store={this.props.store} />
+                    <ResourceListComponent module="space" playerFleet={this.props.store.playerFleet} />
                 </div>
             </div>
         );

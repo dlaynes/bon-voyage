@@ -12,7 +12,7 @@ class LandMark {
                 for(let i=0; i < Fleet.validShips.length; i++){
                     let idx = Fleet.validShips[i];
 
-                    if( idx != 210 && store.ships[idx]) {
+                    if( idx != 210 && store.playerFleet.ships[idx]) {
                         onlyProbes = false;
                         break;
                     }
@@ -45,7 +45,7 @@ class LandMark {
                 for(let i=0; i < Fleet.validShips.length; i++){
                     let idx = Fleet.validShips[i];
 
-                    if( idx != 210 && store.ships[idx]) {
+                    if( idx != 210 && store.playerFleet.ships[idx]) {
                         onlyProbes = false;
                         break;
                     }

@@ -23,9 +23,9 @@ class ResourceListComponent extends Component {
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{this.props.store.metal}</td>
-                        <td>{this.props.store.crystal}</td>
-                        <td><span className="text-error">{this.props.store.deuterium}</span></td>
+                        <td>{this.props.playerFleet.metal}</td>
+                        <td>{this.props.playerFleet.crystal}</td>
+                        <td><span className="text-error">{this.props.playerFleet.deuterium}</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -33,35 +33,35 @@ class ResourceListComponent extends Component {
                     <tbody>
                     <tr>
                         <th className="half">Capacity</th>
-                        <td>{this.props.store.usedCapacity}/{this.props.store.capacity}</td>
+                        <td>{this.props.playerFleet.usedCapacity}/{this.props.playerFleet.capacity}</td>
                     </tr>
                     <tr>
                         <th>Consumption</th>
-                        <td>{this.props.store.consumption}</td>
+                        <td>{this.props.playerFleet.consumption}</td>
                     </tr>
                     <tr>
                         <th>Time Unit</th>
-                        <td>{ResourceListComponent.formatTime(this.props.store.timeUnit)}</td>
+                        <td>{ResourceListComponent.formatTime(this.props.playerFleet.timeUnit)}</td>
                     </tr>
                     <tr>
                         <th>Speed</th>
-                        <td>{this.props.store.speed}</td>
+                        <td>{this.props.playerFleet.speed}</td>
                     </tr>
                     <tr>
                         <th>Speed %</th>
-                        <td>{this.props.store.fleetSpeed}0%</td>
+                        <td>{this.props.playerFleet.fleetSpeed}0%</td>
                     </tr>
                     <tr>
                         <th>Distance</th>
-                        <td><span className="text-info">{this.props.store.distance.toFixed(2)}</span></td>
+                        <td><span className="text-info">{this.props.playerFleet.distance.toFixed(2)}</span></td>
                     </tr>
                     <tr>
                         <th>Ships</th>
-                        <td>{this.props.store.shipCount}</td>
+                        <td>{this.props.playerFleet.shipCount}</td>
                     </tr>
                     <tr>
                         <th>Space Credits</th>
-                        <td><span className="text-success">§ {this.props.store.spaceCredits}</span></td>
+                        <td><span className="text-success">§ {this.props.playerFleet.spaceCredits}</span></td>
                     </tr>
                     </tbody>
                 </table>

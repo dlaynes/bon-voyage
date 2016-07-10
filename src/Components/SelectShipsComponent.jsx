@@ -12,10 +12,10 @@ class SelectShipsComponent extends Component {
     @observable validatingResources = false;
 
     @computed get watchOneShipErrorClass () {
-        return (this.validating && !this.props.store.shipCount) ? 'text-error pull-left' : 'hidden';
+        return (this.validating && !this.props.store.playerFleet.shipCount) ? 'text-error pull-left' : 'hidden';
     };
     @computed get watchNoDeuteriumClass () {
-        return (this.validating && !this.props.headQuarters.baseDeuterium) ? 'text-error-pull-left':'hidden';
+        return (this.validating && !this.props.headQuarters.deuterium) ? 'text-error-pull-left':'hidden';
     };
 
     render () {
@@ -27,11 +27,12 @@ class SelectShipsComponent extends Component {
                     We will give you the remaining resources (if you have enough room available). Watch out on the deuterium usage!</p>
                 <div className="pull-right half">
                     <ResourceListComponent headQuarters={this.props.headQuarters}
+                                           playerFleet={this.props.store.playerFleet}
                                            module="ships" store={this.props.store} />
                     <br />
                 </div>
-                <SelectorComponent tryToAlterShipCount={this.tryToAlterShipCount}
-                                   priceList={this.props.priceList} store={this.props.store} />
+                <SelectorComponent fleet={this.props.store.playerFleet} tryToAlterShipCount={this.tryToAlterShipCount}
+                                   priceList={this.props.priceList} />
                 <div className="clear"></div>
                 <div className="text-center">
                     <button onClick={this.resetShipStore} className="text-warning">» RESET</button>
@@ -46,18 +47,20 @@ class SelectShipsComponent extends Component {
     }
 
     validate() {
-        var c = this.props.store.shipCount;
+        var c = this.props.store.playerFleet.shipCount;
         if(!c){
             return false;
         }
-        return !! this.props.headQuarters.baseDeuterium;
+        return !! this.props.headQuarters.deuterium;
     }
 
     tryToAlterShipCount = (idx,amount, increasing) => {
         if(amount < 0){ amount = 0; }
-        let spaceBuy = false, originalAmount = this.props.store.ships[idx];
-        let realAmount = this.props.store.tryUsingShipAmount(idx, amount, this.props.priceList[idx], spaceBuy);
-
+        let fleet = this.props.store.playerFleet;
+        
+        let originalAmount = fleet.ships[idx];
+        let realAmount = fleet.tryChangingShipAmount(idx, amount, this.props.priceList[idx], this.props.headQuarters);
+        
         this.validating = false;
         
         if(realAmount > originalAmount || !increasing){
@@ -72,8 +75,8 @@ class SelectShipsComponent extends Component {
     };
 
     resetShipStore = () => {
-        this.props.store.resetFleet();
-        this.props.headQuarters.resetBaseResources();
+        this.props.store.playerFleet.reset();
+        this.props.headQuarters.reset();
     };
 
     @action goToSpace(){
