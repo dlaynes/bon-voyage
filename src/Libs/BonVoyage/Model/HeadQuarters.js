@@ -6,14 +6,14 @@ class HeadQuarters {
     static defaultCrystal = 1600000;
     static defaultDeuterium = 350000;
 
-    @observable baseMetal = 0;
-    @observable baseCrystal = 0;
-    @observable baseDeuterium = 0;
+    @observable metal = 0;
+    @observable crystal = 0;
+    @observable deuterium = 0;
 
-    @action resetBaseResources(){
-        this.baseMetal = HeadQuarters.defaultMetal;
-        this.baseCrystal = HeadQuarters.defaultCrystal;
-        this.baseDeuterium = HeadQuarters.defaultDeuterium;
+    @action reset(){
+        this.metal = HeadQuarters.defaultMetal;
+        this.crystal = HeadQuarters.defaultCrystal;
+        this.deuterium = HeadQuarters.defaultDeuterium;
     }
 
 }

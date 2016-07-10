@@ -77,17 +77,18 @@ class DebugBar extends Component {
         this.props.store.changeState(GameState.states.ships);
         for(var idx in ships){
             if(!ships.hasOwnProperty(idx)) continue;
-            this.props.store.tryUsingShipAmount(idx, ships[idx], window.bvConfig.shipData[idx]);
+            this.props.store.playerFleet.tryChangingShipAmount(idx, ships[idx],
+                window.bvConfig.shipData[idx], this.props.store.headQuarters);
         }
         this.props.store.goToSpace();
     }
     planetOne = () => {
         this.chooseShips(this.shipsExpedition);
-        this.props.store.distance = 81000;
+        this.props.store.playerFleet.distance = 81000;
     };
     planetTwo = () => {
         this.chooseShips(this.shipsExpedition);
-        this.props.store.distance = 38000;
+        this.props.store.playerFleet.distance = 38000;
     };
     toggleEvents = (event) => {
         let v = event.target.checked;

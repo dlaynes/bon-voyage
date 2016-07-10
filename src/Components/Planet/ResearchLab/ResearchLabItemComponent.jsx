@@ -12,7 +12,7 @@ class ResearchLabItemComponent extends Component {
         return ResearchLabItemComponent.calcPrice(
             basePrice,
             this.props.techData.factor,
-            this.props.store.techs[this.props.techId]+1);
+            this.props.store.playerFleet.techs[this.props.techId]+1);
     }
 
     render() {
@@ -23,7 +23,7 @@ class ResearchLabItemComponent extends Component {
             <td>
                 <span className="name">{this.props.techData.name}</span>
                 <img src={imgUrl} height="48" width="48" />
-                <span className="text-info">{this.props.store.techs[techId]}</span><br />
+                <span className="text-info">{this.props.store.playerFleet.techs[techId]}</span><br />
                 <span className="text-warning">§ {this.currentPrice}</span>
                 <table className="mini-buttons" cellPadding="0" cellSpacing="0">
                     <tbody>

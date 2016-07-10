@@ -49,11 +49,12 @@ class TraderComponent extends Component {
     }
 
     tryToSellShip = (idx, amount) => {
-        //Hardcoded decimal!!
+        const fleet = this.props.store.playerFleet;
+
         const sellingPrice
             = TraderItemComponent.getBaseTradePrice(idx, ExchangeRate.NORMAL) * amount,
-            currentAmount = this.props.store.ships[idx],
-            totalShips = this.props.store.shipCount;
+            currentAmount = fleet.ships[idx],
+            totalShips = fleet.shipCount;
 
         if(amount < totalShips){
             if(amount > currentAmount){
@@ -63,12 +64,12 @@ class TraderComponent extends Component {
                 this.validating = true;
             
             } else {
-                this.props.store.spaceCredits += sellingPrice;
-                this.props.store.changeShipAmount(idx, currentAmount - amount);
-                this.props.store.setResources({
-                    metal:this.props.store.metal,
-                    crystal:this.props.store.crystal,
-                    deuterium: this.props.store.deuterium}); /* Small hack */
+                fleet.spaceCredits += sellingPrice;
+                fleet.updateShipAmountAndStats(idx, currentAmount - amount, window.bvConfig.shipData);
+                fleet.setResources({
+                    metal: fleet.metal,
+                    crystal: fleet.crystal,
+                    deuterium: fleet.deuterium}); /* Small hack to update capacity */
                 
                 this.cannotSellAllShips = false;
                 this.validating = false;

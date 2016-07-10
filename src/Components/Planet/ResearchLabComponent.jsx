@@ -50,12 +50,12 @@ class ResearchLabComponent extends Component {
         const price = ResearchLabItemComponent.calcPrice(
             basePrice,
             this.props.priceList[idx].factor,
-            this.props.store.techs[idx]+1);
-        if(price > this.props.store.spaceCredits){
+            this.props.store.playerFleet.techs[idx]+1);
+        if(price > this.props.store.playerFleet.spaceCredits){
             this.validating = true;
         } else {
-            this.props.store.techs[idx] += 1;
-            this.props.store.spaceCredits -= price;
+            this.props.store.playerFleet.techs[idx] += 1;
+            this.props.store.playerFleet.spaceCredits -= price;
 
             this.success = true;
         }

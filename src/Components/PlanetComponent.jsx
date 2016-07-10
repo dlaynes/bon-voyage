@@ -29,7 +29,7 @@ class PlanetComponent extends Component {
             <div className={ this.props.visibility ? '' : 'hidden' }>
                 <h3>Planet: {this.props.store.currentPlanet.name}</h3>
                 <p>{this.props.store.currentPlanet.description}</p>
-                <TechsNavComponent store={this.props.store} />
+                <TechsNavComponent techList={this.props.store.playerFleet.techs} />
                 <table className="tbl-resources">
                     <thead>
                     <tr>
@@ -42,11 +42,11 @@ class PlanetComponent extends Component {
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{this.props.store.metal}</td>
-                        <td>{this.props.store.crystal}</td>
-                        <td>{this.props.store.deuterium}</td>
-                        <td><span className="text-success">§ {this.props.store.spaceCredits}</span></td>
-                        <td><span className="text-info">{this.props.store.usedCapacity}/{this.props.store.capacity}</span></td>
+                        <td>{this.props.store.playerFleet.metal}</td>
+                        <td>{this.props.store.playerFleet.crystal}</td>
+                        <td>{this.props.store.playerFleet.deuterium}</td>
+                        <td><span className="text-success">§ {this.props.store.playerFleet.spaceCredits}</span></td>
+                        <td><span className="text-info">{this.props.store.playerFleet.usedCapacity}/{this.props.store.playerFleet.capacity}</span></td>
                     </tr>
                     </tbody>
                 </table>

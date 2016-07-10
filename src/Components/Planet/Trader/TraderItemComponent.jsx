@@ -23,7 +23,7 @@ class TraderItemComponent extends Component {
             <td>
                 <span className="name">{this.props.shipData.name}</span>
                 <img src={imgUrl} height="48" width="48" />
-                <span className="text-info">{this.props.store.ships[shipId]}</span><br />
+                <span className="text-info">{this.props.store.playerFleet.ships[shipId]}</span><br />
                 <span className="text-error">§ {this.getTradePrice()}</span>
                 <table className="mini-buttons" cellPadding="0" cellSpacing="0">
                     <tbody>

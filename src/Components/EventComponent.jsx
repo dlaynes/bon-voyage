@@ -8,8 +8,8 @@ class EventComponent extends Component {
     render () {
         return (
             <div className={ this.props.visibility ? '' : 'hidden' }>
-                <h3>Event title</h3>
-                <p>Event message</p>
+                <h3>{this.props.store.currentEvent.title}</h3>
+                <p>{this.props.store.currentEvent.description}</p>
                 <div className="clear"></div>
                 <div className="text-center">
                     <button onClick={(e) => this.returnToHome(e)} className="action-red">» PLAY AGAIN?</button>

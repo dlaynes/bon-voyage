@@ -90,19 +90,20 @@ class MarketComponent extends Component {
         this.validating = false;
         this.validatingCapacity = false;
         
-        if(resources.metal + resources.crystal + resources.deuterium > this.props.store.capacity - this.props.store.usedCapacity){
+        if(resources.metal + resources.crystal + resources.deuterium
+            > this.props.store.playerFleet.capacity - this.props.store.playerFleet.usedCapacity){
             
             this.validatingCapacity = true;
             
-        } else if(price > this.props.store.spaceCredits){
+        } else if(price > this.props.store.playerFleet.spaceCredits){
 
             this.validating = true;
             
         } else {
-            this.props.store.spaceCredits -= price;
-            this.props.store.metal += resources.metal;
-            this.props.store.crystal += resources.crystal;
-            this.props.store.deuterium += resources.deuterium;
+            this.props.store.playerFleet.spaceCredits -= price;
+            this.props.store.playerFleet.metal += resources.metal;
+            this.props.store.playerFleet.crystal += resources.crystal;
+            this.props.store.playerFleet.deuterium += resources.deuterium;
 
             this.success = true;
         }

@@ -1,3 +1,5 @@
+/* Just a container class for now */
+
 class GameState {
 
     static states = {
@@ -37,6 +39,7 @@ class GameState {
             description:'The fleet entered a black hole, and turned into a bunch of metal made spaghetti, disappearing from this universe for an infinite time.'},
         '6' : {title:'Game Over',description:'Thanks for playing. Try again?'}
     };
+
 }
 
 export default GameState;

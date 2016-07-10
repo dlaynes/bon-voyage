@@ -6,12 +6,12 @@ import Space from '../Space';
 class PlayerFleet extends Fleet {
     
     static defaultTechs = {
-        '109' : 10, //Combustion Drive
-        '110' : 8, //Impulse Drive
-        '111' : 4, //Hyperspace Drive
-        '115' : 10, //Military Tech
-        '117' : 10, //Shielding Tech
-        '118' : 10, //Armor Tech
+        '109' : 10,
+        '110' : 10,
+        '111' : 10,
+        '115' : 10,
+        '117' : 8,
+        '118' : 6,
         '124' : 4 //Astrophysics
     };
 
@@ -42,6 +42,7 @@ class PlayerFleet extends Fleet {
     
     @action resetVariables(){
         this.distance = Space.defaultDistance;
+        console.log("Distance", this.distance);
         this.speed = 0;
         this.duration = 0.0;
         this.capacity = 0;
@@ -107,6 +108,8 @@ class PlayerFleet extends Fleet {
             return;
         }
 
+        console.log("Adding ship", idx, amount);
+
         let slowest = 9999999999,
             consumption = 0,
             capacity = 0,
@@ -118,15 +121,17 @@ class PlayerFleet extends Fleet {
 
         for(let i=0; i < Fleet.validShips.length;i++){
 
-            let idx = Fleet.validShips[i];
-            if(!this.ships[idx]){
+            let id = Fleet.validShips[i];
+            if(!this.ships[id]){
                 continue;
             }
 
+            let currentPriceList = priceList[id];
+
             let new_speed = null,
                 new_consumption = null,
-                motor3 = priceList['motor3'],
-                motor2 = priceList['motor2'];
+                motor3 = currentPriceList.motor3,
+                motor2 = currentPriceList.motor2;
 
             if(typeof motor3 !== undefined){
                 for(let motor in motor3) {
@@ -134,20 +139,20 @@ class PlayerFleet extends Fleet {
                     switch(motor){
                         case '115':
                             if(combustionDriveTech > motor3[motor]){
-                                new_speed = PlayerFleet.calcSpeed(combustionDriveTech, priceList.speed3, 1);
-                                new_consumption = priceList.consumption3;
+                                new_speed = PlayerFleet.calcSpeed(combustionDriveTech, currentPriceList.speed3, 1);
+                                new_consumption = currentPriceList.consumption3;
                             }
                             break;
                         case '117':
                             if(impulseDriveTech > motor3[motor]){
-                                new_speed = PlayerFleet.calcSpeed(impulseDriveTech, priceList.speed3, 2);
-                                new_consumption = priceList.consumption3;
+                                new_speed = PlayerFleet.calcSpeed(impulseDriveTech, currentPriceList.speed3, 2);
+                                new_consumption = currentPriceList.consumption3;
                             }
                             break;
                         case '118':
                             if(hyperspaceDriveTech > motor3[motor]){
-                                new_speed = PlayerFleet.calcSpeed(hyperspaceDriveTech, priceList.speed3, 3);
-                                new_consumption = priceList.consumption3;
+                                new_speed = PlayerFleet.calcSpeed(hyperspaceDriveTech, currentPriceList.speed3, 3);
+                                new_consumption = currentPriceList.consumption3;
                             }
                             break;
                         default:
@@ -161,20 +166,20 @@ class PlayerFleet extends Fleet {
                     switch(motor){
                         case '115':
                             if(combustionDriveTech > motor2[motor]){
-                                new_speed = PlayerFleet.calcSpeed(combustionDriveTech, priceList.speed2, 1);
-                                new_consumption = priceList.consumption2;
+                                new_speed = PlayerFleet.calcSpeed(combustionDriveTech, currentPriceList.speed2, 1);
+                                new_consumption = currentPriceList.consumption2;
                             }
                             break;
                         case '117':
                             if(impulseDriveTech > motor2[motor]){
-                                new_speed = PlayerFleet.calcSpeed(impulseDriveTech, priceList.speed2, 2);
-                                new_consumption = priceList.consumption2;
+                                new_speed = PlayerFleet.calcSpeed(impulseDriveTech, currentPriceList.speed2, 2);
+                                new_consumption = currentPriceList.consumption2;
                             }
                             break;
                         case '118':
                             if(hyperspaceDriveTech > motor2[motor]){
-                                new_speed = PlayerFleet.calcSpeed(hyperspaceDriveTech, priceList.speed2, 3);
-                                new_consumption = priceList.consumption2;
+                                new_speed = PlayerFleet.calcSpeed(hyperspaceDriveTech, currentPriceList.speed2, 3);
+                                new_consumption = currentPriceList.consumption2;
                             }
                             break;
                         default:
@@ -183,33 +188,45 @@ class PlayerFleet extends Fleet {
                 }
             }
             if(!new_speed){
-                switch(priceList['motor']){
+                switch(currentPriceList.motor){
                     case 115:
-                        new_speed = PlayerFleet.calcSpeed(combustionDriveTech, priceList.speed, 1);
-                        new_consumption = priceList.consumption;
+                        new_speed = PlayerFleet.calcSpeed(combustionDriveTech, currentPriceList.speed, 1);
+                        new_consumption = currentPriceList.consumption;
                         break;
                     case 117:
-                        new_speed = PlayerFleet.calcSpeed(impulseDriveTech, priceList.speed, 2);
-                        new_consumption = priceList.consumption;
+                        new_speed = PlayerFleet.calcSpeed(impulseDriveTech, currentPriceList.speed, 2);
+                        new_consumption = currentPriceList.consumption;
                         break;
                     case 118:
-                        new_speed = PlayerFleet.calcSpeed(hyperspaceDriveTech, priceList.speed, 3);
-                        new_consumption = priceList.consumption;
+                        new_speed = PlayerFleet.calcSpeed(hyperspaceDriveTech, currentPriceList.speed, 3);
+                        new_consumption = currentPriceList.consumption;
                         break;
                     default:
                         break;
                 }
             }
 
-            capacity += this.ships[idx] * priceList.capacity;
+
+            capacity += this.ships[id] * currentPriceList.capacity;
             slowest = Math.min(new_speed, slowest);
-            shipListExtra[idx] = {speed: new_speed, consumption: new_consumption};
+            shipListExtra[id] = {speed: new_speed, consumption: new_consumption};
+
+            console.log("Current speed", new_speed);
+            console.log("pricelist", currentPriceList);
+            console.log("current cap", capacity);
+            console.log("Slowest", slowest);
+
+            console.log("Extra", shipListExtra[id]);
         }
+
+        console.log("Total extra", shipListExtra);
 
         this.capacity = capacity;
 
         let duration = 10 + 35000/this.fleetSpeed * Math.sqrt((10*distance) / slowest ), sum = 0;
 
+        console.log("duration", duration);
+        
         for(let i=0; i < Fleet.validShips.length;i++) {
             let idx = Fleet.validShips[i];
             if (this.ships[idx]) {
@@ -218,7 +235,8 @@ class PlayerFleet extends Fleet {
                     shipListExtra[idx].speed, this.ships[idx], shipListExtra[idx].consumption)  ;
             }
         }
-
+        console.log("Consumption", consumption);
+        
         if(sum){
             this.speed = slowest;
             this.duration = duration;
@@ -234,7 +252,7 @@ class PlayerFleet extends Fleet {
         return this.metal + this.crystal + this.deuterium;
     }
     
-    @action tryChangingShipAmount(idx, amount, priceList, baseResources){
+    @action tryChangingShipAmount(idx, amount, priceList, target){
         
         do{
             if(!(idx in this.ships)){
@@ -246,9 +264,9 @@ class PlayerFleet extends Fleet {
                 amount = Fleet.unitLimit;
             }
             
-            let metal = baseResources.metal,
-                crystal = baseResources.crystal,
-                deuterium = baseResources.baseDeuterium;
+            let metal = target.metal,
+                crystal = target.crystal,
+                deuterium = target.deuterium;
                 
             if(this.ships[idx]==amount){
                 
@@ -260,7 +278,7 @@ class PlayerFleet extends Fleet {
                 crystal += (dif * priceList.crystal);
                 deuterium += (dif * priceList.deuterium);
 
-                this.updateShipAmountAndStats(idx, amount, priceList);
+                this.updateShipAmountAndStats(idx, amount, window.bvConfig.shipData);
             } else {
                 let dif = amount - this.ships[idx];
                 let originalMetalUsed = priceList.metal * this.ships[idx],
@@ -292,15 +310,16 @@ class PlayerFleet extends Fleet {
                 crystal -= (dif * priceList.crystal);
                 deuterium -= (dif * priceList.deuterium);
 
-                this.updateShipAmountAndStats(idx, amount, priceList);
+                this.updateShipAmountAndStats(idx, amount, window.bvConfig.shipData);
             }
-            
-            baseResources.metal = metal;
-            baseResources.crystal = crystal;
-            baseResources.deuterium = deuterium;
+
+            target.metal = metal;
+            target.crystal = crystal;
+            target.deuterium = deuterium;
 
         } while(false);
-        return {amount: amount, baseResources: baseResources};
+
+        return amount;
     }
 
     static calcSpeed(motorLevel, speed, factor){

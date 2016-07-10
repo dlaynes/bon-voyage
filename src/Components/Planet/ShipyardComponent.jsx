@@ -55,14 +55,12 @@ class ShipyardComponent extends Component {
         this.successResources = false;
         
         if(amount < 0){ amount = 0; }
-        let spaceBuy = true, originalAmount = this.props.store.ships[idx];
-        var realAmount = this.props.store.tryUsingShipAmount(idx, amount, this.props.priceList[idx], spaceBuy);
+        const fleet = this.props.store.playerFleet;
+        let originalAmount = fleet.ships[idx];
+        var realAmount = fleet.tryChangingShipAmount(idx, amount, this.props.priceList[idx], fleet);
         if(realAmount > originalAmount){
-            
             this.successResources = true;
-
         } else {
-            
             this.validatingResources = true;
         }
         setTimeout(() => {
@@ -83,14 +81,15 @@ class ShipyardComponent extends Component {
         const basePrice = ExchangeRate.resourcesToSpaceCredits(this.props.priceList[idx], ExchangeRate.NORMAL);
 
         var price = basePrice * amount;
-
-        if(price > this.props.store.spaceCredits){
+        const fleet = this.props.store.playerFleet;
+        
+        if(price > fleet.spaceCredits){
             
             this.validating = true;
             
         } else {
-            this.props.store.changeShipAmount(idx, this.props.store.ships[idx]+amount);
-            this.props.store.spaceCredits -= price;
+            fleet.updateShipAmountAndStats(idx, this.props.store.playerFleet.ships[idx]+amount, window.bvConfig.shipData);
+            fleet.spaceCredits -= price;
             
             this.success = true;
         
