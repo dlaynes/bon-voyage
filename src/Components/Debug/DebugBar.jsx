@@ -52,7 +52,7 @@ class DebugBar extends Component {
                     <strong>Events enabled? </strong>
                     <input type="checkbox" onChange={this.toggleEvents} />
                     <strong> Space Credits </strong>
-                    <input onChange={this.setSpaceCredits} defaultValue={this.props.store.spaceCredits} />
+                    <input onChange={this.setSpaceCredits} defaultValue={this.props.store.playerFleet.spaceCredits} />
                 </div>
             </div>
         )    
@@ -96,7 +96,7 @@ class DebugBar extends Component {
 
     setSpaceCredits = (event) => {
         let v = event.target.value;
-        this.props.store.spaceCredits = parseInt(v, 10);
+        this.props.store.playerFleet.spaceCredits = parseInt(v, 10);
     };
 
     setGameSpeed = (event) => {
