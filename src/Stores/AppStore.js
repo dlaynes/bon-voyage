@@ -1,7 +1,6 @@
 import { observable, computed, action } from 'mobx';
 
 import GameLoop from "../Libs/GameLoop";
-import FixedQueue from "../Libs/FixedQueue";
 
 import GameEvent from '../Libs/BonVoyage/Model/GameEvent';
 import GameState from '../Libs/BonVoyage/Model/GameState';
@@ -12,6 +11,7 @@ import Fleet from '../Libs/BonVoyage/Model/Fleet';
 import HeadQuarters from '../Libs/BonVoyage/Model/HeadQuarters';
 import LandMark from '../Libs/BonVoyage/Model/LandMark';
 import Planet from '../Libs/BonVoyage/Model/Planet';
+import BattleManager from '../Libs/BonVoyage/BattleManager';
 
 class AppStore {
 
@@ -23,15 +23,20 @@ class AppStore {
     
     landMarks = LandMark.defaultList.slice(0);
     gameLoop = new GameLoop();
+    battleManager = new BattleManager(window.OgsimBattle);
 
-    @observable pastEvents = FixedQueue(20, []);
+    @observable pastEvents = [];
     @observable currentState = 1;
     @observable gameOverScreen = Object.assign({}, GameState.gameOverScreens['-1']);
 
-    @observable currentEvent = new GameEvent();
+    @observable currentEvent = new GameEvent(this);
 
     constructor() {
+        this.battleManager.setAllyFleet(this.playerFleet);
+        this.battleManager.setEnemyFleet(this.playerFleet);
 
+        this.gameLoop.setSpeed(Space.defaultIntervalSpeed);
+        this.gameLoop.setHandler(this.handleGameLoop);
     }
 
     resetEventDescriptions(){
@@ -56,7 +61,20 @@ class AppStore {
     }
     
     randomEvent(){
-        
+        if(this.currentState==GameState.states.event){
+            return;
+        }
+
+        var eventProb = Math.random(), currentEvent;
+        for(let id in GameEvent.types){
+            if(!GameEvent.types.hasOwnProperty(id)) continue;
+            let eventType = GameEvent.types[id];
+            if(eventType.probability > eventProb){
+                let state = this.currentEvent.init(id);
+                this.changeState(state);
+                break;
+            }
+        }
     }
 
     calcEventProbability(){
@@ -99,10 +117,19 @@ class AppStore {
         fleet.deuterium -= fleet.consumption; //This triggers a capacity update, hopefully
         fleet.timeUnit += 1;
 
+        /* remove slowdowns and speed-ups */
+        if(fleet.speedEffectCounter){
+            fleet.speedEffectCounter--;
+            if(fleet.speedEffectCounter==0){
+                fleet.fleetSpeed = 10;
+                this.playerFleet.updateStats(window.bvConfig.shipData);
+            }
+        }
+
         do {
             for(let i=0; i < this.landMarks.length; i++){
 
-                if(!this.landMarks[i].visited && this.distance < this.landMarks[i].distance){
+                if(!this.landMarks[i].visited && this.playerFleet.distance < this.landMarks[i].distance){
                     this.landMarks[i].visited = true;
                     let result = this.landMarks[i].action(this);
                     if(result){
@@ -125,7 +152,7 @@ class AppStore {
             crystal: this.headQuarters.crystal,
             deuterium: this.headQuarters.deuterium
         });
-        this.pastEvents.push({time:0, message:"Mission just started!"});
+        this.pastEvents.push({time:0, message:"Mission just started!","type":'info'});
         this.changeState(GameState.states.space);
     }
 
@@ -137,17 +164,17 @@ class AppStore {
                 this.playerFleet.reset();
                 this.headQuarters.reset();
                 this.gameLoop.reset();
-                this.gameLoop.setSpeed(Space.defaultIntervalSpeed);
-                this.gameLoop.setHandler(this.handleGameLoop);
-                this.resetLandMarks();
-                this.enemyFleet.resetShips();
                 this.resetPastEvents();
+                this.resetLandMarks();
                 this.resetEventDescriptions();
                 break;
             case GameState.states.space:
+                this.playerFleet.resetShipChanges();
+                this.enemyFleet.resetShipChanges();
+                this.gameLoop.pause();
                 setTimeout(() => {
                     this.gameLoop.play();
-                }, 1000);
+                }, 2000);
                 break;
             case GameState.states.event:
                 this.gameLoop.pause();
@@ -159,7 +186,7 @@ class AppStore {
                 break;
             case GameState.states.planet:
                 this.gameLoop.pause();
-                this.pastEvents.push({time: this.timeUnit,message:"We just reached planet "+data.name});
+                this.pastEvents.push({time: this.playerFleet.timeUnit,message:"We just reached planet "+data.name,type:'info'});
                 this.currentPlanet.set(data);
                 break;
             case GameState.states.endBad:

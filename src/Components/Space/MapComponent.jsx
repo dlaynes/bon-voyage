@@ -14,18 +14,24 @@ class MapComponent extends Component {
     }
 
     render(){
-        var fleetStyle = {left: this.calcMapDistance + 2};
+        const fleetStyle = {left: this.calcMapDistance + 2};
+        let fleetClass = 'text-warning';
+        if(this.props.store.playerFleet.fleetSpeed > 10){
+            fleetClass = 'current_capacity';
+        } else if (this.props.store.playerFleet.fleetSpeed < 10){
+            fleetClass = 'slow_down';
+        }
 
         return(
             <div className="space-map-container">
             <pre className="space-map">+                            +<br />
 <span />    +             +               +<br />
 <span />        +          +<br />
-<span />             <span className="text-info">o</span>            <span className="text-info">o</span>           <span className="text-success">Ω</span><br />
+<span />             <span className="text-info">Ů</span>            <span className="text-info">Φ</span>           <span className="text-success">Ω</span><br />
 +<br />
 <span />    +<br />
 <span />        +              +            </pre>
-                <span id="fleet" className="text-warning" style={fleetStyle}>Э</span>
+                <span id="fleet" className={fleetClass} style={fleetStyle}>Э</span>
                 </div>
         )
 

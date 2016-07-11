@@ -102,6 +102,9 @@
 .current_capacity {
     color: #73cafd;
 }
+.slow_down {
+    color: #8A2BE2;
+}
 #time-events {
     background-color: #edd;
     box-sizing: border-box;
@@ -168,4 +171,26 @@
     height: 20px;
     line-height: 17px;
     padding: 2px 6px;
+}
+.event-resources {
+    margin: 0 auto;
+    text-align: center;
+}
+.event-resources li {
+    display: inline-block; text-align: center;
+    list-style: none;
+    margin: 0; padding: 0;
+}
+.event-resources li.hidden-item {
+    display: none;
+}
+.mini-techs-table {
+    width: 100%;
+    text-align: center;
+    clear: both;
+    margin-bottom: 10px; margin-top: 10px;
+}
+.mini-techs-table  tr td{
+    font-size: 9px;
+    line-height:20px;
 }

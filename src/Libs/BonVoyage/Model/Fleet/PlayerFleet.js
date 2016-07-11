@@ -32,6 +32,8 @@ class PlayerFleet extends Fleet {
     @observable fleetSpeed = 10;
     
     @observable timeUnit = 0;
+
+    speedEffectCounter = 0;
     
     reset(){
         this.resetResources();
@@ -100,16 +102,7 @@ class PlayerFleet extends Fleet {
         return spentResources;
     }
 
-    @action updateShipAmountAndStats(idx, amount, priceList){
-        if(idx in this.ships){
-            this.ships[idx] = amount;
-        } else {
-            console.warn("Ship not found", idx);
-            return;
-        }
-
-        console.log("Adding ship", idx, amount);
-
+    @action updateStats(priceList){
         let slowest = 9999999999,
             consumption = 0,
             capacity = 0,
@@ -206,27 +199,15 @@ class PlayerFleet extends Fleet {
                 }
             }
 
-
             capacity += this.ships[id] * currentPriceList.capacity;
             slowest = Math.min(new_speed, slowest);
             shipListExtra[id] = {speed: new_speed, consumption: new_consumption};
-
-            console.log("Current speed", new_speed);
-            console.log("pricelist", currentPriceList);
-            console.log("current cap", capacity);
-            console.log("Slowest", slowest);
-
-            console.log("Extra", shipListExtra[id]);
         }
-
-        console.log("Total extra", shipListExtra);
 
         this.capacity = capacity;
 
         let duration = 10 + 35000/this.fleetSpeed * Math.sqrt((10*distance) / slowest ), sum = 0;
 
-        console.log("duration", duration);
-        
         for(let i=0; i < Fleet.validShips.length;i++) {
             let idx = Fleet.validShips[i];
             if (this.ships[idx]) {
@@ -235,8 +216,7 @@ class PlayerFleet extends Fleet {
                     shipListExtra[idx].speed, this.ships[idx], shipListExtra[idx].consumption)  ;
             }
         }
-        console.log("Consumption", consumption);
-        
+
         if(sum){
             this.speed = slowest;
             this.duration = duration;
@@ -248,10 +228,21 @@ class PlayerFleet extends Fleet {
         }
     }
 
+    @action updateShipAmountAndStats(idx, amount, priceList){
+        if(idx in this.ships){
+            this.ships[idx] = amount;
+        } else {
+            console.warn("Ship not found", idx);
+            return;
+        }
+        this.updateStats(priceList);
+    }
+
     @computed get usedCapacity(){
         return this.metal + this.crystal + this.deuterium;
     }
-    
+
+    /* We borrow some resources from the target, which might be us. */
     @action tryChangingShipAmount(idx, amount, priceList, target){
         
         do{

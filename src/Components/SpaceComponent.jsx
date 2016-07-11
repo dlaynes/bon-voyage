@@ -25,7 +25,7 @@ class SpaceComponent extends Component {
                 </div>
                 <div className="clear"></div>
                 <div className="pull-left half">
-                    <ShipListComponent module="space" shipList={this.props.store.playerFleet.ships}
+                    <ShipListComponent module="space" fleet={this.props.store.playerFleet}
                                        store={this.props.store} priceList={this.props.priceList} />
                 </div>
                 <div className="pull-right half">

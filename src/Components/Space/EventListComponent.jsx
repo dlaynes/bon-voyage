@@ -15,7 +15,7 @@ class EventListComponent extends Component {
         return (
             <ul className="unstyled text-info" id="time-events">
                 {events.map( (x,i) =>
-                    <li key={'event-'+x.time}><span>{EventListComponent.formatTime(x.time)}</span> <span>- {x.message}</span></li>
+                    <li key={'event-'+x.time}><span>{EventListComponent.formatTime(x.time)}</span> <span className={'text-'+x.type}>- {x.message}</span></li>
                 )}
             </ul>
         );

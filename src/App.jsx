@@ -8,6 +8,7 @@ import SelectShipsComponent from './Components/SelectShipsComponent';
 import SpaceComponent from './Components/SpaceComponent';
 import PlanetComponent from './Components/PlanetComponent';
 import GoodEndingComponent from './Components/GoodEndingComponent';
+import EventComponent from './Components/EventComponent';
 
 import GameState from './Libs/BonVoyage/Model/GameState';
 
@@ -23,6 +24,7 @@ class App extends Component {
             home: (store.currentState==GameState.states.home),
             ships: (store.currentState==GameState.states.ships),
             space: (store.currentState==GameState.states.space),
+            event: (store.currentState==GameState.states.event),
             planet: (store.currentState==GameState.states.planet),
             badEnding: (store.currentState==GameState.states.endBad),
             goodEnding: (store.currentState==GameState.states.endGood)
@@ -35,8 +37,10 @@ class App extends Component {
                                       visibility={visibility.ships} store={store} />
                 <SpaceComponent visibility={visibility.space} priceList={window.bvConfig.shipData} store={store} />
                 <PlanetComponent priceList={window.bvConfig.shipData} store={store} visibility={visibility.planet} />
+                <EventComponent visibility={visibility.event} priceList={window.bvConfig.shipData} store={store} />
                 <BadEndingComponent visibility={visibility.badEnding} store={store} />
-                <GoodEndingComponent visibility={visibility.goodEnding} store={store} />
+                <GoodEndingComponent visibility={visibility.goodEnding} priceList={window.bvConfig.shipData} store={store} />
+
             </div>
             <DebugBar store={store} state={store.state} />
 
