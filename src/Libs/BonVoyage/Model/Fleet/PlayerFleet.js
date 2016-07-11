@@ -25,7 +25,7 @@ class PlayerFleet extends Fleet {
 
     @observable distance = 0;
     @observable speed = 0;
-    @observable capacity = 0;
+    
     @observable duration = 0.0;
     @observable consumption = 0;
     
@@ -44,7 +44,6 @@ class PlayerFleet extends Fleet {
     
     @action resetVariables(){
         this.distance = Space.defaultDistance;
-        console.log("Distance", this.distance);
         this.speed = 0;
         this.duration = 0.0;
         this.capacity = 0;
@@ -227,6 +226,20 @@ class PlayerFleet extends Fleet {
             this.consumption = 0;
         }
     }
+    
+    @action applyBattleResults(){
+        console.log("Applying changes", this.ships, this.shipChanges);
+        
+        for(let i=0; i < Fleet.allFleet.length; i++) {
+            const idx = Fleet.allFleet[i];
+            this.updateShipAmountAndStats(
+                idx,
+                this.ships[idx] + this.shipChanges[idx],
+                window.bvConfig.shipData
+            );
+            this.shipChanges[idx] = 0;
+        }
+    }
 
     @action updateShipAmountAndStats(idx, amount, priceList){
         if(idx in this.ships){
@@ -319,7 +332,7 @@ class PlayerFleet extends Fleet {
 
     static calcConsumption(distance, duration, speed, amount, consumption){
         var av = (35000 / (duration - 10) ) * Math.sqrt(distance * 10 / speed);
-        return Math.round( ((amount * consumption * distance )/35000 * Math.pow(av/ 10 + 1, 2 )));
+        return Math.round( ((amount * consumption * distance )/35000 * Math.pow(av/ 10 + 1, 2 ))) * 2;
     }
     
 }

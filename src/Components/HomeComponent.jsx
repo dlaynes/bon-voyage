@@ -16,7 +16,7 @@ class HomeComponent extends Component {
                     <button onClick={(e) => this.goToShipSelection(e)}
                             className="action-red">» CREATE EXPEDITION FLEET</button>
                 </div>
-            </div>    
+            </div>
         );
     }
 

@@ -16,15 +16,22 @@
       window.bvConfig = {
         resourcePath: '/ogame/skins/EpicBlue/images/',
         iconPath: '/ogame/skins/EpicBlue/gebaeude/',
-        shipData : {
-          "109": {"name": "Military Tech", "factor": 2, "metal": 800, "crystal": 200, "deuterium": 0},
-          "110": {"name": "Shielding Tech", "factor": 2, "metal": 200, "crystal": 600, "deuterium": 0},
-          "111": {"name": "Armor Tech", "factor": 2, "metal": 1000, "crystal": 0, "deuterium": 0},
-          "115": {"name": "Combustion Drive", "factor": 2, "metal": 400, "crystal": 0, "deuterium": 600},
-          "117": {"name": "Impulse Drive", "factor": 2, "metal": 2000, "crystal": 4000, "deuterium": 600},
-          "118": {"name": "Hyperspace Drive", "factor": 2, "metal": 10000, "crystal": 20000, "deuterium": 6000},
-          "124": {"name": "Astrophysics", "factor": 1.75, "metal": 4000, "crystal": 8000, "deuterium": 4000},
+        shipData: {
+          "10001" : {'id':"10001", 'name':'Planet', 'code':'planet', 'size':0,"position": null},
+          "10002" : {'id':"10002", 'name':'Moon', 'code':'moon', 'size':0,"position": null},
+          "10003" : {'id':"3", 'name':'Debris', 'code':'debris', 'size':0,"position": null},
+
+          "109": {"id":"109", "name":"Military Tech", "code":"military_tech", "factor": 2, "metal": 800, "crystal": 200, "deuterium": 0},
+          "110": {"id":"110", "name":"Shielding Tech", "code":"defense_tech", "factor": 2, "metal": 200, "crystal": 600, "deuterium": 0},
+          "111": {"id":"111", "name":"Armor Tech", "code":"hull_tech", "factor": 2, "metal": 1000, "crystal": 0, "deuterium": 0},
+          "115": {"id":"115","name": "Combustion Drive", "code":"combustion_drive_tech", "factor": 2, "metal": 400, "crystal": 0, "deuterium": 600},
+          "117": {"id":"117","name": "Impulse Drive", "code":"impulse_drive_tech", "factor": 2, "metal": 2000, "crystal": 4000, "deuterium": 600},
+          "118": {"id":"118","name": "Hyperspace Drive", "code":"hyperspace_drive_tech", "factor": 2, "metal": 10000, "crystal": 20000, "deuterium": 6000},
+          "124": {"id":"124","name": "Astrophysics", "code":"astrophysics_tech", "factor": 1.75, "metal": 4000, "crystal": 8000, "deuterium": 4000},
+
           "202": {
+            "id":"202",
+            "code":"small_cargo",
             "name": "Small Cargo",
             "metal": 2000,
             "crystal": 2000,
@@ -43,6 +50,8 @@
             "motor2": {"117": 4}
           },
           "203": {
+            "id":"203",
+            "code":"large_cargo",
             "name": "Large Cargo",
             "metal": 6000,
             "crystal": 6000,
@@ -58,6 +67,8 @@
             "motor": 115
           },
           "204": {
+            "id":"204",
+            "code":"light_fighter",
             "name": "Light Fighter",
             "metal": 3000,
             "crystal": 1000,
@@ -73,6 +84,8 @@
             "motor": 115
           },
           "205": {
+            "id":"205",
+            "code": "heavy_fighter",
             "name": "Heavy Fighter",
             "metal": 6000,
             "crystal": 4000,
@@ -88,6 +101,8 @@
             "motor": 117
           },
           "206": {
+            "id":"206",
+            "code":"cruiser",
             "name": "Cruiser",
             "metal": 20000,
             "crystal": 7000,
@@ -103,6 +118,8 @@
             "motor": 117
           },
           "207": {
+            "id":"207",
+            "code":"battle_ship",
             "name": "Battleship",
             "metal": 45000,
             "crystal": 15000,
@@ -118,6 +135,8 @@
             "motor": 118
           },
           "208": {
+            "id":"208",
+            "code":"colony_ship",
             "name": "Colony Ship",
             "metal": 10000,
             "crystal": 20000,
@@ -133,6 +152,8 @@
             "motor": 117
           },
           "209": {
+            "id":"209",
+            "code":"recycler",
             "name": "Recycler",
             "metal": 10000,
             "crystal": 6000,
@@ -154,6 +175,8 @@
             "motor3": {"118": 14}
           },
           "210": {
+            "id":"210",
+            "code":"esp_probe",
             "name": "Espionage Probe",
             "metal": 0,
             "crystal": 1000,
@@ -169,6 +192,8 @@
             "motor": 115
           },
           "211": {
+            "id":"211",
+            "code":"bomber_ship",
             "name": "Bomber",
             "metal": 50000,
             "crystal": 25000,
@@ -187,6 +212,8 @@
             "motor2": {"118": 7}
           },
           "213": {
+            "id":"213",
+            "code":"destroyer",
             "name": "Destroyer",
             "metal": 60000,
             "crystal": 50000,
@@ -202,6 +229,8 @@
             "motor": 118
           },
           "214": {
+            "id":"214",
+            "code":"death_star",
             "name": "Death Star",
             "metal": 5000000,
             "crystal": 4000000,
@@ -217,6 +246,8 @@
             "motor": 118
           },
           "215": {
+            "id":"215",
+            "code":"battle_cruiser",
             "name": "Battle Cruiser",
             "metal": 30000,
             "crystal": 40000,
@@ -341,12 +372,27 @@
             'defense': 1,
             'hull': 15000
           }
+        },
+        rapidFire: {
+          "202": {"210":5,"212":5},
+          "203": {"210":5,"212":5},
+          "204": {"210":5,"212":5},
+          "205": {"210":5,"212":5,"203":3},
+          "206": {"210":5,"212":5,"204":6,"401":10},
+          "207": {"210":5,"212":5},
+          "208": {"210":5,"212":5},
+          "209": {"210":5,"212":5},
+          "210": {},
+          "211": {"210":5,"212":5,"401":120,"402":120,"403":10,"405":10},
+          "212": {},
+          "213": {"210":5,"212":5,"215":3,"402":10},
+          "214": {"210":1250,"212":1250,"202":250,"203":250,"204":200,"205":100,"206":33,"207":30,"208":250,"209":250,"211":25,"213":5,"215":15,"401":200,"402":200,"403":100,"404":50,"405":100},
+          "215": {"202":3,"203":3,"206":5,"207":8}
         }
       };
     </script>
     <script src="/scripts/jquery.min.js"></script>
     <script src="/scripts/bootstrap.min.js"></script>
-    <script src="/scripts/ogsim.js"></script>
     <script src="/static/bundle.js"></script>
   </body>
 </html>

@@ -12,7 +12,41 @@ class EventComponent extends Component {
         const path = window.bvConfig.resourcePath;
         //console.log(event);
 
-        
+        let metalClass = '', metal_extra = '';
+        if(event.metal > 0){
+            if(event.type=='steal-battle' || event.type=='nothing'){
+                metalClass = 'text-warning';
+            } else {
+                metal_extra = '+';
+                metalClass = 'text-success';
+            }
+        } else {
+            metalClass = 'text-error';
+        }
+
+        let crystalClass = '', crystal_extra = '';
+        if(event.crystal > 0){
+            if(event.type=='steal-battle' || event.type=='nothing'){
+                crystalClass = 'text-warning';
+            } else {
+                crystal_extra = '+';
+                crystalClass = 'text-success';
+            }
+        } else {
+            crystalClass = 'text-error';
+        }
+
+        let deuteriumClass = '', deuterium_extra = '';
+        if(event.deuterium > 0){
+            if(event.type=='steal-battle' || event.type=='nothing'){
+                deuteriumClass = 'text-warning';
+            } else {
+                deuterium_extra = '+';
+                deuteriumClass = 'text-success';
+            }
+        } else {
+            deuteriumClass = 'text-error';
+        }
         return (
             <div className={ this.props.visibility ? '' : 'hidden' }>
                 <h3>{this.props.store.currentEvent.title}</h3>
@@ -20,14 +54,14 @@ class EventComponent extends Component {
                 <div className="clear"></div>
                     <ul className="event-resources">
                         <li className={event.metal?'':'hidden-item'}><img src={path+'metall.gif'} /><br /><small>Metal</small><br />
-                            <span className={event.metal > 0 ? 'text-success':'text-error'}>{event.metal > 0 ? '+':''}{event.metal}</span>
+                            <span className={metalClass}>{metal_extra}{event.metal}</span>
                         </li>
                         <li className={event.crystal?'':'hidden-item'}><img src={path+'kristall.gif'} /><br /><small>Crystal</small><br />
-                            <span className={event.crystal > 0 ? 'text-success':'text-error'}>{event.crystal > 0 ? '+':''}{event.crystal}</span>
+                            <span className={crystalClass}>{crystal_extra}{event.crystal}</span>
                         </li>
                         <li className={event.deuterium?'':'hidden-item'}>
                             <img src={path+'deuterium.gif'} /><br /><small>Deuterium</small><br />
-                            <span className={event.deuterium > 0 ? 'text-success':'text-error'}>{event.deuterium > 0 ? '+':''}{event.deuterium}</span>
+                            <span className={deuteriumClass}>{deuterium_extra}{event.deuterium}</span>
                         </li>
                         <li className={event.spaceCredits?'':'hidden-item'}>
                             <img src={path+'message.gif'} /><br /><small>Space Credits</small><br />
@@ -37,7 +71,9 @@ class EventComponent extends Component {
                 <div className="clear"></div>
                 <div className={(event.type=='steal-battle' || event.type== 'battle' || event.type=='add-ships' || event.type=='remove-ships')?'':'hidden'}>
                     <div className="pull-left half">
+                        <div className={(event.type=='steal-battle' || event.type== 'battle')?'':'hidden'}>
                         <TechsNavComponent techList={this.props.store.playerFleet.techs} />
+                        </div>
                         <ShipListComponent module="event" fleet={this.props.store.playerFleet}
                                            store={this.props.store} priceList={this.props.priceList} />
                     </div>
@@ -82,7 +118,7 @@ class EventComponent extends Component {
     };
     
     actionFlee = () => {
-        this.props.store.currentEvent.trigger('fleet');
+        this.props.store.currentEvent.trigger('flee');
     };
 
     actionNegotiate = () => {

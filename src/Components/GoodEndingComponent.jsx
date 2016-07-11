@@ -24,7 +24,9 @@ class GoodEndingComponent extends Component {
                 </div>
                 <div className="clear"></div>
                 <div className="text-center">
+                    <br />
                     <button onClick={this.shareScore} className="text-success">» SHARE SCORE</button>
+                    <br />
                     <br />
                     <button onClick={this.returnToHome} className="action-red">» PLAY AGAIN?</button>
                 </div>

@@ -20,6 +20,9 @@ class ShipyardItemComponent extends Component {
                 <span className="name">{this.props.shipData.name}</span>
                 <img src={imgUrl} height="48" width="48" />
                 <span className="text-info">{this.props.store.playerFleet.ships[shipId]}</span>
+                <small>m {this.props.shipData.metal}</small>
+                <small>c {this.props.shipData.crystal}</small>
+                <small>d {this.props.shipData.deuterium}</small>
                 <table className="mini-buttons" cellPadding="0" cellSpacing="0">
                     <tbody>
                     <tr>

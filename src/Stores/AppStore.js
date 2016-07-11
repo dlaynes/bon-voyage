@@ -23,7 +23,7 @@ class AppStore {
     
     landMarks = LandMark.defaultList.slice(0);
     gameLoop = new GameLoop();
-    battleManager = new BattleManager(window.OgsimBattle);
+
 
     @observable pastEvents = [];
     @observable currentState = 1;
@@ -31,13 +31,17 @@ class AppStore {
 
     @observable currentEvent = new GameEvent(this);
 
+    //commands = new CommandList();
+
     constructor() {
+        this.battleManager = new BattleManager(this);
         this.battleManager.setAllyFleet(this.playerFleet);
-        this.battleManager.setEnemyFleet(this.playerFleet);
+        this.battleManager.setEnemyFleet(this.enemyFleet);
 
         this.gameLoop.setSpeed(Space.defaultIntervalSpeed);
         this.gameLoop.setHandler(this.handleGameLoop);
     }
+
 
     resetEventDescriptions(){
         this.currentEvent.set(GameEvent.defaultEvent);
@@ -64,17 +68,9 @@ class AppStore {
         if(this.currentState==GameState.states.event){
             return;
         }
-
-        var eventProb = Math.random(), currentEvent;
-        for(let id in GameEvent.types){
-            if(!GameEvent.types.hasOwnProperty(id)) continue;
-            let eventType = GameEvent.types[id];
-            if(eventType.probability > eventProb){
-                let state = this.currentEvent.init(id);
-                this.changeState(state);
-                break;
-            }
-        }
+        const id = GameEvent.getRandomEventId();
+        let state = this.currentEvent.init(id);
+        this.changeState(state);
     }
 
     calcEventProbability(){
@@ -85,16 +81,16 @@ class AppStore {
     showEnding(reason){
         switch(reason){
             case GameState.endings.success:
-                this.changeState(GameState.states.endGood);
+                this.changeState(GameState.states.goodEnding);
                 break;
             case GameState.endings.quitGame:
                 this.changeState(GameState.states.home);
                 break;
             default:
-                this.changeState(GameState.states.endBad, reason);
+                this.changeState(GameState.states.badEnding, reason);
                 break;
         }
-    }    
+    }
 
     handleGameLoop = () => {
         //console.log("In loop. Distance", this.distance);
@@ -189,11 +185,11 @@ class AppStore {
                 this.pastEvents.push({time: this.playerFleet.timeUnit,message:"We just reached planet "+data.name,type:'info'});
                 this.currentPlanet.set(data);
                 break;
-            case GameState.states.endBad:
+            case GameState.states.badEnding:
                 this.gameLoop.pause();
                 this.setGameOverStatus(GameState.gameOverScreens[data].title, GameState.gameOverScreens[data].description);
                 break;
-            case GameState.states.endGood:
+            case GameState.states.goodEnding:
                 this.gameLoop.pause();
                 break;
             default:

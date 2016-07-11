@@ -13,7 +13,7 @@ class Fleet {
     static validResearchLabTechs = [109,110,111,115,117,118];
 
     static validShips = [202,203,204,205,206,207,208,209,210,211,213,214,215];
-    static validEnemyShips = [210,202,203,204,205,206,207,211,215,213];
+    static validEnemyShips = [210,204,205,206,207,211,215,213];
     static validConstructibleShips = [202,203,204,205,206,207,208,209,210,211,213,215];
 
     @observable ships = {
@@ -78,6 +78,8 @@ class Fleet {
         '118' : 0,
         '124' : 0
     };
+
+    @observable capacity = 0;
     
     @computed get shipCount(){
         let c = 0;
@@ -106,6 +108,17 @@ class Fleet {
             const idx = Fleet.allFleet[i];
             this.ships[idx] = 0;
         }
+    }
+
+    static calcCapacity(ships){
+        var capacity = 0;
+        for(let i=0; i < Fleet.allFleet.length; i++) {
+            const idx = Fleet.allFleet[i];
+            if(window.bvConfig.shipData[idx].capacity && ships[idx]){
+                capacity += window.bvConfig.shipData[idx].capacity * ships[idx];
+            }
+        }
+        return capacity;
     }
 
     static toDeuteriumPointsAll(){

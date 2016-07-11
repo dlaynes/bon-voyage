@@ -4,6 +4,7 @@ import GameState from './GameState';
 import Fleet from './Fleet';
 import Space from './Space';
 import ExchangeRate from '../ExchangeRate';
+import BattleManager from '../BattleManager';
 
 class GameEvent {
 
@@ -20,7 +21,7 @@ class GameEvent {
         },
         'remove-ships' : {
             probability: 0.06,
-            dialogs: [{"title":"Ships lost","description":"Some ships were lost [TODO]"}]
+            dialogs: [{"title":"Ships lost","description":"Some ships had a malfunction"}]
         },
         'remove-space-credits': {
             probability: 0.12,
@@ -35,7 +36,7 @@ class GameEvent {
         },
         'remove-resource' : {
             probability: 0.22,
-            dialogs: [{"title":"Lost some resources","description":"A deposit tank exploded, and we lost %s %t"}]
+            dialogs: [{"title":"Lost some resources","description":"An storage tank exploded, and we lost %s %t"}]
         },
 
         'add-ships' : {
@@ -48,7 +49,7 @@ class GameEvent {
         },
         'steal-battle': {
             probability: 0.44,
-            dialogs: [{"title":"Battle","description":"We reached an enemy fleet of %c who stole %s %t from us!"}]
+            dialogs: [{"title":"Battle","description":"We caught a fleet of %c which stole %s %t from us a few moments ago"}]
         },
         'slow-down': {
             probability: 0.52,
@@ -56,7 +57,7 @@ class GameEvent {
         },
         'speed-up': {
             probability: 0.6,
-            dialogs: [{title:"Vortex", description: "A vortex trapped our fleet. Now it is moving at a higher speed!"}]
+            dialogs: [{title:"Vortex", description: "A vortex trapped our fleet. Now we are moving at a higher speed!"}]
         },
         'battle': {
             probability: 0.9,
@@ -148,6 +149,108 @@ class GameEvent {
         this.store = store;
     }
 
+    static handleFleeEvent(event, resource_name){
+        event[resource_name] = -event[resource_name];
+        event.description = 'Decided to leave the resources behind!';
+        event.store.pastEvents.push({time:event.store.playerFleet.timeUnit, message:"Ran away from some thieves!","type":'warning'});
+        setTimeout(()=>{
+            event.store.changeState(GameState.states.space);
+        }, 2000);
+    }
+
+    static handleBattleEvent(event, choice){
+        event.store.battleManager.init(function(result) {
+            switch (result) {
+                case BattleManager.WIN:
+                    event.storeResources();
+                    if(choice=='attack'){
+                        event.description = 'We won the battle and earned '+event.spaceCredits+' Credits';
+                    } else {
+                        event.description = 'We couldn\'t escape, but we won the battle and earned '+event.spaceCredits+' Credits';
+                    }
+                    setTimeout(function () {
+                        event.store.playerFleet.applyBattleResults();
+                        event.store.pastEvents.push({
+                            time: event.store.playerFleet.timeUnit,
+                            message: "Found some thieves!",
+                            "type": 'warning'
+                        });
+                        event.store.changeState(GameState.states.space);
+                    }, 5000);
+                    break;
+                case BattleManager.LOST:
+                    if(choice=='attack'){
+                        event.description = 'We lost the battle...';
+                    } else {
+                        event.description = 'We couldn\'t escape. We lost the battle...';
+                    }
+                    setTimeout(function () {
+                        event.store.showEnding(GameState.endings.noShips);
+                    }, 5000);
+                    break;
+                case BattleManager.DRAW:
+                    event.spaceCredits = 0;
+                    event.storeResources();
+                    if(choice=='attack'){
+                        event.description = 'Draw battle!';
+                    } else {
+                        event.description = 'We couldn\'t escape. Draw battle!';
+                    }
+                    setTimeout(function () {
+                        event.store.playerFleet.applyBattleResults();
+                        event.store.pastEvents.push({
+                            time: event.store.playerFleet.timeUnit,
+                            message: "Found some thieves!",
+                            "type": 'warning'
+                        });
+                        event.store.changeState(GameState.states.space);
+                    }, 5000);
+                    break;
+                default:
+                    console.log("Event error", result);
+                    break;
+            }
+        });
+    }
+
+    calcRewardValue(ships, type){
+        let priceList = window.bvConfig.shipData, rewardValue = 0;
+
+        let resources = {metal:0,crystal:0,deuterium:0};
+        for(let idx in ships){
+            if(!ships.hasOwnProperty(idx)) continue;
+
+            resources.metal = ships[idx] * priceList[idx].metal;
+            resources.crystal = ships[idx] * priceList[idx].crystal;
+            resources.deuterium = ships[idx] * priceList[idx].deuterium;
+
+            this.store.enemyFleet.ships[idx] = ships[idx];
+            rewardValue += ExchangeRate.resourcesToSpaceCredits(resources, ExchangeRate.NORMAL);
+        }
+        switch(type){
+            case 'pirates':
+                rewardValue = rewardValue / 3;
+                break;
+            case 'scourge':
+                rewardValue = rewardValue / 2;
+                break;
+            case 'quadrant-12':
+                rewardValue = rewardValue / 1.5;
+                break;
+        }
+        return rewardValue;
+    }
+
+    @action storeResources(){
+        //Resources might be negative or positive
+        this.store.playerFleet.setResources({
+            metal: this.store.playerFleet.metal + this.metal,
+            crystal: this.store.playerFleet.crystal + this.crystal,
+            deuterium: this.store.playerFleet.deuterium + this.deuterium
+        });
+        this.store.playerFleet.spaceCredits += this.spaceCredits;
+    }
+
     @action init(eventType, params=null){
         let newEvent = GameEvent.defaultEvent,
             refType = GameEvent.types[eventType],
@@ -189,29 +292,32 @@ class GameEvent {
 
                 ships = GameEvent.getRandomShips(this.store.playerFleet.distance, Space.defaultDistance);
                 enemy = GameEvent.getRandomEnemy();
-                rewardValue = 0;
-                resources = {metal:0,crystal:0,deuterium:0};
 
-                for(let idx in ships){
-                    if(!ships.hasOwnProperty(idx)) continue;
-
-                    resources.metal = ships[idx] * priceList[idx].metal;
-                    resources.crystal = ships[idx] * priceList[idx].crystal;
-                    resources.deuterium = ships[idx] * priceList[idx].deuterium;
-
-                    this.store.enemyFleet.ships[idx] = ships[idx];
-                    rewardValue += ExchangeRate.resourcesToSpaceCredits(resources, ExchangeRate.NORMAL) / 3;
-                }
                 this.store.enemyFleet.assignTechs(enemy.techs);
-                this.spaceCredits = rewardValue|0;
+                this.spaceCredits = this.calcRewardValue(ships, enemy.type)|0;
 
                 item = Math.random() * refType.dialogs.length|0;
                 newEvent.title = refType.dialogs[item].title;
-                newEvent.description = (refType.dialogs[item].description.replace('%', enemy.name));
-                newEvent.actions = ['attack','flee','negotiate'];
+                newEvent.description = (refType.dialogs[item].description.replace('%c', enemy.name));
+                newEvent.actions = ['attack','flee'];
                 newEvent.after = function(event,action){
-                    event.store.pastEvents.push({time:event.store.playerFleet.timeUnit, message:"Found an enemy fleet","type":'warning'});
-                    event.store.changeState(GameState.states.space);
+
+                    event.validActions.negotiate = false;
+                    event.validActions.attack = false;
+                    event.validActions.flee = false;
+
+                    switch(action){
+                        case 'attack':
+                            GameEvent.handleBattleEvent(event, action);
+                            break;
+                        case 'flee':
+                            if(Math.random() > 0.5){
+                                GameEvent.handleFleeEvent(event, resource_name);
+                            } else {
+                                GameEvent.handleBattleEvent(event, action);
+                            }
+                            break;
+                    }
                 };
                 break;
             case 'steal-battle':
@@ -221,29 +327,68 @@ class GameEvent {
 
                 ships = GameEvent.getRandomShips(this.store.playerFleet.distance, Space.defaultDistance);
                 enemy = GameEvent.getRandomEnemy();
-                rewardValue = 0;
-                resources = {metal:0,crystal:0,deuterium:0};
 
-                for(let idx in ships){
-                    if(!ships.hasOwnProperty(idx)) continue;
+                var cap = Fleet.calcCapacity(ships);
 
-                    resources.metal = ships[idx] * priceList[idx].metal;
-                    resources.crystal = ships[idx] * priceList[idx].crystal;
-                    resources.deuterium = ships[idx] * priceList[idx].deuterium;
-
-                    this.store.enemyFleet.ships[idx] = ships[idx];
-                    rewardValue += ExchangeRate.resourcesToSpaceCredits(resources, ExchangeRate.NORMAL) / 3;
+                item = Math.floor(Math.random() * 3);
+                resource_name = GameEvent.validEventResources[item];
+                amount = Math.min(GameEvent.randomIntFromInterval(3000,30000), this.store.playerFleet[resource_name], cap);
+                if(!amount){
+                    gameState = GameState.states.space;
+                    this.store.pastEvents.push({time:this.store.playerFleet.timeUnit, message:"Small delay in our trip?","type":'warning'});
+                    break;
                 }
+                this.store.playerFleet[resource_name] -= amount; //We remove the amount for now
+
+                this[resource_name] = amount; //You might recover it back
+
                 this.store.enemyFleet.assignTechs(enemy.techs);
-                this.spaceCredits = rewardValue|0;
+                this.spaceCredits = this.calcRewardValue(ships, enemy.type)|0;
 
                 item = Math.random() * refType.dialogs.length|0;
                 newEvent.title = refType.dialogs[item].title;
-                newEvent.description = (refType.dialogs[item].description.replace('%', enemy.name));
+                newEvent.description = ((refType.dialogs[item].description.replace('%c', enemy.name))
+                                            .replace('%s', amount)).replace('%t', resource_name);
                 newEvent.actions = ['attack','flee','negotiate'];
                 newEvent.after = function(event,action){
-                    event.store.pastEvents.push({time:event.store.playerFleet.timeUnit, message:"Found some thieves!","type":'warning'});
-                    event.store.changeState(GameState.states.space);
+
+                    event.validActions.negotiate = false;
+                    event.validActions.attack = false;
+                    event.validActions.flee = false;
+
+                    switch(action){
+                        case 'negotiate':
+                            event.spaceCredits = 0;
+                            event.type = 'nothing';
+
+                            if(Math.random() > 0.5){
+                                event[resource_name] = -event[resource_name];
+                                event.description = 'They ran away with our minerals!';
+                            } else {
+                                event.storeResources();
+                                event.description = 'We got our resources back! They\'ve just left';
+                            }
+
+                            event.store.pastEvents.push({time:event.store.playerFleet.timeUnit, message:"Found some thieves!","type":'warning'});
+                            setTimeout(()=>{
+                                event.store.changeState(GameState.states.space);
+                            }, 2000);
+                            break;
+                        case 'flee':
+
+                            if(Math.random() > 0.5){
+                                GameEvent.handleFleeEvent(event, resource_name);
+                                break;
+                            } else {
+                                GameEvent.handleBattleEvent(event, action);
+                            }
+
+                            break;
+                        case 'attack':
+                        default:
+                            GameEvent.handleBattleEvent(event, action);
+                            break;
+                    }
                 };
                 break;
             case 'add-resource':
@@ -262,16 +407,13 @@ class GameEvent {
                     event.store.pastEvents.push({time:event.store.playerFleet.timeUnit, message:"Resources sighted","type":'info'});
                     switch(action){
                         case 'take':
-                            event.store.playerFleet.setResources({
-                                metal: event.store.playerFleet.metal + event.metal,
-                                crystal: event.store.playerFleet.crystal + event.crystal,
-                                deuterium: event.store.playerFleet.deuterium + event.deuterium
-                            });
+                            event.storeResources();
                             event.store.changeState(GameState.states.space);
                             break;
                         case 'skip':
                         default:
-                            event.validActions.continue = false;
+                            event.validActions.skip = false;
+                            event.validActions.take = false;
                             event.description = 'Decided to leave the resources behind!';
                             setTimeout(()=>{
                                 event.store.changeState(GameState.states.space);
@@ -389,8 +531,11 @@ class GameEvent {
                         case 'take':
                             for(let i=0; i < Fleet.allFleet.length; i++) {
                                 const idx = Fleet.allFleet[i];
-
-                                this.store.playerFleet.ships[idx] += this.store.playerFleet.shipChanges[idx];
+                                this.store.playerFleet.updateShipAmountAndStats(
+                                    idx,
+                                    this.store.playerFleet.ships[idx] + this.store.playerFleet.shipChanges[idx],
+                                    window.bvConfig.shipData
+                                );
                                 this.store.playerFleet.shipChanges[idx] = 0;
                             }
                             event.store.changeState(GameState.states.space);
@@ -409,15 +554,15 @@ class GameEvent {
                 break;
             case 'remove-ships':
                 item = Math.floor(Math.random() * GameEvent.validRemovableShipsArray.length);
-                idx = GameEvent.validObtainableShipsArray[item];
+                idx = GameEvent.validRemovableShipsArray[item];
                 ship_type = GameEvent.validRemovableShips[idx];
-                amount = Math.min(GameEvent.randomIntFromInterval(ship_type.min,ship_type.max), this.store.playerFleet.ships[item]);
+                amount = Math.min(GameEvent.randomIntFromInterval(ship_type.min,ship_type.max), this.store.playerFleet.ships[idx]);
                 if(!amount){
                     gameState = GameState.states.space;
                     this.store.pastEvents.push({time:this.store.playerFleet.timeUnit, message:"Small delay in our trip!","type":'warning'});
                     break;
                 }
-                this.store.playerFleet.shipChanges[GameEvent.validObtainableShipsArray[item]] = -amount;
+                this.store.playerFleet.shipChanges[GameEvent.validRemovableShipsArray[item]] = -amount;
 
                 item = Math.random() * refType.dialogs.length|0;
                 newEvent.title = refType.dialogs[item].title;
@@ -426,8 +571,12 @@ class GameEvent {
                 newEvent.after = function(event,action){
                     for(let i=0; i < Fleet.allFleet.length; i++) {
                         const idx = Fleet.allFleet[i];
-
-                        this.store.playerFleet.ships[idx] += this.store.playerFleet.shipChanges[idx];
+                        //The shipChanges values are negative!!
+                        this.store.playerFleet.updateShipAmountAndStats(
+                            idx,
+                            this.store.playerFleet.ships[idx] + this.store.playerFleet.shipChanges[idx],
+                            window.bvConfig.shipData
+                        );
                         this.store.playerFleet.shipChanges[idx] = 0;
                     }
 
@@ -442,7 +591,7 @@ class GameEvent {
 
                 newEvent.actions = ['continue'];
                 newEvent.after = function(event,action){
-                  if(Math.random() > 0.5){
+                  if(Math.random() > 0.7){
                       this.store.showEnding(GameState.endings.supernova);
                   } else {
                       //badge??
@@ -455,12 +604,14 @@ class GameEvent {
                   }
                 };
                 break;
-            case 'blackhole':
-                newEvent.title = 'Black Hole';
-                newEvent.description = 'Wrong coordinates!! Init evasion maneuvers!';
+            case 'black-hole':
+                item = Math.random() * refType.dialogs.length|0;
+                newEvent.title = refType.dialogs[item].title;
+                newEvent.description = refType.dialogs[item].description;
+
                 newEvent.actions = ['continue'];
                 newEvent.after = function(event,action){
-                    if(Math.random() > 0.5){
+                    if(Math.random() > 0.7){
                         this.store.showEnding(GameState.endings.blackHole);
                     } else {
                         event.store.pastEvents.push({time:event.store.playerFleet.timeUnit, message:"We escaped from a Black hole!","type":'success'});
@@ -514,6 +665,23 @@ class GameEvent {
         this.after(this, action);
     }
 
+    static getRandomEventId(){
+        const rn = Math.random();
+        if(rn < 0.01){ return 'supernova'; }
+        if(rn < 0.02){ return 'black-hole'; }
+        if(rn < 0.06){ return 'remove-ships'; }
+        if(rn < 0.11){ return 'remove-space-credits'; }
+        if(rn < 0.17){ return 'add-space-credits'; }
+        if(rn < 0.22){ return 'remove-resource'; }
+        if(rn < 0.28){ return 'add-ships'; }
+        if(rn < 0.36){ return 'add-resource'; }
+        if(rn < 0.42){ return 'slow-down'; }
+        if(rn < 0.50){ return 'speed-up'; }
+        if(rn < 0.60){ return 'steal-battle'; }
+        if(rn < 0.90){ return 'battle'; }
+        return 'nothing';
+    }
+
     static randomIntFromInterval(min,max)
     {
         return Math.floor(Math.random()*(max-min+1)+min);
@@ -522,7 +690,7 @@ class GameEvent {
     static getMaxProbableShipType(distance, maxDistance){
         const length = Fleet.validEnemyShips.length;
 
-        return Math.min(Math.ceil(Math.sqrt( (1 - (maxDistance - distance)/maxDistance)*100 )*length/10), length);
+        return 1 + Math.min(Math.ceil(Math.sqrt( ((maxDistance - distance)/maxDistance)*100 )*length/10), length);
     }
     
     static getMaxProbableShipTypeCount(distance, maxDistance){
@@ -558,7 +726,7 @@ class GameEvent {
         const maxProbableShipType = GameEvent.getMaxProbableShipType(distance, maxDistance);
 
         const maxProbableShipTypeCount = GameEvent.getMaxProbableShipTypeCount(distance, maxDistance);
-        const minProbableShipTypeCount = Math.max(maxProbableShipTypeCount/3, 1);
+        const minProbableShipTypeCount = Math.max(maxProbableShipTypeCount/2, 1);
         const maxProbableShipTypeAmount = GameEvent.getMaxProbableShipAmount(distance, maxDistance);
         const minProbableShipTypeAmount = Math.max(maxProbableShipTypeAmount/3, 1);
 
@@ -568,6 +736,9 @@ class GameEvent {
         for(let i=minProbableShipTypeCount; i < max; i++){
             pos = Math.random() * pickableFleet.length|0;
             idx = pickableFleet[pos];
+            //console.log("id",idx);
+            //console.log("res fleet",pickableFleet);
+            //console.log("pos",pos);
             if(!realFleet[idx]){
                 realFleet[idx] = GameEvent.randomIntFromInterval(minProbableShipTypeAmount, maxProbableShipTypeAmount);
             }
