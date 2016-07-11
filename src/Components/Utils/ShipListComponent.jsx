@@ -9,8 +9,6 @@ class ShipListComponent extends Component {
     validShips = Fleet.allBattleFleet; /* Try not to break the screen size */
     
     render() {
-        console.log("new ships",this.props.fleet.ships);
-        console.log("new ship changes",this.props.fleet.shipChanges);
         return (
             <table className="tbl-active-ships">
                 <tbody>
@@ -21,7 +19,7 @@ class ShipListComponent extends Component {
                             </td><td className="one-fifth">
                             <img src={ window.bvConfig.iconPath+x+'.gif' }
                                  height="20" width="20" />
-                        </td><td class="one-fifth"><span className="amount">{this.props.fleet.ships[x]}</span></td>
+                        </td><td><span className="amount">{this.props.fleet.ships[x]}</span></td>
                             <td>{this.props.fleet.shipChanges[x] > 0 ? <span className="text-success">+{this.props.fleet.shipChanges[x]}</span>:''}
                                 {this.props.fleet.shipChanges[x] < 0 ? <span className="text-error">{this.props.fleet.shipChanges[x]}</span>:''}
                             </td>

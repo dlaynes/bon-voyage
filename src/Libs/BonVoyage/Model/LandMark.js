@@ -5,7 +5,7 @@ import Planet from './Planet';
 class LandMark {
     static defaultList = [
         {
-            distance: 81500,
+            distance: 81000,
             visited: false,
             action: (store) => {
                 let onlyProbes = true;

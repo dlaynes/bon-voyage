@@ -9,8 +9,8 @@ class GameState {
         event : 4,
         battle : 5,
         planet: 6,
-        endBad: 7,
-        endGood: 8
+        badEnding: 7,
+        goodEnding: 8
     };
 
     static endings = {

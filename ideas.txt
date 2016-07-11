@@ -6,15 +6,13 @@ Events:
 - Found friendly (aliens/confederates):
 a) You receive advice
 b) You have [shipType!] you receive (ships/space credits) for them => (trade ships? Yes/No).
-- Vortex: speed increased (amount) for (time) [Speed status changes color: sky blue]
-- Malfunction: speed decreased (amount) for (time) [Speed status changes color: purple]
-- Severe malfunction: you lose X ships
 
 TODO:
 Difficulty increases with distance
 Images for game events
 Mostrar Astrophysics alcanzado al final
 Modo raid planet
+Algunas naves deben estar presentes para acceder a determinados eventos
 
 Medals:
 - Not available for now.

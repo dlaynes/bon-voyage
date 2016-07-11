@@ -26,8 +26,8 @@ class App extends Component {
             space: (store.currentState==GameState.states.space),
             event: (store.currentState==GameState.states.event),
             planet: (store.currentState==GameState.states.planet),
-            badEnding: (store.currentState==GameState.states.endBad),
-            goodEnding: (store.currentState==GameState.states.endGood)
+            badEnding: (store.currentState==GameState.states.badEnding),
+            goodEnding: (store.currentState==GameState.states.goodEnding)
         };
         return (
         <div>
