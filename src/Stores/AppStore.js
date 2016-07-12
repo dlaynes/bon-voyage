@@ -167,6 +167,7 @@ class AppStore {
             case GameState.states.space:
                 this.playerFleet.resetShipChanges();
                 this.enemyFleet.resetShipChanges();
+                this.enemyFleet.resetShips();
                 this.gameLoop.pause();
                 setTimeout(() => {
                     this.gameLoop.play();
@@ -176,10 +177,9 @@ class AppStore {
                 this.gameLoop.pause();
                 //Do something with data
                 break;
-            case GameState.states.battle:
+            /* case GameState.states.battle:
                 this.gameLoop.pause();
-                //Do something with data
-                break;
+                break; */
             case GameState.states.planet:
                 this.gameLoop.pause();
                 this.pastEvents.push({time: this.playerFleet.timeUnit,message:"We just reached planet "+data.name,type:'info'});

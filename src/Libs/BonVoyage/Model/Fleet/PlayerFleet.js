@@ -261,12 +261,10 @@ class PlayerFleet extends Fleet {
         this.updateStats(priceList);
     }
     
-    @action updateShipAmountAddMultiple(ships, priceList){
+    @action updateShipAmountSetMultiple(ships, priceList){
         for(let i=0; i < Fleet.allFleet.length; i++) {
             const idx = Fleet.allFleet[i];
-            if (ships[idx]){
-                this.ships[idx] = ships[idx];
-            }
+            this.ships[idx] = ships[idx];
         }
         this.updateStats(priceList);
     }
@@ -352,7 +350,7 @@ class PlayerFleet extends Fleet {
 
     static calcConsumption(distance, duration, speed, amount, consumption){
         var av = (35000 / (duration - 10) ) * Math.sqrt(distance * 10 / speed);
-        return Math.round( ((amount * consumption * distance )/35000 * Math.pow(av/ 10 + 1, 2 ))) * 2;
+        return Math.round( ((amount * consumption * distance )/35000 * Math.pow(av/ 10 + 1, 2 )));
     }
     
 }

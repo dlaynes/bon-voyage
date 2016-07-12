@@ -70,13 +70,13 @@ class Fleet {
     };
 
     @observable techs = {
-        '109' : 0,
-        '110' : 0,
-        '111' : 0,
-        '115' : 0,
-        '117' : 0,
-        '118' : 0,
-        '124' : 0
+        '109' : 0, //Mil
+        '110' : 0, //Shield
+        '111' : 0, //Armor
+        '115' : 0, //Combustion Drive
+        '117' : 0, //Impulse Drive
+        '118' : 0, //Hyperspace Drive
+        '124' : 0 //Astrophysics
     };
 
     @observable capacity = 0;
@@ -96,18 +96,29 @@ class Fleet {
         }
     }
 
+    @action rawFleetAssign(ships){
+        for(let idx in ships){
+            if(!ships.hasOwnProperty(idx)){ continue; }
+            this.ships[idx] = ships[idx];
+        }
+    }
+
     @action resetShipChanges(){
+        let amount = 0;
         for(let i=0; i < Fleet.allFleet.length; i++) {
             const idx = Fleet.allFleet[i];
-            this.shipChanges[idx] = 0;
+            this.shipChanges[idx] = amount;
         }
     }
 
     @action resetShips(){
+        console.log("before resetting", this.ships);
+        let amount = 0;
         for(let i=0; i < Fleet.allFleet.length; i++) {
             const idx = Fleet.allFleet[i];
-            this.ships[idx] = 0;
+            this.ships[idx] = amount;
         }
+        console.log("after resetting",this.ships);
     }
 
     static calcCapacity(ships){
