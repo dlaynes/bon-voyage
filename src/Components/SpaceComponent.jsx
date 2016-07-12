@@ -15,7 +15,7 @@ class SpaceComponent extends Component {
         return (
             <div className={ this.props.visibility ? '' : 'hidden' }>
                 <h3>Space</h3>
-                <TechsNavComponent techList={this.props.store.playerFleet.techs} />
+                <TechsNavComponent debugMode={this.props.store.debugMode} techList={this.props.store.playerFleet.techs} />
                 <p>[Random message]</p>
                 <div className="pull-left">
                     <MapComponent store={this.props.store} />

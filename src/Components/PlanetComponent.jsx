@@ -29,7 +29,7 @@ class PlanetComponent extends Component {
             <div className={ this.props.visibility ? '' : 'hidden' }>
                 <h3>Planet: {this.props.store.currentPlanet.name}</h3>
                 <p>{this.props.store.currentPlanet.description}</p>
-                <TechsNavComponent techList={this.props.store.playerFleet.techs} />
+                <TechsNavComponent debugMode={this.props.store.debugMode} techList={this.props.store.playerFleet.techs} />
                 <table className="tbl-resources">
                     <thead>
                     <tr>

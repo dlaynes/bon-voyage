@@ -8,12 +8,11 @@ class Fleet {
 
     static allBattleFleet = [202,203,204,205,206,207,208,209,210,211,213,214,215,401,402,403,404,405,406,407,408];
     static allFleet = [202,203,204,205,206,207,208,209,210,211,213,214,215,401,402,403,404,405,406,407,408,502,503];
-    static validMotors = [109,110,111];
-    static validBattleTechs = [115,117,118];
     static validResearchLabTechs = [109,110,111,115,117,118];
 
     static validShips = [202,203,204,205,206,207,208,209,210,211,213,214,215];
-    static validEnemyShips = [210,204,205,206,207,211,215,213];
+    static validEnemyShips = [210,204,205,202,206,207,211,203,215,213]; //Sorted
+    static validEnemyDefense = [401,402,403,405,407,404,408,406]; //Sorted
     static validConstructibleShips = [202,203,204,205,206,207,208,209,210,211,213,215];
 
     @observable ships = {
@@ -96,10 +95,17 @@ class Fleet {
         }
     }
 
+    /* Nope. MobX does not like this
     @action rawFleetAssign(ships){
         for(let idx in ships){
             if(!ships.hasOwnProperty(idx)){ continue; }
             this.ships[idx] = ships[idx];
+        }
+    } */
+
+    @action setShipAmount(idx, amount){
+        if(idx in this.ships){
+            this.ships[idx] = amount;
         }
     }
 
@@ -112,13 +118,11 @@ class Fleet {
     }
 
     @action resetShips(){
-        console.log("before resetting", this.ships);
         let amount = 0;
         for(let i=0; i < Fleet.allFleet.length; i++) {
             const idx = Fleet.allFleet[i];
             this.ships[idx] = amount;
         }
-        console.log("after resetting",this.ships);
     }
 
     static calcCapacity(ships){

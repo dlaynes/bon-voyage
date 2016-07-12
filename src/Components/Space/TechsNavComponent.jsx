@@ -26,6 +26,11 @@ class TechsNavComponent extends Component {
                             <td>Hyperspace Drive</td>
                             <td>&nbsp;<span className="text-success">{this.props.techList['118']}</span>&nbsp;</td>
                         </tr>
+                        <tr className={this.props.debugMode?'':'hidden'}>
+                            <td>Astrophysics</td>
+                            <td>&nbsp;<span className="text-success">{this.props.techList['124']}</span>&nbsp;</td>
+                            <td colspan="4">&nbsp;</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>            

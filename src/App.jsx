@@ -29,6 +29,9 @@ class App extends Component {
             badEnding: (store.currentState==GameState.states.badEnding),
             goodEnding: (store.currentState==GameState.states.goodEnding)
         };
+
+        let debug = store.debugMode ? <DebugBar store={store} state={store.state} /> : '';
+
         return (
         <div>
             <div id="holder">
@@ -42,7 +45,7 @@ class App extends Component {
                 <GoodEndingComponent visibility={visibility.goodEnding} priceList={window.bvConfig.shipData} store={store} />
 
             </div>
-            <DebugBar store={store} state={store.state} />
+            {debug}
 
             <DevTools />
         </div>

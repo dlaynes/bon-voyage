@@ -5,6 +5,7 @@ import AppStore from './Stores/AppStore';
 import App from './App';
 
 const appStore = new AppStore();
+appStore.debugMode = true;
 
 render(
   <AppContainer>
