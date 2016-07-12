@@ -67,7 +67,7 @@ class GameEvent {
             probability: 1,
             dialogs: [
                 {"title":"Inhabited Planet","description":"We found a planet with weird living things. Amazing, nothing we have seen before."},
-                {"title":"Space Nebula","description":"There is a shiny Nebula nearby, and we decided to take some photos"}]
+                {"title":"Space Nebula","description":"There is a shiny Nebula nearby, and we decided to take some photos from it"}]
         },
         'custom': {
             probability: 2,
@@ -108,22 +108,24 @@ class GameEvent {
     static validRemovableShips = {
         '202':{min:1,max:5},
         '203':{min:1,max:2},
-        '204':{min:1,max:5},
-        '205':{min:1,max:2},
-        '206':{min:1,max:1},
-        '207':{min:1,max:1},
-        '210':{min:1,max:10}
-    };
-    static validObtainableShipsArray = [202,203,204,205,206,210,215];
-    static validObtainableShips = {
-        '202':{min:1,max:10},
-        '203':{min:1,max:4},
-        '204':{min:1,max:10},
-        '205':{min:1,max:4},
+        '204':{min:1,max:20},
+        '205':{min:1,max:10},
         '206':{min:1,max:2},
         '207':{min:1,max:1},
         '210':{min:1,max:20},
         '215':{min:1,max:1}
+    };
+    static validObtainableShipsArray = [202,203,204,205,206,210,215];
+    static validObtainableShips = {
+        '202':{min:1,max:20},
+        '203':{min:1,max:5},
+        '204':{min:1,max:40},
+        '205':{min:1,max:20},
+        '206':{min:1,max:6},
+        '207':{min:1,max:4},
+        '210':{min:1,max:40},
+        '213':{min:1,max:1},
+        '215':{min:1,max:2}
     };
     store = null;
 
@@ -241,6 +243,7 @@ class GameEvent {
         let resources = {metal:0,crystal:0,deuterium:0};
         for(let idx in ships){
             if(!ships.hasOwnProperty(idx)) continue;
+            if(!ships[idx]) continue;
 
             resources.metal = ships[idx] * priceList[idx].metal;
             resources.crystal = ships[idx] * priceList[idx].crystal;
@@ -251,7 +254,7 @@ class GameEvent {
         }
         switch(type){
             case 'pirates':
-                rewardValue = rewardValue / 3;
+                rewardValue = rewardValue / 2.5;
                 break;
             case 'scourge':
                 rewardValue = rewardValue / 2;
@@ -283,7 +286,6 @@ class GameEvent {
             ships,
             enemy,
             resources,
-            rewardValue,
             idx,
             ship_type,
             gameState = GameState.states.event;
@@ -616,11 +618,11 @@ class GameEvent {
             case 'supernova':
                 item = Math.random() * refType.dialogs.length|0;
                 newEvent.title = refType.dialogs[item].title;
-                newEvent.description = refType.dialogs[item].description;
+                newEvent.description = refType.dialogs[item].description+'. Survival chance: 80%';
 
                 newEvent.actions = ['continue'];
                 newEvent.after = function(event,action){
-                  if(Math.random() > 0.7){
+                  if(Math.random() > 0.8){
                       this.store.showEnding(GameState.endings.supernova);
                   } else {
                       //badge??
@@ -636,11 +638,11 @@ class GameEvent {
             case 'black-hole':
                 item = Math.random() * refType.dialogs.length|0;
                 newEvent.title = refType.dialogs[item].title;
-                newEvent.description = refType.dialogs[item].description;
+                newEvent.description = refType.dialogs[item].description+'. Survival chance: 80%';
 
                 newEvent.actions = ['continue'];
                 newEvent.after = function(event,action){
-                    if(Math.random() > 0.7){
+                    if(Math.random() > 0.8){
                         this.store.showEnding(GameState.endings.blackHole);
                     } else {
                         event.store.pastEvents.push({time:event.store.playerFleet.timeUnit, message:"We escaped from a Black hole!","type":'success'});
@@ -657,9 +659,9 @@ class GameEvent {
                 newEvent.description = params.description;
                 newEvent.actions = params.actions;
                 if(params.before){
-                    params.before(this);
+                    newEvent.before = params.before;
                 }
-                newEvent.after = after; //Who will call after?
+                newEvent.after = params.after; //Who will call after?
                 break;
             default:
                 console.log("Unknown type", eventType);
@@ -675,7 +677,9 @@ class GameEvent {
         this.type = event.type;
         this.description = event.description;
         
-        this.params = event.params;
+        if(event.before){
+            event.before(this);
+        }
         
         this.validActions.continue = false;
         this.validActions.take = false;

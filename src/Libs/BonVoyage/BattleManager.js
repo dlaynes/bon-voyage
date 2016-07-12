@@ -62,13 +62,16 @@ class BattleManager {
             item;
         let current_explosions = 0, ally_difference = 0, enemy_difference = 0;
 
+        //console.log("ally fleet", allyFleet);
+        //console.log("enemy fleet", enemyFleet);
+
         //Any survivors?
         for(let i=0; i<allyFleet.length; i++){
             item = allyFleet[i].id;
             current_explosions = (this.store.playerFleet.ships[item] - allyFleet[i].difference);
 
             this.store.playerFleet.shipChanges[item] = -current_explosions;
-            ally_difference = allyFleet[i].difference;
+            ally_difference += allyFleet[i].difference;
         }
 
         for(let i=0; i<enemyFleet.length; i++){
@@ -76,7 +79,7 @@ class BattleManager {
             current_explosions = (this.store.enemyFleet.ships[item] - enemyFleet[i].difference);
 
             this.store.enemyFleet.shipChanges[item] = -current_explosions;
-            enemy_difference = enemyFleet[i].difference;
+            enemy_difference += enemyFleet[i].difference;
         }
 
         //Do something with wins - draws or loses
