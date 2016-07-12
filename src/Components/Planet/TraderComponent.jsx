@@ -66,10 +66,6 @@ class TraderComponent extends Component {
             } else {
                 fleet.spaceCredits += sellingPrice;
                 fleet.updateShipAmountAndStats(idx, currentAmount - amount, window.bvConfig.shipData);
-                fleet.setResources({
-                    metal: fleet.metal,
-                    crystal: fleet.crystal,
-                    deuterium: fleet.deuterium}); /* Small hack to update capacity */
                 
                 this.cannotSellAllShips = false;
                 this.validating = false;

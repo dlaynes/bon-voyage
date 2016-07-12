@@ -10,7 +10,6 @@ class BattleManager {
     allyFleet = null;
     enemyFleet = null;
     after = null;
-    afterLosing = null;
     constructor(store){
         this.store = store;
     }
@@ -23,7 +22,7 @@ class BattleManager {
         this.enemyFleet = enemyFleet;
     }
 
-    init(after, afterLosing){
+    init(after){
         let af = {}, ef = {}, idx;
         for(let i=0;i<Fleet.allBattleFleet.length;i++){
             idx = Fleet.allBattleFleet[i];
@@ -46,12 +45,11 @@ class BattleManager {
             defense_tech: this.enemyFleet.techs['110'],
             hull_tech: this.enemyFleet.techs['111']
         };
+        /*
         let PlayerList = {
             "1" : "Player",
             "2" : "PC"
-        };
-
-        //console.log("sending", allyObj.fleet, enemyObj.fleet);
+        }; */
 
         this.after = after;
         new Battle([allyObj], [enemyObj], window.bvConfig.shipData, window.bvConfig.rapidFire, this.expand );
@@ -64,7 +62,7 @@ class BattleManager {
             item;
         let current_explosions = 0, ally_difference = 0, enemy_difference = 0;
 
-        //console.log('Ally fleet', allyFleet);
+        //Any survivors?
         for(let i=0; i<allyFleet.length; i++){
             item = allyFleet[i].id;
             current_explosions = (this.store.playerFleet.ships[item] - allyFleet[i].difference);
@@ -72,7 +70,7 @@ class BattleManager {
             this.store.playerFleet.shipChanges[item] = -current_explosions;
             ally_difference = allyFleet[i].difference;
         }
-        //console.log('Enemy fleet', enemyFleet);
+
         for(let i=0; i<enemyFleet.length; i++){
             item = enemyFleet[i].id;
             current_explosions = (this.store.enemyFleet.ships[item] - enemyFleet[i].difference);

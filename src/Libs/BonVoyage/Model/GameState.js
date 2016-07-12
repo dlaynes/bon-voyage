@@ -34,7 +34,7 @@ class GameState {
         '3' : {title:'We lost our fleet',
             description:'There are no active ships right now. I\'m the only survivor, and just sent a message to the command center. I was put on hold, while a repetitive music plays as I wait.'},
         '4' : {title:'Supernova',
-            description:'The expedition passed close to the star Ominous Spark, which coincidentally imploded and destroyed the fleet, along with a quarter of the galaxy'},
+            description:'The expedition passed close to the star Ominous Spark, which coincidentally imploded and destroyed the fleet, along with a part of the galaxy'},
         '5' : {title:'Black Hole',
             description:'The fleet entered a black hole, and turned into a bunch of metal made spaghetti, disappearing from this universe for an infinite time.'},
         '6' : {title:'Game Over',description:'Thanks for playing. Try again?'}

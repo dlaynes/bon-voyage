@@ -225,11 +225,10 @@ class PlayerFleet extends Fleet {
             this.duration = 0;
             this.consumption = 0;
         }
+        this.setResources(this); //Update storage
     }
     
     @action applyBattleResults(){
-        console.log("Applying changes", this.ships, this.shipChanges);
-        
         for(let i=0; i < Fleet.allFleet.length; i++) {
             const idx = Fleet.allFleet[i];
             this.updateShipAmountAndStats(
@@ -247,6 +246,27 @@ class PlayerFleet extends Fleet {
         } else {
             console.warn("Ship not found", idx);
             return;
+        }
+        this.updateStats(priceList);
+    }
+
+    @action updateShipAmountWithChanges(priceList){
+        for(let i=0; i < Fleet.allFleet.length; i++) {
+            const idx = Fleet.allFleet[i];
+            if (this.shipChanges[idx] != 0){
+                this.ships[idx] += this.shipChanges[idx];
+            }
+            this.shipChanges[idx] = 0;
+        }
+        this.updateStats(priceList);
+    }
+    
+    @action updateShipAmountAddMultiple(ships, priceList){
+        for(let i=0; i < Fleet.allFleet.length; i++) {
+            const idx = Fleet.allFleet[i];
+            if (ships[idx]){
+                this.ships[idx] = ships[idx];
+            }
         }
         this.updateStats(priceList);
     }
