@@ -8,10 +8,11 @@ class LandMark {
         {
             distance: 100000,
             visited: false,
-            action: (store) => {
+            action: function(store) {
                 if(store.playerFleet.ships['208']) {
                     let data = {
                         title: 'Met a Civil Fleet',
+                        type: 'custom',
                         description: 'Hi. We would like to trade your very useful Colony Ship for our lucky Esp. Probe, which survived more than 100 battles',
                         actions: ['take', 'skip'],
                         after: function (event, action) {
@@ -43,7 +44,7 @@ class LandMark {
                                         event.description = 'We rejected the proposal due to a lack of Colony Ships in the area';
                                     break;
                             }
-                            setTimeout(()=>{
+                            setTimeout(function(){
                                 event.store.changeState(GameState.states.space);
                             }, 5000);
                         }
@@ -56,7 +57,7 @@ class LandMark {
         {
             distance: 81000,
             visited: false,
-            action: (store) => {
+            action: function(store) {
                 let onlyProbes = true;
                 for(let i=0; i < Fleet.validShips.length; i++){
                     let idx = Fleet.validShips[i];
@@ -75,77 +76,21 @@ class LandMark {
         {
             distance: 80500,
             visited: false,
-            action: (store) => {
+            action: function(store) {
                 return {state: GameState.states.planet, data: Planet.planets["v-3455"]};
             }
         },
         {
-            distance: 60000,
-            visited: false,
-            action: (store) => {
-                if(store.playerFleet.ships['211']) {
-
-                    let ships = {
-                        '401': 80,
-                        '402': 100,
-                        '403': 20,
-                        '404': 10,
-                        '405': 20,
-                        '407': 1
-                    };
-
-                    let data = {
-                        title: 'Fortified Planet',
-                        description: 'We found an enemy planet belonging to The Scourge, with strong defenses',
-                        before: function(event){
-                            event.type = 'battle';
-                            event.store.enemyFleet.rawFleetAssign(ships);
-                            event.store.enemyFleet.techs['109'] = 10;
-                            event.store.enemyFleet.techs['110'] = 9;
-                            event.store.enemyFleet.techs['111'] = 9;
-                        },
-                        actions: ['attack', 'flee'],
-                        after: function (event, action) {
-
-                            event.validActions.take = false;
-                            event.validActions.skip = false;
-
-                            switch(action){
-                                case 'attack':
-                                    //event.spaceCredits = event.calcRewardValue(ships, 'scourge');
-                                    event.spaceCredits = 150000;
-                                    GameEvent.handleBattleEvent(event, 'attack');
-                                    break;
-                                case 'flee':
-                                default:
-                                    event.store.pastEvents.push({time:event.store.playerFleet.timeUnit,
-                                        message:"We found an enemy planet","type":'success'});
-                                    event.description = 'We chose not to attack the planet.';
-                                    setTimeout(()=>{
-                                        event.store.changeState(GameState.states.space);
-                                    }, 5000);
-                                    break;
-                            }
-                        }
-                    };
-                    let state = store.currentEvent.init('custom', data);
-                    return {state:state}
-                }
-            }
-        },
-
-
-        {
             distance: 38500,
             visited: false,
-            action: (store) => {
+            action: function(store) {
                 return {state: GameState.states.planet, data: Planet.planets["tau-wg"]};
             }
         },
         {
             distance: 5000,
             visited: false,
-            action: (store) => {
+            action: function(store) {
 
                 if(store.playerFleet.techs['124'] > 5) {
                     let data = {
@@ -158,7 +103,7 @@ class LandMark {
 
                             switch(action){
                                 case 'take':
-                                    event.store.playerFleet.spaceCredits = 0;
+                                    //event.store.playerFleet.spaceCredits = 0;
                                     event.store.playerFleet.updateShipAmountAndStats('214', 1, window.bvConfig.shipData);
                                     event.description = 'Darth Vader\'s ship was an Hologram. But... is that a moon?';
                                     event.store.pastEvents.push({time:event.store.playerFleet.timeUnit,
@@ -171,7 +116,7 @@ class LandMark {
                                         message:"We escaped from Darth Vader!","type":'info'});
                                     break;
                             }
-                            setTimeout(()=>{
+                            setTimeout(function(){
                                 event.store.changeState(GameState.states.space);
                             }, 5000);
 
@@ -186,7 +131,7 @@ class LandMark {
         {
             distance: 3500,
             visited: false,
-            action: (store) => {
+            action: function(store) {
                 let onlyProbes = true;
                 for(let i=0; i < Fleet.validShips.length; i++){
                     let idx = Fleet.validShips[i];

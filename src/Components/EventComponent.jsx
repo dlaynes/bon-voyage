@@ -69,15 +69,15 @@ class EventComponent extends Component {
                         </li>
                     </ul>
                 <div className="clear"></div>
-                <div className={(event.type=='steal-battle' || event.type== 'battle' || event.type=='add-ships' || event.type=='remove-ships')?'':'hidden'}>
+                <div className={(event.type=='steal-battle' || event.type=='raid-planet' || event.type== 'battle' || event.type=='add-ships' || event.type=='remove-ships')?'':'hidden'}>
                     <div className="pull-left half">
-                        <div className={(event.type=='steal-battle' || event.type== 'battle')?'':'hidden'}>
+                        <div className={(event.type=='steal-battle' || event.type== 'battle' || event.type== 'raid-planet')?'':'hidden'}>
                         <TechsNavComponent techList={this.props.store.playerFleet.techs} />
                         </div>
                         <ShipListComponent module="event" fleet={this.props.store.playerFleet}
                                            store={this.props.store} priceList={this.props.priceList} />
                     </div>
-                    <div className={(event.type=='steal-battle' || event.type== 'battle')?'pull-right half':'hidden'}>
+                    <div className={(event.type=='steal-battle' || event.type== 'battle' || event.type== 'raid-planet')?'pull-right half':'hidden'}>
                         <TechsNavComponent techList={this.props.store.enemyFleet.techs} />
                         <ShipListComponent module="event" fleet={this.props.store.enemyFleet}
                                            store={this.props.store} priceList={this.props.priceList} />

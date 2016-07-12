@@ -24,6 +24,7 @@ class AppStore {
     landMarks = LandMark.defaultList.slice(0);
     gameLoop = new GameLoop();
 
+    @observable debugMode = false;
 
     @observable pastEvents = [];
     @observable currentState = 1;
@@ -68,7 +69,7 @@ class AppStore {
         if(this.currentState==GameState.states.event){
             return;
         }
-        const id = GameEvent.getRandomEventId();
+        const id = GameEvent.getRandomEventId(this);
         let state = this.currentEvent.init(id);
         this.changeState(state);
     }
