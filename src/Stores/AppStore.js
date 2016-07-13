@@ -28,6 +28,8 @@ class AppStore {
     landMarks = LandMark.defaultList.slice(0);
     gameLoop = new GameLoop();
 
+    @observable playerName = '';
+
     @observable score = 0;
 
     @observable debugMode = false;
@@ -81,6 +83,8 @@ class AppStore {
     }
 
     storeResources(){
+        console.log("storing", this.currentEvent.metal, this.currentEvent.crystal, this.currentEvent.deuterium);
+
         this.playerFleet.setResources({
             metal: this.playerFleet.metal + this.currentEvent.metal,
             crystal: this.playerFleet.crystal + this.currentEvent.crystal,
@@ -234,7 +238,13 @@ class AppStore {
             }
         }
         console.log("score after ships", score);
-        score += ExchangeRate.resourcesToSpaceCredits(fleet);
+        let res = {
+            metal: fleet.metal,
+            crystal: fleet.crystal,
+            deuterium: fleet.deuterium
+        };
+        console.log(res);
+        score += ExchangeRate.resourcesToSpaceCredits(res, ExchangeRate.NORMAL);
         console.log("score after items", score);
         for(let i=0; i<Fleet.validTechs.length;i++){
             idx = Fleet.validTechs[i];

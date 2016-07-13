@@ -10,13 +10,6 @@ class ResourceListComponent extends Component {
     }
 
     render() {
-        let speedClass = '';
-        if(this.props.playerFleet.fleetSpeed > 10){
-            speedClass = 'current_capacity';
-        } else if(this.props.playerFleet.fleetSpeed < 10){
-            speedClass = 'slow_down';
-        }
-
         return (
             <div>
                 <table className="tbl-resources">
@@ -31,7 +24,7 @@ class ResourceListComponent extends Component {
                     <tr>
                         <td>{this.props.playerFleet.metal}</td>
                         <td>{this.props.playerFleet.crystal}</td>
-                        <td><span className="text-error">{this.props.playerFleet.deuterium}</span></td>
+                        <td><span>{this.props.playerFleet.deuterium}</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -47,7 +40,7 @@ class ResourceListComponent extends Component {
                     </tr>
                     <tr>
                         <th>Speed</th>
-                        <td><span className={speedClass}>{this.props.playerFleet.speed}</span></td>
+                        <td><span>{this.props.playerFleet.speed}</span></td>
                     </tr>
                     <tr>
                         <th>Ships</th>

@@ -82,11 +82,11 @@ export default class EventManager {
         },
         'battle': {
             dialogs: [{"title":"Battle","description":"We encountered a fleet of %c. It seems there is a reward available"}],
-            actions: ['attack', 'fleet']
+            actions: ['attack', 'flee']
         },
         'nothing': {
             dialogs: [
-                {title:"Space Contest",description:'The Commander organized an Essay Contest. He won.'},
+                {title:"Small Planet",description:'The Commander organized an Essay Contest. He won.'},
                 {title:"Confederate Fleet",description:"A Confederate Fleet was seen nearby. They have Recyclers and Colony Ships, with low running speed."},
                 {title:"Exotic Planet",description:"We found a planet with weird living things. Amazing! Nothing we have ever seen before..."},
                 {title:"Space Nebula",description:"There is a shiny Nebula nearby, and we decided to take some photos from it"}],
@@ -115,6 +115,31 @@ export default class EventManager {
         }
     };
 
+    static validEventResources = ['metal','crystal','deuterium'];
+    static validRemovableShipsArray = [202,203,204,205,206,210];
+    static validRemovableShips = {
+        '202':{min:1,max:5},
+        '203':{min:1,max:2},
+        '204':{min:1,max:20},
+        '205':{min:1,max:10},
+        '206':{min:1,max:2},
+        '207':{min:1,max:1},
+        '210':{min:1,max:20},
+        '215':{min:1,max:1}
+    };
+    static validObtainableShipsArray = [202,203,204,205,206,210,215];
+    static validObtainableShips = {
+        '202':{min:1,max:20},
+        '203':{min:1,max:5},
+        '204':{min:1,max:40},
+        '205':{min:1,max:20},
+        '206':{min:1,max:6},
+        '207':{min:1,max:4},
+        '210':{min:1,max:40},
+        '213':{min:1,max:1},
+        '215':{min:1,max:2}
+    };
+
     after = null;
 
     constructor(store){
@@ -122,7 +147,7 @@ export default class EventManager {
     }
 
     @action init(type, params){
-        let event = this.store.currentEvent, resource_name, item, amount, result,
+        let event = this.store.currentEvent, resource_name, item, amount, result, idx, ship_type,
             descriptions, description, rawShips, enemy, priceList = window.bvConfig.shipData;
         event.metal = 0;
         event.crystal = 0;
@@ -174,9 +199,9 @@ export default class EventManager {
                 enemy = EventManager.getRandomEnemy();
 
                 this.store.enemyFleet.assignTechs(enemy.techs);
-                event.spaceCredits = this.calcRewardValueAndAssing(ships, enemy.type) | 0;
+                event.spaceCredits = this.calcRewardValueAndAssing(rawShips, enemy.type) | 0;
 
-                result = this.removeRandomResources(Fleet.calcCapacity(rawShips));
+                result = this.removeRandomResources(Fleet.calcCapacity(rawShips), true);
                 if (!result.resource_name) {
                     //Game over?
                     gameState = GameState.states.space;
@@ -193,9 +218,10 @@ export default class EventManager {
                 item = Math.floor(Math.random() * 3);
                 resource_name = EventManager.validEventResources[item];
                 amount = EventManager.randomIntFromInterval(2000, 20000);
-                this[resource_name] = amount;
+                event[resource_name] = amount;
 
-                event.description = (event.description.replace('%s', amount)).replace('%t', resource_name);
+                event.description = ((event.description.replace('%s', amount)).replace('%t', resource_name))
+                    +". Do you have enough cargos?";
                 this.after = Event.addResourceAction;
                 break;
 
@@ -208,7 +234,7 @@ export default class EventManager {
                     });
                     break;
                 }
-                result = this.removeRandomResources(30000);
+                result = this.removeRandomResources(30000, false);
                 if (!result.resource_name) {
                     //Game over?
                     gameState = GameState.states.space;
@@ -222,7 +248,7 @@ export default class EventManager {
 
                 this.store.playerFleet.spaceCredits += amount;
                 event.spaceCredits = amount;
-                event.description = event.description.replace('%s', amount);
+                event.description = (event.description).replace('%s', amount);
 
                 this.after = Event.spaceCreditsGainedAction;
                 break;
@@ -247,7 +273,8 @@ export default class EventManager {
                     break;
                 }
                 this.store.playerFleet.spaceCredits -= amount;
-                this.spaceCredits = -amount;
+                event.spaceCredits = -amount;
+                event.description = (event.description).replace('%s', amount);
 
                 this.after = Event.spaceCreditsLostAction;
                 break;
@@ -268,7 +295,6 @@ export default class EventManager {
                 break;
 
             case 'add-ships':
-
                 item = Math.floor(Math.random() * EventManager.validObtainableShipsArray.length);
                 idx = EventManager.validObtainableShipsArray[item];
                 ship_type = EventManager.validObtainableShips[idx];
@@ -297,7 +323,7 @@ export default class EventManager {
                     amount--;
                 }
                 if (!amount) {
-                    gameState = EventManager.states.space;
+                    gameState = GameState.states.space;
                     this.store.pastEvents.push({
                         time: this.store.playerFleet.timeUnit,
                         message: "Small delay in our trip!", "type": 'warning'
@@ -305,7 +331,6 @@ export default class EventManager {
                     break;
                 }
                 this.store.playerFleet.shipsExpanded[idx].changes = -amount;
-                this.store.playerFleet.updateShipAmountWithChanges(priceList);
                 this.after = Event.removeShipsAction;
                 break;
             case 'supernova':
@@ -313,7 +338,7 @@ export default class EventManager {
                     gameState = GameState.states.space;
                     this.store.pastEvents.push({
                         time: this.store.playerFleet.timeUnit,
-                        message: "We detected a Star explosion and escaped!", "type": 'warning'
+                        message: "We detected a Super Nova explosion and escaped!", "type": 'warning'
                     });
                     break;
                 }
@@ -356,12 +381,17 @@ export default class EventManager {
         }
     }
 
-    @action removeRandomResources(cap){
+    @action removeRandomResources(cap, canRecover=false){
         let amount;
         let item = Math.floor(Math.random() * 3);
         let resource_name = EventManager.validEventResources[item];
         do {
-            amount = Math.min(EventManager.randomIntFromInterval(4000,40000), this.store.playerFleet[resource_name], cap);
+            if(canRecover){
+                amount = Math.min(EventManager.randomIntFromInterval(4000,40000), this.store.playerFleet[resource_name], cap);
+            } else {
+                amount = Math.min(EventManager.randomIntFromInterval(3000,cap), this.store.playerFleet[resource_name]);
+            }
+
             if(!amount){
                 if(this.store.playerFleet.deuterium){
                     resource_name = 'deuterium';
@@ -378,7 +408,11 @@ export default class EventManager {
             return {amount: 0, resource_name: null};
         }
         this.store.playerFleet[resource_name] -= amount; //We remove the amount for now
-        this.store.currentEvent[resource_name] = amount; //You might recover it back
+        if(canRecover){
+            this.store.currentEvent[resource_name] = amount; //You might recover it back
+        } else {
+            this.store.currentEvent[resource_name] = -amount;
+        }
         return {amount: amount, resource_name: resource_name};
     }
 

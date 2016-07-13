@@ -4,7 +4,7 @@ class Planet {
 
     static planets = {
         "default": {name:"No Name",description:"Unknown Planet",actionStatus:0},
-        "v-3455": {name:"V-3455",description: "First step of our Journey", actionStatus:0},
+        "onigiri": {name:"Onigiri",description: "First Landmark of our Journey", actionStatus:0},
         "tau-wg": {name:"Tau-WG",description: "Main Confederate Planet", actionStatus:0}
     };
     
