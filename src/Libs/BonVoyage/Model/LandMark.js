@@ -1,6 +1,5 @@
 import Fleet from './Fleet';
 import GameState from './GameState';
-import GameEvent from './GameEvent';
 import Planet from './Planet';
 
 class LandMark {
@@ -9,13 +8,13 @@ class LandMark {
             distance: 100000,
             visited: false,
             action: function(store) {
-                if(store.playerFleet.ships['208']) {
+                if(store.playerFleet.shipsExpanded['208'].amount) {
                     let data = {
                         title: 'Met a Civil Fleet',
                         type: 'custom',
-                        description: 'Hi. We would like to trade your very useful Colony Ship for our lucky Esp. Probe, which survived more than 100 battles',
+                        description: 'Hi. We would like to trade your very useful Colony Ship for our lucky Espionage Probe SR-070, which survived more than 100 battles',
                         actions: ['take', 'skip'],
-                        after: function (event, action) {
+                        after: function (store, event, action) {
 
                             event.validActions.take = false;
                             event.validActions.skip = false;
@@ -23,46 +22,51 @@ class LandMark {
                             switch(action){
                                 case 'take':
                                     let ships = {
-                                        '208' : event.store.playerFleet.ships['208'] -= 1,
-                                        '210' : event.store.playerFleet.ships['210'] += 1
+                                        '208' : store.playerFleet.shipsExpanded['208'].amount - 1,
+                                        '210' : store.playerFleet.shipsExpanded['210'].amount + 1
                                     };
                                     for(let idx in ships){
                                         if(!ships.hasOwnProperty(idx)) continue;
 
-                                        event.store.playerFleet.updateShipAmountAndStats(
+                                        store.playerFleet.updateShipAmountAndStats(
                                             idx,
                                             ships[idx],
                                             window.bvConfig.shipData
                                         );
                                     }
-                                    event.store.playerFleet.techs['124']++;
+                                    store.playerFleet.techs['124']++;
                                     event.description =
                                         'We just traded the ships. The probe came with a strange artifact that is being reviewed by our engineers';
+                                    store.pastEvents.push({time:store.playerFleet.timeUnit,
+                                        message:"Got a very special Esp. Probe","type":'info'});
+
                                     break;
                                 case 'skip':
                                 default:
-                                        event.description = 'We rejected the proposal due to a lack of Colony Ships in the area';
+                                    store.pastEvents.push({time:store.playerFleet.timeUnit,
+                                        message:"Met a caravan in the way","type":'info'});
+                                    event.description = 'We rejected the proposal due to a lack of Colony Ships in the area';
                                     break;
                             }
                             setTimeout(function(){
-                                event.store.changeState(GameState.states.space);
+                                store.changeState(GameState.states.space);
                             }, 5000);
                         }
                     };
-                    let state = store.currentEvent.init('custom', data);
+                    let state = store.eventManager.init('custom', data);
                     return {state:state}
                 }
             }
         },
         {
-            distance: 81000,
+            distance: 76000,
             visited: false,
             action: function(store) {
                 let onlyProbes = true;
                 for(let i=0; i < Fleet.validShips.length; i++){
                     let idx = Fleet.validShips[i];
 
-                    if( idx != 210 && store.playerFleet.ships[idx]) {
+                    if( idx != 210 && store.playerFleet.shipsExpanded[idx].amount) {
                         onlyProbes = false;
                         break;
                     }
@@ -74,14 +78,14 @@ class LandMark {
             }
         },
         {
-            distance: 80500,
+            distance: 74200,
             visited: false,
             action: function(store) {
                 return {state: GameState.states.planet, data: Planet.planets["v-3455"]};
             }
         },
         {
-            distance: 38500,
+            distance: 25800,
             visited: false,
             action: function(store) {
                 return {state: GameState.states.planet, data: Planet.planets["tau-wg"]};
@@ -91,38 +95,37 @@ class LandMark {
             distance: 5000,
             visited: false,
             action: function(store) {
-
                 if(store.playerFleet.techs['124'] > 5) {
                     let data = {
                         title: 'Darth Vader found our Fleet',
                         description: 'Luke, please accept this Death Star, and together we will bring order to the galaxy',
                         actions: ['take','flee'],
-                        after: function(event,action){
+                        after: function(store,event,action){
                             event.validActions.take = false;
                             event.validActions.flee = false;
 
                             switch(action){
                                 case 'take':
                                     //event.store.playerFleet.spaceCredits = 0;
-                                    event.store.playerFleet.updateShipAmountAndStats('214', 1, window.bvConfig.shipData);
-                                    event.description = 'Darth Vader\'s ship was an Hologram. But... is that a moon?';
-                                    event.store.pastEvents.push({time:event.store.playerFleet.timeUnit,
-                                        message:"Darth Vader gave us something","type":'success'});
+                                    store.playerFleet.updateShipAmountAndStats('214', 1, window.bvConfig.shipData);
+                                    event.description = 'Darth Vader\'s ship was a Hologram. But... is that a moon?';
+                                    store.pastEvents.push({time:store.playerFleet.timeUnit,
+                                        message:"Darth Vader gave us a gift","type":'success'});
                                     break;
                                 case 'flee':
                                 default:
                                     event.description = 'Darth Vader realizes Luke is not with us, and then we flee!';
-                                    event.store.pastEvents.push({time:event.store.playerFleet.timeUnit,
+                                    store.pastEvents.push({time:store.playerFleet.timeUnit,
                                         message:"We escaped from Darth Vader!","type":'info'});
                                     break;
                             }
                             setTimeout(function(){
-                                event.store.changeState(GameState.states.space);
+                                store.changeState(GameState.states.space);
                             }, 5000);
 
                         }
                     };
-                    let state = store.currentEvent.init('custom', data);
+                    let state = store.eventManager.init('custom', data);
                     return {state:state}
                 }
                 return null;
@@ -136,7 +139,7 @@ class LandMark {
                 for(let i=0; i < Fleet.validShips.length; i++){
                     let idx = Fleet.validShips[i];
 
-                    if( idx != 210 && store.playerFleet.ships[idx]) {
+                    if( idx != 210 && store.playerFleet.shipsExpanded[idx].amount) {
                         onlyProbes = false;
                         break;
                     }

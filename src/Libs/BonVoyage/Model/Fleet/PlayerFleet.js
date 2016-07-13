@@ -114,7 +114,7 @@ class PlayerFleet extends Fleet {
         for(let i=0; i < Fleet.validShips.length;i++){
 
             let id = Fleet.validShips[i];
-            if(!this.ships[id]){
+            if(!this.shipsExpanded[id].amount){
                 continue;
             }
 
@@ -198,7 +198,7 @@ class PlayerFleet extends Fleet {
                 }
             }
 
-            capacity += this.ships[id] * currentPriceList.capacity;
+            capacity += this.shipsExpanded[id].amount * currentPriceList.capacity;
             slowest = Math.min(new_speed, slowest);
             shipListExtra[id] = {speed: new_speed, consumption: new_consumption};
         }
@@ -209,10 +209,10 @@ class PlayerFleet extends Fleet {
 
         for(let i=0; i < Fleet.validShips.length;i++) {
             let idx = Fleet.validShips[i];
-            if (this.ships[idx]) {
-                sum += this.ships[idx];
+            if (this.shipsExpanded[idx].amount) {
+                sum += this.shipsExpanded[idx].amount;
                 consumption += PlayerFleet.calcConsumption(distance, duration,
-                    shipListExtra[idx].speed, this.ships[idx], shipListExtra[idx].consumption)  ;
+                    shipListExtra[idx].speed, this.shipsExpanded[idx].amount, shipListExtra[idx].consumption)  ;
             }
         }
 
@@ -231,18 +231,21 @@ class PlayerFleet extends Fleet {
     @action applyBattleResults(){
         for(let i=0; i < Fleet.allFleet.length; i++) {
             const idx = Fleet.allFleet[i];
+            if(!this.shipsExpanded[idx].changes) continue;
+
             this.updateShipAmountAndStats(
                 idx,
-                this.ships[idx] + this.shipChanges[idx],
+                this.shipsExpanded[idx].amount + this.shipsExpanded[idx].changes,
                 window.bvConfig.shipData
             );
-            this.shipChanges[idx] = 0;
+            this.shipsExpanded[idx].changes = 0;
         }
     }
 
     @action updateShipAmountAndStats(idx, amount, priceList){
-        if(idx in this.ships){
-            this.ships[idx] = amount;
+        if(idx in this.shipsExpanded){
+            if(this.shipsExpanded[idx].amount != amount)
+                this.shipsExpanded[idx].amount = amount;
         } else {
             console.warn("Ship not found", idx);
             return;
@@ -253,18 +256,9 @@ class PlayerFleet extends Fleet {
     @action updateShipAmountWithChanges(priceList){
         for(let i=0; i < Fleet.allFleet.length; i++) {
             const idx = Fleet.allFleet[i];
-            if (this.shipChanges[idx] != 0){
-                this.ships[idx] += this.shipChanges[idx];
-            }
-            this.shipChanges[idx] = 0;
-        }
-        this.updateStats(priceList);
-    }
-    
-    @action updateShipAmountSetMultiple(ships, priceList){
-        for(let i=0; i < Fleet.allFleet.length; i++) {
-            const idx = Fleet.allFleet[i];
-            this.ships[idx] = ships[idx];
+            if(!this.shipsExpanded[idx].changes) continue;
+
+            this.shipsExpanded[idx].amount += this.shipsExpanded[idx].changes;
         }
         this.updateStats(priceList);
     }
@@ -277,7 +271,7 @@ class PlayerFleet extends Fleet {
     @action tryChangingShipAmount(idx, amount, priceList, target){
         
         do{
-            if(!(idx in this.ships)){
+            if(!(idx in this.shipsExpanded)){
                 console.warn("Ship not found:", idx);
                 break;
             }
@@ -290,22 +284,22 @@ class PlayerFleet extends Fleet {
                 crystal = target.crystal,
                 deuterium = target.deuterium;
                 
-            if(this.ships[idx]==amount){
-                
+            if(this.shipsExpanded[idx].amount==amount){
                 break;
                 
-            } else if(this.ships[idx] > amount){
-                let dif = this.ships[idx] - amount;
+            } else if(this.shipsExpanded[idx].amount > amount){
+                let dif = this.shipsExpanded[idx].amount - amount;
                 metal += (dif * priceList.metal);
                 crystal += (dif * priceList.crystal);
                 deuterium += (dif * priceList.deuterium);
 
                 this.updateShipAmountAndStats(idx, amount, window.bvConfig.shipData);
             } else {
-                let dif = amount - this.ships[idx];
-                let originalMetalUsed = priceList.metal * this.ships[idx],
-                    originalCrystalUsed = priceList.crystal * this.ships[idx],
-                    originalDeuteriumUsed = priceList.deuterium * this.ships[idx],
+                let m = this.shipsExpanded[idx].amount,
+                    dif = amount - m;
+                let originalMetalUsed = priceList.metal * m,
+                    originalCrystalUsed = priceList.crystal * m,
+                    originalDeuteriumUsed = priceList.deuterium * m,
                     extraMetal,
                     extraCrystal,
                     extraDeuterium;
@@ -325,7 +319,7 @@ class PlayerFleet extends Fleet {
                     }
 
                     dif--;
-                    amount = this.ships[idx] + dif;
+                    amount = m + dif;
                 }
 
                 metal -= (dif * priceList.metal);

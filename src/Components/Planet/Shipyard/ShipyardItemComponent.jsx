@@ -19,7 +19,7 @@ class ShipyardItemComponent extends Component {
             <td>
                 <span className="name">{this.props.shipData.name}</span>
                 <img src={imgUrl} height="48" width="48" />
-                <span className="text-info">{this.props.store.playerFleet.ships[shipId]}</span>
+                <span className="text-info">{this.props.store.playerFleet.shipsExpanded[shipId].amount}</span>
                 <small>m {this.props.shipData.metal}</small>
                 <small>c {this.props.shipData.crystal}</small>
                 <small>d {this.props.shipData.deuterium}</small>
@@ -49,11 +49,11 @@ class ShipyardItemComponent extends Component {
     }
 
     addOne = (event) => {
-        this.changeAmount(this.props.store.playerFleet.ships[this.props.shipId]+1);
+        this.changeAmount(this.props.store.playerFleet.shipsExpanded[this.props.shipId].amount+1);
     };
 
     addTen = (event) => {
-        this.changeAmount(this.props.store.playerFleet.ships[this.props.shipId]+10);
+        this.changeAmount(this.props.store.playerFleet.shipsExpanded[this.props.shipId].amount+10);
     };
 
     changeAmount(amount){

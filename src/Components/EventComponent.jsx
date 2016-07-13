@@ -98,31 +98,31 @@ class EventComponent extends Component {
     }
 
     actionContinue = () => {
-        this.props.store.currentEvent.trigger('continue');
+        this.props.store.eventManager.trigger('continue');
     };
     
     actionTake = () => {
-        this.props.store.currentEvent.trigger('take');
+        this.props.store.eventManager.trigger('take');
     };
 
     actionSkip = () => {
-        this.props.store.currentEvent.trigger('skip');
+        this.props.store.eventManager.trigger('skip');
     };
 
     actionReturn = () => {
-        this.props.store.currentEvent.trigger('return');
+        this.props.store.eventManager.trigger('return');
     };
     
     actionAttack = () => {
-        this.props.store.currentEvent.trigger('attack');
+        this.props.store.eventManager.trigger('attack');
     };
     
     actionFlee = () => {
-        this.props.store.currentEvent.trigger('flee');
+        this.props.store.eventManager.trigger('flee');
     };
 
     actionNegotiate = () => {
-        this.props.store.currentEvent.trigger('negotiate');
+        this.props.store.eventManager.trigger('negotiate');
     };
 }
 export default EventComponent;
