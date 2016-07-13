@@ -88,6 +88,7 @@ class DebugBar extends Component {
     };
     planetTwo = () => {
         this.chooseShips(this.shipsExpedition);
+        this.props.store.playerFleet.techs['124'] = 6;
         this.props.store.playerFleet.distance = 38000;
     };
     toggleEvents = (event) => {

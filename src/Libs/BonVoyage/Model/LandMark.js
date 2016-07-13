@@ -12,7 +12,7 @@ class LandMark {
                     let data = {
                         title: 'Met a Civil Fleet',
                         type: 'custom',
-                        description: 'Hi. We would like to trade your very useful Colony Ship for our lucky Espionage Probe SR-070, which survived more than 100 battles',
+                        description: 'Hi. We would like to trade your very useful Colony Ship for our Esp. Probe, model SR-070. It survived more than 100 battles',
                         actions: ['take', 'skip'],
                         after: function (store, event, action) {
 
@@ -36,7 +36,7 @@ class LandMark {
                                     }
                                     store.playerFleet.techs['124']++;
                                     event.description =
-                                        'We just traded the ships. The probe came with a strange artifact that is being reviewed by our engineers';
+                                        'We traded the ships. The probe came with a strange artifact that is being reviewed by our engineers';
                                     store.pastEvents.push({time:store.playerFleet.timeUnit,
                                         message:"Got a very special Esp. Probe","type":'info'});
 
@@ -44,7 +44,7 @@ class LandMark {
                                 case 'skip':
                                 default:
                                     store.pastEvents.push({time:store.playerFleet.timeUnit,
-                                        message:"Met a caravan in the way","type":'info'});
+                                        message:"Met a friendly caravan in the way","type":'info'});
                                     event.description = 'We rejected the proposal due to a lack of Colony Ships in the area';
                                     break;
                             }
@@ -81,7 +81,7 @@ class LandMark {
             distance: 74200,
             visited: false,
             action: function(store) {
-                return {state: GameState.states.planet, data: Planet.planets["v-3455"]};
+                return {state: GameState.states.planet, data: Planet.planets["onigiri"]};
             }
         },
         {

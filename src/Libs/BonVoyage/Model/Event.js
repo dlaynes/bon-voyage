@@ -22,7 +22,13 @@ export default class Event {
         @observable negotiate : false,
         @observable return : false
     };
-    
+
+    @action turnResourcesIntoNegative(){
+        this.metal = - this.metal;
+        this.crystal = - this.crystal;
+        this.deuterium = - this.deuterium;
+    }
+
     @action resetActions(){
         this.validActions.continue = false;
         this.validActions.take = false;
@@ -122,6 +128,7 @@ export default class Event {
     }
 
     @action static addResourceAction(store, event, action){
+        //console.log("add resource action", action);
         store.pastEvents.push(
             {time:store.playerFleet.timeUnit, message:"Resources sighted","type":'info'});
         switch(action){
@@ -141,7 +148,7 @@ export default class Event {
         }
     }
 
-    @action static resourcesLostAction(store){
+    @action static resourcesLostAction(store, event){
         store.pastEvents.push({time:store.playerFleet.timeUnit, message:"Resources lost","type":'error'});
         store.changeState(GameState.states.space);
     }
@@ -161,7 +168,9 @@ export default class Event {
         store.changeState(GameState.states.space);
     }
 
-    @action static addShipsAction(store, event){
+    @action static addShipsAction(store, event, action){
+        //console.log("add resource action", action);
+
         store.pastEvents.push({time:store.playerFleet.timeUnit, message:"Ships found!","type":'success'});
         switch(action){
             case 'take':
@@ -181,6 +190,7 @@ export default class Event {
     }
 
     @action static removeShipsAction(store, event){
+        store.playerFleet.updateShipAmountWithChanges(window.bvConfig.shipData);
         store.pastEvents.push({time:store.playerFleet.timeUnit, message:"We lost some ships","type":'error'});
         store.changeState(GameState.states.space);
     }
@@ -228,6 +238,10 @@ export default class Event {
                     } else {
                         event.description = 'We couldn\'t escape, but we won the battle and earned '+event.spaceCredits+' Credits';
                     }
+                    if(event.type=='steal-battle'){
+                        event.description += ". We got our resources back!";
+                    }
+
                     setTimeout(() => {
                         store.playerFleet.applyBattleResults();
                         if(event.type=='battle'){
@@ -241,7 +255,7 @@ export default class Event {
                                 message: "Raided an enemy planet", type: 'success'
                             });
                         } else {
-                            this.store.pastEvents.push({
+                            store.pastEvents.push({
                                 time: store.playerFleet.timeUnit,
                                 message: "Defeated some thieves!", type: 'success'
                             });
@@ -313,6 +327,7 @@ export default class Event {
 
             }
         }
+        event.turnResourcesIntoNegative();
         store.pastEvents.push({time:store.playerFleet.timeUnit, message:extraDesc,"type":'warning'});
         setTimeout(() => {
             store.changeState(GameState.states.space);

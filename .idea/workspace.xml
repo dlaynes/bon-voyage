@@ -2,33 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f031fb84-3d7e-4fcf-b66a-525f9747440c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/ogame_oregon_node_modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Components/Space/Map/PlanetComponent.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Components/Space/Map/ShipComponent.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Components/Utils/ShipList/ShipListItemComponent.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Libs/BonVoyage/EventManager.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Event.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/GameEvent.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ogame-oregon.iml" afterPath="$PROJECT_DIR$/.idea/ogame-oregon.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/EventComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/EventComponent.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Debug/DebugBar.jsx" afterPath="$PROJECT_DIR$/src/Components/Debug/DebugBar.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/GoodEnding/ResourceListComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/GoodEnding/ResourceListComponent.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Planet/Shipyard/ShipyardItemComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/Shipyard/ShipyardItemComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Planet/ShipyardComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/ShipyardComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Planet/Trader/TraderItemComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/Trader/TraderItemComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Planet/TraderComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Planet/TraderComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/SelectShipsComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/SelectShipsComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Ships/SelectorComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Ships/SelectorComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Ships/SelectorItemComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Ships/SelectorItemComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Space/MapComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Space/MapComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Space/TechsNavComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Space/TechsNavComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Components/Utils/ShipListComponent.jsx" afterPath="$PROJECT_DIR$/src/Components/Utils/ShipListComponent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Libs/BonVoyage/BattleManager.js" afterPath="$PROJECT_DIR$/src/Libs/BonVoyage/BattleManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet.js" afterPath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Libs/BonVoyage/EventManager.js" afterPath="$PROJECT_DIR$/src/Libs/BonVoyage/EventManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Event.js" afterPath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Event.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet/PlayerFleet.js" afterPath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet/PlayerFleet.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/LandMark.js" afterPath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/LandMark.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Planet.js" afterPath="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Planet.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Stores/AppStore.js" afterPath="$PROJECT_DIR$/src/Stores/AppStore.js" />
     </list>
     <ignored path="ogame-oregon.iws" />
@@ -50,21 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Fleet.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppStore.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AppStore.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Stores/AppStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="930">
-              <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+            <state relative-caret-position="-2880">
+              <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -72,11 +45,43 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="GoodEndingComponent.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="415">
+              <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResourceListComponent.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/GoodEnding/ResourceListComponent.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="EventManager.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/EventManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1119">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="295">
+              <caret line="224" column="49" selection-start-line="224" selection-start-column="49" selection-end-line="224" selection-end-column="49" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -87,8 +92,8 @@
       <file leaf-file-name="Event.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Event.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state relative-caret-position="280">
+              <caret line="192" column="80" selection-start-line="192" selection-start-column="80" selection-end-line="192" selection-end-column="80" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -99,8 +104,8 @@
       <file leaf-file-name="LandMark.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/LandMark.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+            <state relative-caret-position="460">
+              <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -108,11 +113,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventComponent.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/EventComponent.jsx">
+      <file leaf-file-name="Planet.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Planet.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="117" column="6" selection-start-line="117" selection-start-column="6" selection-end-line="117" selection-end-column="6" />
+            <state relative-caret-position="120">
+              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerFleet.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet/PlayerFleet.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="430">
+              <caret line="342" column="5" selection-start-line="342" selection-start-column="5" selection-end-line="342" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -126,8 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Components/Space/EventListComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Space/ResourceListComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Events/TechsNavComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/HomeComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Utils/ButtonListComponent.jsx" />
@@ -135,7 +148,6 @@
         <option value="$PROJECT_DIR$/styles/app.css" />
         <option value="$PROJECT_DIR$/scripts/ogsim.js" />
         <option value="$PROJECT_DIR$/src/Libs/Ogsim/Timer.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/ideas.txt" />
         <option value="$PROJECT_DIR$/src/Libs/Ogsim/UnitType.js" />
         <option value="$PROJECT_DIR$/src/Libs/Tools.js" />
@@ -150,10 +162,7 @@
         <option value="$PROJECT_DIR$/src/index.jsx" />
         <option value="$PROJECT_DIR$/src/Components/SpaceComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/PlanetComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Planet.js" />
         <option value="$PROJECT_DIR$/src/Components/Space/TechsNavComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/GoodEnding/ResourceListComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Space/Map/ShipComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Space/Map/PlanetComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Space/MapComponent.jsx" />
@@ -167,16 +176,22 @@
         <option value="$PROJECT_DIR$/src/Components/Planet/Trader/TraderItemComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Ships/SelectorItemComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Utils/ShipList/ShipListItemComponent.jsx" />
-        <option value="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet/PlayerFleet.js" />
         <option value="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet.js" />
         <option value="$PROJECT_DIR$/src/Components/Ships/SelectorComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Libs/BonVoyage/BattleManager.js" />
         <option value="$PROJECT_DIR$/src/Components/EventComponent.jsx" />
         <option value="$PROJECT_DIR$/src/Libs/BonVoyage/Model/GameEvent.js" />
         <option value="$PROJECT_DIR$/src/Libs/BonVoyage/Model/LandMark.js" />
-        <option value="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Event.js" />
         <option value="$PROJECT_DIR$/src/Stores/AppStore.js" />
+        <option value="$PROJECT_DIR$/src/Components/Debug/DebugBar.jsx" />
         <option value="$PROJECT_DIR$/src/Libs/BonVoyage/EventManager.js" />
+        <option value="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet/PlayerFleet.js" />
+        <option value="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Event.js" />
+        <option value="$PROJECT_DIR$/src/Components/GoodEnding/ResourceListComponent.jsx" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx" />
+        <option value="$PROJECT_DIR$/src/Libs/BonVoyage/Model/Planet.js" />
       </list>
     </option>
   </component>
@@ -335,7 +350,103 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Libs" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BonVoyage" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Fleet" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Space" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoodEnding" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogame-oregon" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Debug" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -448,12 +559,12 @@
       <workItem from="1468371156486" duration="45000" />
       <workItem from="1468378239228" duration="10071000" />
       <workItem from="1468420440867" duration="110000" />
-      <workItem from="1468420715288" duration="6883000" />
+      <workItem from="1468420715288" duration="16778000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="292846000" />
+    <option name="totallyTimeSpent" value="302741000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="745" extended-state="6" />
@@ -497,20 +608,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Libs/Ogsim/RoundStatistics.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Libs/Ogsim/Battle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="81" column="33" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Planet/MarketComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-20">
@@ -560,13 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Planet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Ships/ResourceListComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-300">
@@ -595,31 +685,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Space/TechsNavComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Events/TechsNavComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="19" column="63" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/GoodEnding/ResourceListComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/ExchangeRate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-80">
-          <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -644,22 +713,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Utils/ShipList/ShipListChangesComponent.jsx" />
     <entry file="file://$PROJECT_DIR$/src/Components/Utils/ShipList/ShipListDescriptionComponent.jsx" />
-    <entry file="file://$PROJECT_DIR$/src/Components/SpaceComponent.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Utils/ShipListComponent.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -693,13 +748,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
           <caret line="100" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="203" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -783,21 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet/PlayerFleet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="234" column="0" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/GameEvent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -814,43 +847,135 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/LandMark.js">
+    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+        <state relative-caret-position="15">
+          <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/ExchangeRate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="52" column="17" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Space/TechsNavComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/SpaceComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Debug/DebugBar.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="90" column="54" selection-start-line="90" selection-start-column="54" selection-end-line="90" selection-end-column="54" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Event.js">
+    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Fleet/PlayerFleet.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="430">
+          <caret line="342" column="5" selection-start-line="342" selection-start-column="5" selection-end-line="342" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/EventManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1119">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="295">
+          <caret line="224" column="49" selection-start-line="224" selection-start-column="49" selection-end-line="224" selection-end-column="49" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" column="19" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Event.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="192" column="80" selection-start-line="192" selection-start-column="80" selection-end-line="192" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/GoodEnding/ResourceListComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/GoodEndingComponent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Stores/AppStore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="930">
-          <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+        <state relative-caret-position="-2880">
+          <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/LandMark.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Libs/BonVoyage/Model/Planet.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
