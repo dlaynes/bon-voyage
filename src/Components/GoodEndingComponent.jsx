@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
 import ShipListComponent from './Utils/ShipListComponent';
-import ResourceListComponent from './Space/ResourceListComponent';
+import ResourceListComponent from './GoodEnding/ResourceListComponent';
 
 import GameState from '../Libs/BonVoyage/Model/GameState';
 
@@ -20,7 +20,8 @@ class GoodEndingComponent extends Component {
                                        store={this.props.store} priceList={this.props.priceList} />
                 </div>
                 <div className="pull-right half">
-                    <ResourceListComponent module="goodEnding" playerFleet={this.props.store.playerFleet} />
+                    <ResourceListComponent module="goodEnding" store={this.props.store}
+                                           playerFleet={this.props.store.playerFleet} />
                 </div>
                 <div className="clear"></div>
                 <div className="text-center">

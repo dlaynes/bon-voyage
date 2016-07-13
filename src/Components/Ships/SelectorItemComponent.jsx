@@ -12,7 +12,7 @@ class SelectorItemComponent extends Component {
             <td>
                 <span className="name">{this.props.shipData.name}</span>
                 <img src={imgUrl} height="48" width="48" />
-                <span className="text-info">{this.props.ships[shipId]}</span>
+                <span className="text-info">{this.props.shipsExpanded[shipId].amount}</span>
                 <table className="mini-buttons" cellPadding="0" cellSpacing="0">
                     <tbody>
                         <tr>
@@ -30,19 +30,19 @@ class SelectorItemComponent extends Component {
     }
 
     addOne = (event) => {
-        this.changeAmount(this.props.ships[this.props.shipId]+1, true);
+        this.changeAmount(this.props.shipsExpanded[this.props.shipId].amount+1, true);
     };
 
     addTen = (event) => {
-        this.changeAmount(this.props.ships[this.props.shipId]+10, true);
+        this.changeAmount(this.props.shipsExpanded[this.props.shipId].amount+10, true);
     };
 
     minusOne = (event) => {
-        this.changeAmount(this.props.ships[this.props.shipId]-1, false);
+        this.changeAmount(this.props.shipsExpanded[this.props.shipId].amount-1, false);
     };
 
     minusTen = (event) => {
-        this.changeAmount(this.props.ships[this.props.shipId]-10, false);
+        this.changeAmount(this.props.shipsExpanded[this.props.shipId].amount-10, false);
     };
 
     changeAmount(amount, increasing){

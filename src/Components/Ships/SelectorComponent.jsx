@@ -15,7 +15,7 @@ class SelectorComponent extends Component {
                     <tbody>
                         <tr>
                             {this.validShipIds.map((x, i) =>
-                                <SelectorItemComponent ships={this.props.fleet.ships}
+                                <SelectorItemComponent shipsExpanded={this.props.fleet.shipsExpanded}
                                                        tryToAlterShipCount={this.props.tryToAlterShipCount}
                                                        key={'shipInput-'+x}
                                                        shipData={this.props.priceList[x]} shipId={x} />

@@ -58,7 +58,7 @@ class SelectShipsComponent extends Component {
         if(amount < 0){ amount = 0; }
         let fleet = this.props.store.playerFleet;
         
-        let originalAmount = fleet.ships[idx];
+        let originalAmount = fleet.shipsExpanded[idx].amount;
         let realAmount = fleet.tryChangingShipAmount(idx, amount, this.props.priceList[idx], this.props.headQuarters);
         
         this.validating = false;

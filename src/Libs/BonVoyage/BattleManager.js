@@ -26,10 +26,10 @@ class BattleManager {
         let af = {}, ef = {}, idx;
         for(let i=0;i<Fleet.allBattleFleet.length;i++){
             idx = Fleet.allBattleFleet[i];
-            if(this.allyFleet.ships[idx])
-                af[idx+''] = this.allyFleet.ships[idx];
-            if(this.enemyFleet.ships[idx])
-                ef[idx+''] = this.enemyFleet.ships[idx];
+            if(this.allyFleet.shipsExpanded[idx].amount)
+                af[idx+''] = this.allyFleet.shipsExpanded[idx].amount;
+            if(this.enemyFleet.shipsExpanded[idx].amount)
+                ef[idx+''] = this.enemyFleet.shipsExpanded[idx].amount;
         }
         let allyObj = {
             fleet: af,
@@ -62,23 +62,22 @@ class BattleManager {
             item;
         let current_explosions = 0, ally_difference = 0, enemy_difference = 0;
 
-        //console.log("ally fleet", allyFleet);
-        //console.log("enemy fleet", enemyFleet);
-
         //Any survivors?
         for(let i=0; i<allyFleet.length; i++){
             item = allyFleet[i].id;
-            current_explosions = (this.store.playerFleet.ships[item] - allyFleet[i].difference);
-
-            this.store.playerFleet.shipChanges[item] = -current_explosions;
+            current_explosions = (this.store.playerFleet.shipsExpanded[item].amount - allyFleet[i].difference);
+            if(current_explosions){
+                this.store.playerFleet.shipsExpanded[item].changes = -current_explosions;
+            }
             ally_difference += allyFleet[i].difference;
         }
 
         for(let i=0; i<enemyFleet.length; i++){
             item = enemyFleet[i].id;
-            current_explosions = (this.store.enemyFleet.ships[item] - enemyFleet[i].difference);
-
-            this.store.enemyFleet.shipChanges[item] = -current_explosions;
+            current_explosions = (this.store.enemyFleet.shipsExpanded[item].amount - enemyFleet[i].difference);
+            if(current_explosions){
+                this.store.enemyFleet.shipsExpanded[item].changes = -current_explosions;
+            }
             enemy_difference += enemyFleet[i].difference;
         }
 

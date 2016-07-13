@@ -53,7 +53,7 @@ class TraderComponent extends Component {
 
         const sellingPrice
             = TraderItemComponent.getBaseTradePrice(idx, ExchangeRate.NORMAL) * amount,
-            currentAmount = fleet.ships[idx],
+            currentAmount = fleet.shipsExpanded[idx].amount,
             totalShips = fleet.shipCount;
 
         if(amount < totalShips){
