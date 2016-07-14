@@ -320,7 +320,7 @@ export default class EventManager {
                 ship_type = EventManager.validRemovableShips[idx];
                 amount = Math.min(EventManager.randomIntFromInterval(ship_type.min, ship_type.max),
                     this.store.playerFleet.shipsExpanded[idx].amount);
-                if (idx == '210') {
+                if (amount && idx == '210') {
                     amount--;
                 }
                 if (!amount) {
