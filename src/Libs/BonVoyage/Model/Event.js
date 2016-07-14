@@ -98,7 +98,8 @@ export default class Event {
                 event.type = 'nothing';
 
                 if(Math.random() > 0.5){
-                    event[resource_name] = -event[resource_name];
+                    event.turnResourcesIntoNegative();
+                    //store.storeResources();
                     event.description = 'They just left with our minerals!';
                 } else {
                     store.storeResources();
