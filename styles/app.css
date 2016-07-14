@@ -44,9 +44,10 @@
 #holder .mini-buttons button {
     width: 26px;
     height: 16px;
+    line-height: 16px;
     font-size: 8px;
-    padding: 0px 0px;
-    margin-top: 1px; margin-right: 0px;
+    padding: 0;
+    margin-top: 1px; margin-right: 0;
     text-align: center;
 }
 #holder .tbl-ships-space .mini-buttons button {
@@ -82,16 +83,19 @@
     color: #000;
 }
 #holder button {
-    border: 0 none; font-family: 'Press Start 2P', cursive; font-size: 10px;
-    padding: 6px 8px;     margin-top: 8px;
+    border: 1px solid #3d3d3d; font-family: 'Press Start 2P', cursive; font-size: 10px;
+    padding: 6px 8px; background-color: #000; margin-top: 8px;
     margin-right: 6px;
 }
-.action-red {
-    margin-top: 8px;
+#holder button:hover {
+    background-color: #adadad;
+}
+#holder .action-red {
+    margin-top: 8px; border: 0 none;
     color: #fff;
     background-color: red;
 }
-.action-red:hover {
+#holder .action-red:hover {
     background-color: #edb800;
 }
 .techs-nav {
@@ -142,6 +146,9 @@
     position: absolute;
     top: 63px;
     left: 2px;
+}
+#fleet, .space-map span {
+    font-family: "Press Start 2P",cursive;
 }
 .bottom-menu {
     position: absolute;
