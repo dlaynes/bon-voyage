@@ -9,7 +9,7 @@ class HomeComponent extends Component {
         return (
             <div className={ this.props.visibility ? '' : 'hidden' }>
                 <h3>Bon Voyage</h3>
-                <p><span className="text-warning">The sector is at war. Greed and corruption splat the Confederation in half.<br />
+                <p><span className="text-warning">The Sector is at war. Greed and corruption split the Confederation in half.<br />
                     Outlaws attack everybody on sight. For many of them there is a price on their heads.
                     <br />Two enemy civilizations, <span className="text-info">The Scourge</span> and <span className="text-info">Quadrant 12</span>
                     , threaten to destroy what is left of the old Government...</span></p>

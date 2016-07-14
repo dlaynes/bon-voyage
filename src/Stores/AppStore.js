@@ -83,7 +83,7 @@ class AppStore {
     }
 
     storeResources(){
-        console.log("storing", this.currentEvent.metal, this.currentEvent.crystal, this.currentEvent.deuterium);
+        //console.log("storing", this.currentEvent.metal, this.currentEvent.crystal, this.currentEvent.deuterium);
 
         this.playerFleet.setResources({
             metal: this.playerFleet.metal + this.currentEvent.metal,
