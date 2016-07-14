@@ -115,7 +115,7 @@ export default class Event {
                 break;
             case 'flee':
                 if(Math.random() > 0.5){
-                    Event.handleFleeEvent(store, resource_name, 'steal-battle');
+                    Event.handleFleeEvent(store, null, 'steal-battle');
                     break;
                 } else {
                     Event.handleBattleEvent(store, action);
@@ -316,14 +316,14 @@ export default class Event {
 
         let extraDesc = '??';
 
-        if(resource_name){
-            event[resource_name] = -event[resource_name];
+        if(event.type=='steal-battle'){
+            event.turnResourcesIntoNegative();
             event.description = 'We left the resources behind!';
             extraDesc = 'Ran away from some thieves!';
         } else {
             if(event.type=='battle'){
                 event.description = 'We ran away!';
-                extraDesc = 'Ran away from a battle!';
+                extraDesc = 'Ran away from an enemy fleet!';
             } else if(event.type=='raid-planet'){
                 event.description = 'We decided not to attack for now';
                 extraDesc = 'Enemy planet sighted';
