@@ -25,7 +25,7 @@ export default class EventManager {
         'remove-ships' : {
             dialogs: [
                 {title:"Ships lost",description:"Some ships had a major malfunction"},
-                {title:"Stolen ships",description:"A part of our fleet was destroyed by an explosive Esp. Probe sent by Pirates"}
+                {title:"Ships lost",description:"A part of our fleet was destroyed by an explosive Esp. Probe sent by Pirates"}
             ],
             actions: ['continue']
         },
@@ -87,7 +87,7 @@ export default class EventManager {
         'nothing': {
             dialogs: [
                 {title:"Space Radio",description:"Probes are very useful, you should bring some with you if possible..."},
-                {title:"Small Planet",description:'The Commander organized an Essay Contest about Space. He won.'},
+                {title:"Break Time",description:'The Commander organized an Essay Contest about the Space. He won.'},
                 {title:"Confederate Fleet",description:"A Confederate Fleet was seen nearby. They have Recyclers and Colony Ships, with low running speed."},
                 {title:"Exotic Planet",description:"We found a planet with weird living things. Amazing! Nothing we have ever seen before..."},
                 {title:"Space Nebula",description:"There is a shiny Nebula nearby, and we decided to take some photos from it"}],
