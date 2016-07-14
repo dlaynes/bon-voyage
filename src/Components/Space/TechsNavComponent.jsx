@@ -13,9 +13,9 @@ class TechsNavComponent extends Component {
                         <tr>
                             <td>Military tech</td>
                             <td>&nbsp;<span className="text-success">{this.props.techList['109']}</span>&nbsp;</td>
-                            <td>Defense tech</td>
+                            <td>Shielding tech</td>
                             <td>&nbsp;<span className="text-success">{this.props.techList['110']}</span>&nbsp;</td>
-                            <td>Hull tech</td>
+                            <td>Armor tech</td>
                             <td>&nbsp;<span className="text-success">{this.props.techList['111']}</span>&nbsp;</td>
                         </tr>
                         <tr>

@@ -5,8 +5,8 @@ import { observer } from 'mobx-react';
 class ShipListItemComponent extends Component {
     render(){
         let x = this.props.idx,
-            currentAmount = this.props.fleet.shipsExpanded[x].amount,
-            changeAmount = this.props.fleet.shipsExpanded[x].changes;
+            currentAmount = this.props.shipItem.amount,
+            changeAmount = this.props.shipItem.changes;
         let changes = '';
         if(changeAmount > 0){
             changes = <span className="text-success">+{changeAmount}</span>

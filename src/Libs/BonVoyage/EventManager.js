@@ -24,8 +24,8 @@ export default class EventManager {
         },
         'remove-ships' : {
             dialogs: [
-                {title:"Ships lost",description:"Some ships had a malfunction"},
-                {title:"Stolen ships",description:"A part of our fleet was taken away by space Pirates"}
+                {title:"Ships lost",description:"Some ships had a major malfunction"},
+                {title:"Stolen ships",description:"A part of our fleet was destroyed by an explosive Esp. Probe sent by Pirates"}
             ],
             actions: ['continue']
         },
@@ -46,8 +46,8 @@ export default class EventManager {
         },
         'remove-resource' : {
             dialogs: [
-                {title:"Lost some resources,",description:"An storage tank exploded, and we lost %s %t"},
-                {title:"Lost some resources",description:"Pirate Probes took away some of our stuff!"}
+                {title:"Lost some resources,",description:"A storage tank exploded, and we lost %s %t"},
+                {title:"Lost some resources",description:"Pirate Probes took away some of our resources!"}
             ],
             actions: ['continue']
         },
@@ -60,8 +60,8 @@ export default class EventManager {
         },
         'add-resource': {
             dialogs: [
-                {"title":"Found some resources","description":"There is a lonely floating container with %s of %t nearby"},
-                {"title":"Found some resources","description":"We found an asteroid with %s of %t, what should we do?"}],
+                {"title":"Found some resources","description":"There is a lonely floating container with %s of %t"},
+                {"title":"Found some resources","description":"We found an asteroid with %s of %t"}],
             actions: ['take', 'skip']
         },
         'steal-battle': {
@@ -81,12 +81,13 @@ export default class EventManager {
             actions: ['attack', 'flee']
         },
         'battle': {
-            dialogs: [{"title":"Battle","description":"We encountered a fleet of %c. It seems there is a reward available"}],
+            dialogs: [{"title":"Battle","description":"We encountered a fleet of %c. There is a bounty on them"}],
             actions: ['attack', 'flee']
         },
         'nothing': {
             dialogs: [
-                {title:"Small Planet",description:'The Commander organized an Essay Contest. He won.'},
+                {title:"Space Radio",description:"Probes are very useful, you should bring some with you if possible..."},
+                {title:"Small Planet",description:'The Commander organized an Essay Contest about Space. He won.'},
                 {title:"Confederate Fleet",description:"A Confederate Fleet was seen nearby. They have Recyclers and Colony Ships, with low running speed."},
                 {title:"Exotic Planet",description:"We found a planet with weird living things. Amazing! Nothing we have ever seen before..."},
                 {title:"Space Nebula",description:"There is a shiny Nebula nearby, and we decided to take some photos from it"}],
@@ -221,7 +222,7 @@ export default class EventManager {
                 event[resource_name] = amount;
 
                 event.description = ((event.description.replace('%s', amount)).replace('%t', resource_name))
-                    +". Do you have enough cargos?";
+                    +". Do we have enough storage available?";
                 this.after = Event.addResourceAction;
                 break;
 
@@ -257,7 +258,7 @@ export default class EventManager {
                     gameState = GameState.states.space;
                     this.store.pastEvents.push({
                         time: this.store.playerFleet.timeUnit,
-                        message: "Thieves detected! They ran way!", "type": 'warning'
+                        message: "Thieves detected! They ran away!", "type": 'warning'
                     });
                     break;
                 }
@@ -304,7 +305,7 @@ export default class EventManager {
                     this.store.pastEvents.push(
                         {
                             time: this.store.playerFleet.timeUnit,
-                            message: "Small delay in our trip!",
+                            message: "We take some photos!",
                             "type": 'warning'
                         });
                     break;
@@ -326,7 +327,7 @@ export default class EventManager {
                     gameState = GameState.states.space;
                     this.store.pastEvents.push({
                         time: this.store.playerFleet.timeUnit,
-                        message: "Small delay in our trip!", "type": 'warning'
+                        message: "An enemy probe passed by!", "type": 'warning'
                     });
                     break;
                 }
@@ -496,8 +497,8 @@ export default class EventManager {
         return 1 + Math.min(Math.ceil(Math.sqrt( ((maxDistance - distance)/maxDistance)*100 )*length/10), length);
     }
 
-    static getMaxProbableShipTypeCount(distance, maxDistance){
-        return Math.ceil(((maxDistance - distance)/maxDistance) * 10) + 1;
+    static getMaxProbableShipTypeCount(distance, maxDistance, extra=1){
+        return Math.ceil(((maxDistance - distance)/maxDistance) * 10) + extra;
     }
 
     static getMaxProbableShipAmount(distance, maxDistance){
@@ -526,17 +527,18 @@ export default class EventManager {
     }
 
     static getRandomShips(distance, maxDistance, type='battle'){
-        let maxProbableShipType, pickableFleet;
+        let maxProbableShipType, pickableFleet, maxProbableShipTypeCount;
 
         if(type=='battle'){
             maxProbableShipType = EventManager.getMaxProbableShipType(Fleet.validEnemyShips.length, distance, maxDistance);
             pickableFleet = Fleet.validEnemyShips.slice(0, maxProbableShipType-1);
+            maxProbableShipTypeCount = EventManager.getMaxProbableShipTypeCount(distance, maxDistance, 1);
         } else {
             maxProbableShipType = EventManager.getMaxProbableShipType(Fleet.validEnemyDefense.length, distance, maxDistance);
             pickableFleet = Fleet.validEnemyDefense.slice(0, maxProbableShipType-1);
+            maxProbableShipTypeCount = EventManager.getMaxProbableShipTypeCount(distance, maxDistance, 1);
         }
 
-        const maxProbableShipTypeCount = EventManager.getMaxProbableShipTypeCount(distance, maxDistance);
         const minProbableShipTypeCount = Math.max(maxProbableShipTypeCount/3, 1);
         const maxProbableShipTypeAmount = EventManager.getMaxProbableShipAmount(distance, maxDistance);
         const minProbableShipTypeAmount = Math.max(maxProbableShipTypeAmount/5, 1);
