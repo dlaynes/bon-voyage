@@ -22,9 +22,9 @@ class SelectShipsComponent extends Component {
 
         return (
             <div className={ this.props.visibility ? '' : 'hidden' }>
-                <h3>Build Fleet</h3>
-                <p>Prepare yourself for the trip. Perhaps you want certain ships for your needs?<br />
-                    We will give you the remaining resources (if you have enough room available). Watch out on the deuterium usage!</p>
+                <h3>Build Expedition Fleet</h3>
+                <p>Prepare yourself for the mission. Perhaps you want certain ships for your needs?<br />
+                    We will give you the remaining resources afterwards, if you have enough capacity available. Watch out on the deuterium consumption.</p>
                 <div className="pull-right half">
                     <ResourceListComponent headQuarters={this.props.headQuarters}
                                            playerFleet={this.props.store.playerFleet}

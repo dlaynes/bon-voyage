@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import DevTools from 'mobx-react-devtools';
+//import DevTools from 'mobx-react-devtools';
 
 import HomeComponent from './Components/HomeComponent';
 import BadEndingComponent from './Components/BadEndingComponent';
@@ -46,8 +46,6 @@ class App extends Component {
 
             </div>
             {debug}
-
-            <DevTools />
         </div>
         );
     }

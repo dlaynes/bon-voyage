@@ -7,9 +7,9 @@ import ExchangeRate from '../../Libs/BonVoyage/ExchangeRate';
 @observer
 class MarketComponent extends Component {
 
-    tenthsMetal = ExchangeRate.resourcesToSpaceCredits({metal:10000,crystal:0,deuterium:0}, ExchangeRate.NORMAL);
-    tenthsCrystal = ExchangeRate.resourcesToSpaceCredits({metal:0,crystal:10000,deuterium:0}, ExchangeRate.NORMAL);
-    tenthsDeuterium = ExchangeRate.resourcesToSpaceCredits({metal:0,crystal:0,deuterium:10000}, ExchangeRate.NORMAL);
+    tenthsMetal = ExchangeRate.resourcesToSpaceCredits({metal:10000,crystal:0,deuterium:0}, ExchangeRate.MEDIUM);
+    tenthsCrystal = ExchangeRate.resourcesToSpaceCredits({metal:0,crystal:10000,deuterium:0}, ExchangeRate.MEDIUM);
+    tenthsDeuterium = ExchangeRate.resourcesToSpaceCredits({metal:0,crystal:0,deuterium:10000}, ExchangeRate.MEDIUM);
 
     @observable success = false;
     @observable validating = false;
