@@ -19,13 +19,13 @@ class GoodEndingComponent extends Component {
             <div className={ this.props.visibility ? '' : 'hidden' }>
                 <h3>We reached Planet Omega</h3>
                 <TechsNavComponent debugMode={this.props.store.debugMode} techList={this.props.store.playerFleet.techs} />
-                <p>Congratulations!</p>
+                <p><span className="text-warning">Congratulations!</span></p>
                 <div className="clear"></div>
                 <br />
-                <p>The mission was accomplished!<br />Current Nintendo President is thinking about releasing a mobile game based on it</p>
+                <p>The mission was accomplished!<br />Current Nintendo President is thinking about releasing a mobile game based on the journey</p>
                 <div className="clear"></div>
                 <span className="text-success">These are your final stats:</span>
-                <br />
+                <br /><br />
                 <div className="clear"></div>
                 <div className="pull-left half">
                     <ShipListComponent module="goodEnding" fleet={this.props.store.playerFleet}

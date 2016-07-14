@@ -15,7 +15,7 @@ class ShipListComponent extends Component {
                         <ShipListItemComponent
                             key={"ship-list-"+this.props.module+'-'+x}
                             idx={x}
-                            fleet={this.props.fleet}
+                            shipItem={this.props.fleet.shipsExpanded[x]}
                             priceList={this.props.priceList}
                         />
                     )}

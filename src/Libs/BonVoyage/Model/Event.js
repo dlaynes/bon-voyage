@@ -181,7 +181,7 @@ export default class Event {
             default:
                 event.validActions.skip = false;
                 event.validActions.take = false;
-                event.description = 'Decided to leave the ships behind!';
+                event.description = 'We decided to leave the ships behind!';
                 setTimeout(()=>{
                     store.changeState(GameState.states.space);
                 }, 2000);
@@ -232,11 +232,11 @@ export default class Event {
                 case BattleManager.WIN:
                     store.storeResources();
                     if(choice=='attack'){
-                        event.description = 'We won the battle and earned '+event.spaceCredits+' Credits';
+                        event.description = 'We won the battle and earned '+event.spaceCredits+' Credits!';
                     } else if(event.type=='raid-planet') {
-                        event.description = 'We won the battle and earned '+event.spaceCredits+' Credits';
+                        event.description = 'We won the battle and earned '+event.spaceCredits+' Credits!';
                     } else {
-                        event.description = 'We couldn\'t escape, but we won the battle and earned '+event.spaceCredits+' Credits';
+                        event.description = 'We couldn\'t escape, but we won the battle and earned '+event.spaceCredits+' Credits!';
                     }
                     if(event.type=='steal-battle'){
                         event.description += ". We got our resources back!";
@@ -280,6 +280,9 @@ export default class Event {
                         event.description = 'Draw battle!';
                     } else {
                         event.description = 'We couldn\'t escape. Draw battle!';
+                    }
+                    if(event.type=='steal-battle'){
+                        event.description += " We got our resources back...";
                     }
                     setTimeout( () => {
                         store.playerFleet.applyBattleResults();
