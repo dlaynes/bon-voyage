@@ -32,7 +32,7 @@ class HomeComponent extends Component {
                             className="action-red">» CREATE EXPEDITION FLEET</button>
                 </div>
 
-                <small className="pull-right"><br />Bon Voyage v.0.2</small>
+                <small className="pull-right"><br />Bon Voyage v 0.2</small>
             </div>
         );
     }
