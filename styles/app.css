@@ -127,7 +127,9 @@
 }
 .space-map-container {
     position: relative;
-    overflow: auto;
+    width: 550px;
+    height: 145px;
+    overflow: hidden;
 }
 .space-map {
     background-color: #061a54;
@@ -139,10 +141,13 @@
     font-size: 14px;
     line-height: 1.45;
     margin: 0;
+    position: absolute;
+    width: 1000px;
+    height: 400px;
     padding: 1px 2px;
-    width: 550px;
+
 }
-#fleet {
+#fleet, .planet {
     position: absolute;
     top: 63px;
     left: 2px;
