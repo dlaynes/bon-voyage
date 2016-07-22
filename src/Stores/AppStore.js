@@ -28,6 +28,8 @@ class AppStore {
     landMarks = LandMark.defaultList.slice(0);
     gameLoop = new GameLoop();
 
+    planets = [];
+
     @observable playerName = '';
 
     @observable score = 0;
@@ -51,6 +53,20 @@ class AppStore {
 
         this.gameLoop.setSpeed(Space.defaultIntervalSpeed);
         this.gameLoop.setHandler(this.handleGameLoop);
+
+        this.initPlanets();
+    }
+
+    initPlanets(){
+        LandMark.defaultList.forEach((val) => {
+            if(!val.mapData){
+                return;
+            }
+            this.planets.push({
+                distance: val.distance,
+                planet: val.mapData
+            });
+        });
     }
 
     resetEventDescriptions(){
@@ -120,7 +136,8 @@ class AppStore {
 
         if(fleet.distance < step){
             fleet.distance = 0;
-            this.showEnding(GameState.endings.success);
+            //Congratulations!!
+            //this.showEnding(GameState.endings.success);
             return;
         } else {
             fleet.distance -= step;
