@@ -80,6 +80,7 @@ class LandMark {
         {
             distance: 74200,
             visited: false,
+            mapData: {"id":"onigiri","symbol":"Ů","className":"text-info"},
             action: function(store) {
                 return {state: GameState.states.planet, data: Planet.planets["onigiri"]};
             }
@@ -87,6 +88,7 @@ class LandMark {
         {
             distance: 25800,
             visited: false,
+            mapData: {"id":"tau-wg","symbol":"Φ","className":"text-info"},
             action: function(store) {
                 return {state: GameState.states.planet, data: Planet.planets["tau-wg"]};
             }
@@ -149,8 +151,18 @@ class LandMark {
                 }
                 return null;
             }
+        },
+        {
+            distance: 0.000001,
+            visited: false,
+            mapData: {"id":"omega","symbol":"Ω","className":"text-success"},
+            action: function(store){
+                console.log("Ending!!");
+                return {state: GameState.states.goodEnding};
+            }
         }
     ];
 }
+/* Screw calculus */
 
 export default LandMark;
